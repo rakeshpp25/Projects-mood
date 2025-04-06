@@ -1,0 +1,108 @@
+.OuterReviewdiv{
+      display: flex;
+width: 800px;
+padding: 10px;
+flex-direction: column;
+align-items: flex-start;
+gap: 15px;
+border : 1px solid #E8E8E8;
+}
+
+.reviewDescription{
+      display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 15px;
+align-self: stretch;
+}
+
+.PhotoNNameDetailsNRating{
+      display: flex;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
+}
+
+.PhotoNName{
+      display: flex;
+align-items: center;
+gap: 15px;
+flex: 1 0 0;
+}
+
+.pic{
+      width: 42px;
+height: 42px;
+}
+
+.UserName{
+      color:#303030;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+}
+
+.date{
+      color: #4D4D4D;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.RatingNStar{
+      display: flex;
+padding: 0px 3px;
+align-items: center;
+gap: 5px;
+border-radius: 2px;
+background : #059212;
+}
+
+.RatingNStar > :first-child {
+      color: #fff;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+
+    .RatingNStar > :nth-child(2) {
+      width: 15.56px;
+      height: 15.56px;
+      display: flex;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .Reviewtitle{
+      color: #000;
+font-size: 24px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+    }
+
+    .ReviewDescription{
+      display: flex;
+justify-content: center;
+align-items: center;
+align-self: stretch;
+    }
+
+    .ReviewDescription > :first-child{
+      flex: 1 0 0;
+      color: #303030;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+    }
+
+    .ReviewPhotos img{
+      width:100px;
+      height:100px;
+    }
+

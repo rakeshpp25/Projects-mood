@@ -1,0 +1,157 @@
+.wholeProfle{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 80px;
+flex: 1 0 0;
+margin : 50px;
+width : 880px
+}
+
+.informationNinputs{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 30px;
+align-self: stretch;
+}
+
+.personalInformation{
+
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+}
+
+.title{
+      display: flex;
+align-items: center;
+gap: 100px;
+align-self: stretch;
+}
+
+.titleName{
+color: #000;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.edit , .cancel{
+      color: #6439FF;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.nameInputs{
+      display: flex;
+justify-content: center;
+align-items: flex-end;
+gap: 24px;
+}
+
+.firstNameDetails , .lastNameDetails{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+}
+
+.firstNameTittle , .lastNameTittle{
+      align-self : stretch;
+      color: #4D4D4D;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.firstNameInput , .lastNameInput{
+      display : flex;
+      align-self: stretch;
+}
+
+.firstNameInput input , .lastNameInput input , .emailForminput input, .mobileForminput input{
+align-self: stretch;
+border : 1px solid #B2B2B2;
+width: 350px;
+height: 50px;
+outline: none;
+font-size :20px;
+padding : 0 15px;
+}
+
+
+.save{
+      display: flex;
+      width: 120px;
+      height: 50px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 2px;
+      background : #6439FF;
+      color : #fff;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.EmailOuterDiv{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+      align-self: stretch;
+}
+
+.emailForminput, .mobileForminput{
+      display: flex;
+align-items: center;
+gap: 20px;
+}
+
+
+.gender{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 24px;
+align-self: stretch;
+}
+
+.yourGender{
+      align-self: stretch;
+      color: #000;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal; 
+}
+
+.maleNfemale{
+      display: flex;
+align-items: center;
+gap: 45px;
+align-self: stretch;
+}
+
+.maleNfemale p {
+      display: flex;
+align-items: center;
+gap: 20px;
+}
+
+.whichGender{
+      color: #000;
+
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+}
+

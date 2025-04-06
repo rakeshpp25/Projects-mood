@@ -1,0 +1,12 @@
+body{
+      font-family: "Inter", serif;
+      font-style: normal;
+line-height: normal;
+    }
+button : hover {
+  background : none;
+}
+    
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
