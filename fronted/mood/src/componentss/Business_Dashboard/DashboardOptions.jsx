@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import styles from "../../css/Business_Dashboard_Css/dashboardOptions.module.css";
 // import profile from "../images/profile.png";
+import Footer from '../Reuse/Footer'
 import {
   OverviewIcon,
   ProfileIcon,
@@ -15,10 +16,12 @@ import Overview from "../Business_Dashboard/Overview";
 import { v4 as uuidv4 } from "uuid";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../Reuse/Navbar";
+import axios from "axios";
 
 function DashboardOptions() {
   const { view } = useParams();
-
+  const [userData, setUserData] = useState(null); // State to hold user data
+  const [loading, setLoading] = useState(true); // State to track loading
   const [DashBoardOptions, setDashBoardOptions] = useState([
     {
       id: uuidv4(),
@@ -48,6 +51,24 @@ function DashboardOptions() {
     DashBoardOptions[0].id
   ); // State to track the active component
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const res = await axios.get("http://localhost:8000/Profile", {
+          withCredentials: true, // Include cookies for authentication
+        });
+        setUserData(res.data); // Set the user data
+        setLoading(false); // Set loading to false
+      } catch (err) {
+        console.error("Error fetching user data:", err);
+        setLoading(false); // Set loading to false if there's an error
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+
   const renderComponent = () => {
     const activeOption = DashBoardOptions.find(
       (option) => option.id === activeComponent
@@ -69,7 +90,7 @@ function DashboardOptions() {
             {/* profile i.e user name starts */}
             <div className={styles.UserName}>
               <p className={styles.hello}>Hello</p>
-              <p className={styles.name}>Rakesh Pal</p>
+              <p className={styles.name}>{userData?.name }</p>
             </div>
           </div>
           {/* profile pic and name ends here  */}
@@ -94,6 +115,7 @@ function DashboardOptions() {
         {/* Render Active Component */}
         <div className={styles.activeComponent}>{renderComponent()}</div>
       </div>
+      <Footer/>
     </>
   );
 }

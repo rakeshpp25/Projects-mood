@@ -22,6 +22,17 @@ const BusinessSignupSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  aadharNumber: {
+    type: String,
+    // required: true, // Changed 'require' to 'required'
+  },
+  altMobileNumber: {
+    type: String,
+    // required: true, // Changed 'require' to 'required'
+  },
+  gender: {
+    type: String,
+  },
   role: {
     type: String,
     enum: ["user", "business"],

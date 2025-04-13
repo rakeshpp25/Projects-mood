@@ -1,28 +1,36 @@
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 
-const ProfileSchema = new mongoose.Schema({
-      FirstName : {
-            type : String,
-            require : true,
-      },
-      LastName : {
-            type : String,
-      },
-      EmailAdress : {
-            type : String,
-            require : true,
-      },
-      ContactNumber : {
-            type : String,
-            require : true,
-      },
-      user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "user",
-            required: true,
-      },
-});
+// const ProfileSchema = new mongoose.Schema({
+//   name: {
+//     type: String,
+//     required: true, // Changed 'require' to 'required'
+//   },
+//   gender: {
+//     type: String,
+//   },
+//   emailAddress: {
+//     type: String,
+//     required: true, // Changed 'require' to 'required'
+//   },
+//   aadharNumber: {
+//     type: String,
+//     required: true, // Changed 'require' to 'required'
+//   },
+//   mobileNumber: {
+//     type: String,
+//     required: true, // Changed 'require' to 'required'
+//   },
+//   altMobileNumber: {
+//     type: String,
+//     required: true, // Changed 'require' to 'required'
+//   },
+//   user: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: "User", // Ensure the reference is consistent (make sure the User model is named "User")
+//     required: true,
+//   },
+// });
 
-const Profilemodel = mongoose.model("Profile", ProfileSchema);
+// const ProfileModel = mongoose.model("Profile", ProfileSchema);
 
-export default Profilemodel;
+// export default ProfileModel;

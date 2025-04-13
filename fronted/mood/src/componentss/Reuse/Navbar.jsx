@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import logo from "../../images/MOOD.png";
 import styles from "../../css/Reuse_css/navbar.module.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,6 +13,28 @@ function Navbar() {
   const navigate = useNavigate();
 
   const [isDropdownHover, setIsDropdownHover] = useState(false);
+  const [firstName, setFirstName] = useState("");
+
+// Fetch user profile data from backend on component mount
+useEffect(() => {
+  const fetchUserData = async () => {
+    if (isAuthenticated) {
+      try {
+        const res = await axios.get("http://localhost:8000/Profile", {
+          withCredentials: true,
+        });
+        const fullName = res.data.name;
+        const firstName = fullName.split(" ")[0]; // Extract the first name
+        setFirstName(firstName); // Update the state with the first name
+      } catch (err) {
+        console.error("Failed to fetch user data", err);
+      }
+    }
+  };
+
+  fetchUserData();
+}, [isAuthenticated]);
+
 
   const handleLogin = () => {
     navigate("/login");
@@ -77,7 +99,7 @@ function Navbar() {
               <AccountIcon />
             </span>
             <span className={styles.AccountTitle}>
-              {user?.name || "Account"}
+            {firstName || "Account"}
             </span>
             <span className={styles.downArrow}>
               <DownArrow className={styles.downArrow} />
