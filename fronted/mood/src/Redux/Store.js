@@ -5,6 +5,8 @@ import { persistStore, persistReducer } from 'redux-persist';
 import { combineReducers } from 'redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import editStates from './toggleEdit'
+import roleReducer from './roleslice';
+import authReducer from './authenticatedSlice'
 
 // Configure persist settings
 const persistConfig = {
@@ -17,6 +19,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   overviewDescription: libraryDetailsReducer,
   edit :editStates,
+  role: roleReducer,
+  auth: authReducer,
 });
 
 // Wrap reducers with persistReducer

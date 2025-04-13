@@ -1,9 +1,9 @@
 import React from 'react'
-import Navbar from '../componentss/Navbar'
-import Herobar from '../componentss/Herobar'
-import DesktopCard from '../componentss/DesktopCard'
-import GetIntouch from '../componentss/GetIntouch'
-import Footer from '../componentss/Footer'
+import Navbar from '../componentss/Reuse/Navbar'
+import Herobar from '../componentss/User_View/Herobar'
+import DesktopCard from '../componentss/User_View/DesktopCard'
+import GetIntouch from '../componentss/User_View/GetIntouch'
+import Footer from '../componentss/Reuse/Footer'
 
 
 function Home() {
