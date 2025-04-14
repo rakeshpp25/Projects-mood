@@ -14,7 +14,8 @@ function Herobar() {
 
 const navigate = useNavigate();
 
-const getLocation = () => {
+const getLocation = (e) => {
+  e.preventDefault()
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -84,12 +85,19 @@ const getErrorMessage = (errorCode) => {
     
       <div className={styles.herobarOuterDiv}>
         <div className={styles.herobarInsideDiv}>
-          <div className={styles.HerobarTitleNdescription}>
+          {/* <div className={styles.HerobarTitleNdescription}>
             <div className={styles.title}>
-            Set Your MOOD, Set Your Success
+            Set Your <span>MOOD</span> , Set Your Success
             </div>
             <div className={styles.description}>
+              <div className="w-S"></div>
             find best library that suits you and provide best result that fits you    
+            </div>
+          </div> */}
+          <div className=" flex flex-col w-full gap-4 justify-center text-center">
+            <h3 className="text-4xl">Set Your <span className="text-orange-400">MOOD</span> , Set Your Success</h3>
+            <div className="text-2xl w-full">
+            find best library that suits you and provide best result that fits you 
             </div>
           </div>
           
@@ -98,9 +106,15 @@ const getErrorMessage = (errorCode) => {
               <button type="submit">
                 <SearchIcon/>
               </button>
+              <button type="button"
+  className="bg-gray-400 rounded-full py-1 px-2"
+  onClick={getLocation}
+>
+  Near me
+</button>
               
             </form> 
-            <button className={styles.NearMebtn} onClick={getLocation}>Near me</button>
+            
         </div>
       </div>
     </>

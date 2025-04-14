@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import styles from "../css/librarydesimages.module.css";
-import image1 from "../images/ball.jpeg";
-import image2 from "../images/library.jpg";
-import image3 from "../images/MainAfter.jpg";
-import image4 from "../images/nature.avif";
-import image5 from "../images/new.jpg";
+import styles from "../../css/Full_Library_Details_css/librarydesimages.module.css";
+import image1 from "../../images/ball.jpeg";
+import image2 from "../../images/library.jpg";
+import image3 from "../../images/MainAfter.jpg";
+import image4 from "../../images/nature.avif";
+import image5 from "../../images/new.jpg";
 
 function LibraryDescImages() {
   const images = [image1, image2, image3, image4, image5];

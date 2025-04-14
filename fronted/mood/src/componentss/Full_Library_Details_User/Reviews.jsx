@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "../css/Reviews.module.css";
+import styles from "../../css/Reviews.module.css";
 import { DotIcon, StarIcon, UserReviewPic } from "../Svgs";
-import libraryImg from '../images/library.jpg'
+import libraryImg from '../../images/library.jpg'
 
 function Reviews() {
   return (

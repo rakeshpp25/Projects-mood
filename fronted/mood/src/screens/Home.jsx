@@ -1,9 +1,10 @@
 import React from 'react'
 import Navbar from '../componentss/Reuse/Navbar'
 import Herobar from '../componentss/User_View/Herobar'
-import DesktopCard from '../componentss/User_View/DesktopCard'
 import GetIntouch from '../componentss/User_View/GetIntouch'
 import Footer from '../componentss/Reuse/Footer'
+import TrendingLibraries from '../componentss/home/TrendingLibraries'
+import SuggestedLibraries from '../componentss/home/SuggestedLibraries'
 
 
 function Home() {
@@ -14,7 +15,8 @@ function Home() {
 <Navbar/>
 <Herobar/>
 </div>
-<DesktopCard/>
+<TrendingLibraries/>
+<SuggestedLibraries/>
 <GetIntouch/>
 <Footer/>
 </div>

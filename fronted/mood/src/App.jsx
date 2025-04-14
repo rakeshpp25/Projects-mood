@@ -11,6 +11,7 @@ import DashboardOptions from "./componentss/Business_Dashboard/DashboardOptions"
 import ProtectedRoute from "./componentss/ProtectedRoutes/ProtectedRoutes";
 import Time from "./componentss/Business_Dashboard/Time";
 import DesktopBigCard from "./componentss/User_View/DesktopBigCard";
+import FullLibraryDetails from "./screens/FullLibraryDetails";
 
 axios.defaults.withCredentials = true; 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/Profile" element={<Profile/>} />
         <Route path="/time" element={<Time/>} />
         <Route path="/nearme" element={<DesktopBigCard/>} />
+        <Route path="/libraryDetails" element={<FullLibraryDetails/>} />
         <Route
         path="/dashboard"
         element={

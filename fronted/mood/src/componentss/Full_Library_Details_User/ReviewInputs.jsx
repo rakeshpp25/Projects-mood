@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from  '../css/ReviewInputs.module.css'
+import styles from  '../../css/ReviewInputs.module.css'
 import { StarIcon } from '../Svgs'
 
 function ReviewInputs() {

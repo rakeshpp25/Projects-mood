@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from '../css/ShowRatings.module.css'
+import styles from '../../css/Full_Library_Details_css/ShowRatings.module.css'
 import { StarIcon } from '../Svgs'
 
 function ShowRatings() {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../css/ShowAmenities.module.css";
+import styles from "../../css/Full_Library_Details_css/ShowAmenities.module.css";
 import { WaterIcon, WifiIcon ,ACIcon } from "../Svgs";
 
 function ShowAmenities() {

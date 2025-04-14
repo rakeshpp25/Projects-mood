@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import styles from "../css/LibraryDescription.module.css";
+import styles from "../../css/Full_Library_Details_css/LibraryDescription.module.css";
 import { DotIcon, LocationIcon, StarIcon } from "../Svgs";
 
 

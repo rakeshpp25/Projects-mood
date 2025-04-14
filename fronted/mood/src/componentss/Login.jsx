@@ -62,12 +62,12 @@ function Login() {
               <hr />
             </div>
 
-            <div className="signupdecide">
-              <Link to="/userSignup" className="tosigninpage">
-                <button>User</button>
+            <div className="signupdecide w-full flex justify-around gap-4">
+              <Link to="/userSignup" className="tosigninpage w-1/2">
+                <button className="w-full">User</button>
               </Link>
-              <Link to="/businessSignup" className="tosigninpage">
-                <button>Corporate</button>
+              <Link  to="/businessSignup" className="tosigninpage w-1/2">
+                <button className="w-full">Corporate</button>
               </Link>
             </div>
           </div>
