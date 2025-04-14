@@ -33,6 +33,12 @@ function ShowAmenities() {
               <p>{item.Name}</p>
             </div>
           ))}
+          {amenities.map((item) => (
+            <div className={styles.amenityItem}>
+              <span>{item.icon}</span>
+              <p>{item.Name}</p>
+            </div>
+          ))}
         </div>
       </div>
     </>
