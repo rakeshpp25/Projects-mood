@@ -9,6 +9,8 @@ import BusinessSignup from './componentss/Business_Signup/BusinessSignup'
 import Profile from "./componentss/Business_Dashboard/Profile";
 import DashboardOptions from "./componentss/Business_Dashboard/DashboardOptions";
 import ProtectedRoute from "./componentss/ProtectedRoutes/ProtectedRoutes";
+import Time from "./componentss/Business_Dashboard/Time";
+import DesktopBigCard from "./componentss/User_View/DesktopBigCard";
 
 axios.defaults.withCredentials = true; 
 
@@ -21,7 +23,9 @@ function App() {
         <Route path="/userSignup" element={<Usersignup/>} />
         <Route path="/emailverify" element={<Emailverify/>} />
         <Route path="/businessSignup" element={<BusinessSignup/>} />
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/Profile" element={<Profile/>} />
+        <Route path="/time" element={<Time/>} />
+        <Route path="/nearme" element={<DesktopBigCard/>} />
         <Route
         path="/dashboard"
         element={

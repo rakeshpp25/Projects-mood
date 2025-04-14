@@ -37,7 +37,7 @@ if(user.verification_code == verificationCode){
   res.json("User email verified successfully.");
 }
   } catch (error) {
-    res.status(400).send("User not found kya kare");
+    res.status(400).send("User not found ");
   }
 });
 export const verifyEmailLogin = router;

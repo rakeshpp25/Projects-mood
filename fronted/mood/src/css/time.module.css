@@ -1,0 +1,27 @@
+.ParticularDay{
+      border : 2px solid red;
+      margin :5px;
+}
+
+.InputBoxDiv {
+      position: relative;
+      width: 100%;
+     
+      
+    }
+    
+    .InputBox {
+      width: 100%;
+      padding: 10px 35px 10px 10px; /* leave space for icon on right */
+      outline: none;
+      font-size: 16px;
+    }
+    
+    .arrowIcon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none; /* prevent icon from blocking input clicks */
+    }
+    

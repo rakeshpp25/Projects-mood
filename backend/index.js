@@ -9,11 +9,11 @@ import { product } from "./routes/product.js";
 import {verifytoken} from './middleware/auth.js'
 import cookieParser from 'cookie-parser';
 import { profile } from "./routes/profile.js";
-import { verifyEmailLogin } from "./routes/verifyEmailLogin.js";
-import { ImageUploads } from "./routes/imageUpload.js";
-import { UserLocation } from "./routes/UserLocation.js";
 import { logoutRoute } from "./routes/logout.js";
-
+import {overview} from './routes/overview.js'
+import {UserLocation} from './routes/UserLocation.js'
+import { address } from "./routes/address.js";
+import { getInTouch } from "./routes/getInTouch.js";
 
 dotenv.config();
 
@@ -36,6 +36,10 @@ app.use('/emailverify',verifyEmailroutes)
 app.use('/login',login)
 app.use('/logout',logoutRoute)
 app.use('/Profile',verifytoken,profile )
+app.use('/overview',verifytoken,overview )
+app.use('/location',UserLocation)
+app.use('/address',verifytoken,address)
+app.use('/getintouch',getInTouch)
 
 
 // app.use('/product',verifytoken, product)

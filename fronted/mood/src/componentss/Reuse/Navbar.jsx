@@ -72,7 +72,7 @@ useEffect(() => {
   return (
     <nav className={`${styles.navbar} w-full`}>
       <div className={styles.logoDiv}>
-        <img className={styles.logoInside} src={logo} alt="logo" />
+        <Link to = {'/'}><img className={styles.logoInside} src={logo} alt="logo" /></Link>
       </div>
 
       <div className={styles.middleNav}>

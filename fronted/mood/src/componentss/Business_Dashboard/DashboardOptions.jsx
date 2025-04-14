@@ -6,9 +6,9 @@ import {
   OverviewIcon,
   ProfileIcon,
   ProfilePic,
-  VideoIcon,
   PhotoIcon,
   ReviewsIcon,
+  Addresslocation,
 } from "../Svgs";
 import Profile from "../Business_Dashboard/Profile";
 import Overview from "../Business_Dashboard/Overview";
@@ -17,6 +17,8 @@ import { v4 as uuidv4 } from "uuid";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../Reuse/Navbar";
 import axios from "axios";
+import Address from "./Address";
+import Documents from "../../componentss/documents/Documents";
 
 function DashboardOptions() {
   const { view } = useParams();
@@ -37,6 +39,12 @@ function DashboardOptions() {
     },
     {
       id: uuidv4(),
+      buttonIcon: <Addresslocation/>,
+      buttonName: "ADDRESS",
+      component: <Address/>,
+    },
+    {
+      id: uuidv4(),
       buttonIcon: <PhotoIcon />,
       buttonName: "PHOTOS",
     },
@@ -44,6 +52,12 @@ function DashboardOptions() {
       id: uuidv4(),
       buttonIcon: <ReviewsIcon />,
       buttonName: "REVIEWS",
+    },
+    {
+      id: uuidv4(),
+      buttonIcon: <ReviewsIcon />,
+      buttonName: "Documents",
+      component:<Documents/>
     },
   ]);
 

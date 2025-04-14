@@ -10,6 +10,7 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedFields, setUpdatedFields] = useState({}); // Track changed fields
+  const [originalData, setOriginalData] = useState(null); // Store original data
 
   useEffect(() => {
     const getUserProfile = async () => {
@@ -18,6 +19,7 @@ function Profile() {
           withCredentials: true,
         });
         setUserData(res.data);
+        setOriginalData(res.data); // Set the original data
         setLoading(false);
       } catch (err) {
         console.error("Failed to fetch user data", err.response || err);
@@ -29,6 +31,10 @@ function Profile() {
   }, []);
 
   const handleEditToggle = () => {
+    if (isEditing) {
+      // If we're cancelling the edit, revert to the original data
+      setUserData(originalData);
+    }
     setIsEditing((prev) => !prev);
   };
 
@@ -36,13 +42,13 @@ function Profile() {
     e.preventDefault();
     const { username, useremail, mobile_no, aadharNumber } = updatedFields;
 
-   const mobileRegex = /^\d{10}$/; // Matches exactly 10 digits
+    const mobileRegex = /^\d{10}$/; // Matches exactly 10 digits
 
-  // Check if mobile number is updated and validate only when updated
-  if (mobile_no && !mobileRegex.test(mobile_no)) {
-    toast.error("Mobile number must be a 10-digit number.");
-    return;
-  }
+    // Check if mobile number is updated and validate only when updated
+    if (mobile_no && !mobileRegex.test(mobile_no)) {
+      toast.error("Mobile number must be a 10-digit number.");
+      return;
+    }
 
     // Send only updated fields
     try {
@@ -52,9 +58,10 @@ function Profile() {
         { withCredentials: true }
       );
       setUserData(res.data); // updated data from backend
+      setOriginalData(res.data); // Update original data after save
       setUpdatedFields({}); // Reset updated fields
       setIsEditing(false);
-      toast.success("Data saved suceessfully")
+      toast.success("Data saved successfully");
     } catch (err) {
       console.error("Failed to save profile:", err);
       alert("Something went wrong while saving your profile");

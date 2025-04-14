@@ -63,7 +63,6 @@ const sendLocationToServer = async (latitude, longitude) => {
         console.log("Formatted Address:", formattedAddress);
 
         // Redirect to DesktopBigCard with formatted address as query param
-        console.log("hello")
         navigate(`/Nearme?address=${encodeURIComponent(formattedAddress)}`);
         
     } catch (error) {
