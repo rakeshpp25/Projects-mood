@@ -19,13 +19,17 @@ const FullLibraryDetails = () => {
           <LibraryHeader />
 
           <ShowAmenities />
-          <SpecialFeature/>
+          <SpecialFeature />
           <div>
-          <h1 className="text-3xl m-4 font-bold ">About the Library</h1>
-          <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro magnam at nulla saepe, minima voluptate cum nemo perspiciatis exercitationem quos? </div>
+            <h1 className="text-3xl m-4 font-bold ">About the Library</h1>
+            <div>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
+              magnam at nulla saepe, minima voluptate cum nemo perspiciatis
+              exercitationem quos?{" "}
+            </div>
           </div>
 
-          
+          <div></div>
           <ShowRatings />
 
           <Reviews />
@@ -34,8 +38,6 @@ const FullLibraryDetails = () => {
           <Prices />
         </div>
       </div>
-
-      
     </div>
   );
 };
