@@ -12,6 +12,7 @@ import ProtectedRoute from "./componentss/ProtectedRoutes/ProtectedRoutes";
 import Time from "./componentss/Business_Dashboard/Time";
 import DesktopBigCard from "./componentss/User_View/DesktopBigCard";
 import FullLibraryDetails from "./screens/FullLibraryDetails";
+import NearMeCard from "./componentss/libraryDetail/NearMeCard";
 
 axios.defaults.withCredentials = true; 
 
@@ -26,7 +27,7 @@ function App() {
         <Route path="/businessSignup" element={<BusinessSignup/>} />
         <Route path="/Profile" element={<Profile/>} />
         <Route path="/time" element={<Time/>} />
-        <Route path="/nearme" element={<DesktopBigCard/>} />
+        <Route path="/nearme" element={<NearMeCard/>} />
         <Route path="/libraryDetails" element={<FullLibraryDetails/>} />
         <Route
         path="/dashboard"

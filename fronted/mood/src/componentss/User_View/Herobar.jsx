@@ -85,15 +85,7 @@ const getErrorMessage = (errorCode) => {
     
       <div className={styles.herobarOuterDiv}>
         <div className={styles.herobarInsideDiv}>
-          {/* <div className={styles.HerobarTitleNdescription}>
-            <div className={styles.title}>
-            Set Your <span>MOOD</span> , Set Your Success
-            </div>
-            <div className={styles.description}>
-              <div className="w-S"></div>
-            find best library that suits you and provide best result that fits you    
-            </div>
-          </div> */}
+          
           <div className=" flex flex-col w-full gap-4 justify-center text-center">
             <h3 className="text-4xl">Set Your <span className="text-orange-400">MOOD</span> , Set Your Success</h3>
             <div className="text-2xl w-full">
@@ -101,7 +93,7 @@ const getErrorMessage = (errorCode) => {
             </div>
           </div>
           
-            <form action="" className={styles.searchBar}>
+            <form action="" className={styles.searchBar} onSubmit={(e) => e.preventDefault()}>
               <input type="text" placeholder="Search by library, place" />
               <button type="submit">
                 <SearchIcon/>

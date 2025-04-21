@@ -10,9 +10,7 @@ function LibraryDescImages() {
   const images = [image1, image2, image3, image4, image5];
   const [ currentImage , setcurrentImage] = useState(0)
 
-  const changeimage = (e) =>{
-
-  }
+ 
 
   return (
     <>
@@ -44,7 +42,7 @@ function LibraryDescImages() {
             </svg>
           </button>
 
-          <button className={styles.right} onClick={changeimage}>
+          <button className={styles.right} onClick={()=>setcurrentImage(currentImage+1)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="49"
