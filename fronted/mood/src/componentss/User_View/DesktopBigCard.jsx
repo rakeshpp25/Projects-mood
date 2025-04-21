@@ -15,6 +15,11 @@ function DesktopBigCard() {
     <>
       <Navbar />
       <NearMeCard />
+      <NearMeCard />
+      <NearMeCard />
+      <NearMeCard />
+      <NearMeCard />
+      <NearMeCard />
      
     </>
   )

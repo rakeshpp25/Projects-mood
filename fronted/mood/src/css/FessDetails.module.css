@@ -1,0 +1,108 @@
+.pageWrapper {
+      max-width: 600px;
+      min-width: 400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    
+
+.titleNEdit {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .hourlySection {
+      margin-bottom: 2rem;
+    }
+    
+    .hourlySection > span {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+    
+    .InsideHourly {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .HourlyItem {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      background-color: #f9f9f9;
+      width: 150px;
+      position: relative;
+    }
+    
+    .price {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    
+    .HourlyFeesInputBox {
+      width: 100%;
+      padding: 0.4rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    
+    /* Add More Button */
+    .AddMoreText {
+      color: blue;
+      cursor: pointer;
+      margin-top: 8px;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .AddMoreText:hover {
+      text-decoration: underline;
+    }
+    
+    /* Delete Icon */
+    .DeleteIcon {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      color: red;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.2s ease;
+    }
+    
+    .DeleteIcon:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Placeholder styling for dynamic inputs */
+    .HourlyItem input::placeholder {
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    
+    /* Error message */
+    .errorMessage {
+      color: red;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    

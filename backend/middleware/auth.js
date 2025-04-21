@@ -7,7 +7,7 @@ const generatetoken = (userdata) => {
       id: userdata.id,
     },
     "helloji",
-    { expiresIn: "3h" }
+    
   );
 
   return token;

@@ -27,7 +27,7 @@ function App() {
         <Route path="/businessSignup" element={<BusinessSignup/>} />
         <Route path="/Profile" element={<Profile/>} />
         <Route path="/time" element={<Time/>} />
-        <Route path="/nearme" element={<NearMeCard/>} />
+        <Route path="/nearme" element={<DesktopBigCard/>} />
         <Route path="/libraryDetails" element={<FullLibraryDetails/>} />
         <Route
         path="/dashboard"

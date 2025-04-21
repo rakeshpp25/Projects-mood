@@ -1,29 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "../../css/Full_Library_Details_css/LibraryDescription.module.css";
 import { DotIcon, LocationIcon, StarIcon } from "../Svgs";
+import { MdOutlineLocationOn } from "react-icons/md";
 
 
 function LibraryHeader() {
   const name = useSelector(
     (state) => state.overviewDescription.BusinessNameinputvalue
   );
-  const location = useSelector(
-    (state) => state.overviewDescription.BusinessLocationInputValue
-  );
+  // const location = useSelector(
+  //   (state) => state.overviewDescription.BusinessLocationInputValue
+  // );
+  const [location,setLocation]=useState("KNIT, Sultanpur")
 
   return (
     <>
-      <div className={styles.OuterFullHeader}>
-{/* Library title and location starts for user to see */}
-        <div className={styles.NameNLocation}>
-          <span className={styles.LibraryName} >{name}</span>
-          <p className={styles.LocationNIcon}>
-            <span className={styles.loactionIcon}><LocationIcon/></span>
-            <span className={styles.locationName}>{location}</span>
-          </p>
+   
+      <div className="">
+  
+        <div className="gap-8 font-semibold">
+        <h1 className="text-4xl font-bold">Knowledge Zone Library</h1>
+          
+          <div className="flex items-center my-2"><MdOutlineLocationOn className="text-4xl"/>
+          <p>{location}</p>
+           </div>
         </div>
-{/* Library title and location ends for user to see */}
+
 
 
 <div className={styles.RatingTimeContact}>

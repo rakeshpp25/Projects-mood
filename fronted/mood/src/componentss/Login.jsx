@@ -9,7 +9,9 @@ import { toast } from "react-toastify";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [inputEmail, setInputEmail] = useState({});
+  const [isSending, setIsSending] = useState(false); // loading state
 
   const handleEmail = (e) => {
     setInputEmail({
@@ -20,18 +22,36 @@ function Login() {
 
   const handlesubmit = (e) => {
     e.preventDefault();
+    setIsSending(true); // start loading
+
     axios.post("http://localhost:8000/login", inputEmail)
       .then((res) => {
-        console.log("Data saved", res.data);
         if (res.data) {
           const userRole = res.data.role;
-          
-          dispatch(setRole(userRole)); // store role in Redux
-          navigate("/emailverify", { state: { email: inputEmail.useremail, role: userRole, purpose: "login" } });
+          dispatch(setRole(userRole));
+          navigate("/emailverify", {
+            state: {
+              email: inputEmail.useremail,
+              role: userRole,
+              purpose: "login"
+            }
+          });
         }
       })
       .catch((error) => {
-        toast.error(error.message)
+        if (error.response) {
+          // Server responded with a status other than 2xx
+          toast.error(error.response.data.message || "Login failed. Please try again.");
+        } else if (error.request) {
+          // Request made but no response received
+          toast.error("No response from server. Please check your internet connection.");
+        } else {
+          // Something else caused an error
+          toast.error("An unexpected error occurred.");
+        }
+      })
+      .finally(() => {
+        setIsSending(false); // stop loading
       });
   };
 
@@ -49,9 +69,14 @@ function Login() {
                   name="useremail"
                   placeholder="Email id"
                   onChange={handleEmail}
+                  required
                 />
-                <button type="submit" className="btn-user-submit">
-                  Send Code
+                <button
+                  type="submit"
+                  className="btn-user-submit"
+                  disabled={isSending}
+                >
+                  {isSending ? "Sending..." : "Send Code"}
                 </button>
               </form>
             </div>
@@ -66,7 +91,7 @@ function Login() {
               <Link to="/userSignup" className="tosigninpage w-1/2">
                 <button className="w-full">User</button>
               </Link>
-              <Link  to="/businessSignup" className="tosigninpage w-1/2">
+              <Link to="/businessSignup" className="tosigninpage w-1/2">
                 <button className="w-full">Corporate</button>
               </Link>
             </div>

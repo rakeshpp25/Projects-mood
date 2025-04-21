@@ -5,6 +5,7 @@ import Footer from '../componentss/Footer'
 function Dashboard() {
   return (
     <>
+    <Headers/>
     <DashboardOptions/>
     <Footer/>
     </>

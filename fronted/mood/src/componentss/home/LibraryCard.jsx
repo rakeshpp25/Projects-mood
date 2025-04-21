@@ -2,12 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../../css/User_view_css/desktopcard.module.css";
 import { VscLocation } from "react-icons/vsc";
+import { FaMapMarkedAlt } from "react-icons/fa"; // map icon
 
-const LibraryCard = ({ title, location, rating, reviews, image }) => {
+const LibraryCard = ({ title, location, liblat, liblang, rating, reviews, image }) => {
+  const handleMapClick = () => {
+    console.log(liblat)
+    const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${liblat},${liblang}`;
+    window.open(mapUrl, "_blank");
+  };
+
   return (
     <div className={styles.OuterCard}>
       <div className={styles.LibraryImage}>
         <img src={image} alt={title} />
+        <div className={styles.mapIconWrapper} onClick={handleMapClick} title="Open in Google Maps">
+          <FaMapMarkedAlt className={styles.mapIcon} />
+        </div>
       </div>
 
       <div className={styles.libraryDeatils}>
@@ -56,7 +66,7 @@ const LibraryCard = ({ title, location, rating, reviews, image }) => {
         </div>
 
         {/* View Details Button */}
-        <Link to="/" className={styles.btn}>
+        <Link to="/libraryDetails" className={styles.btn}>
           View Details
         </Link>
       </div>

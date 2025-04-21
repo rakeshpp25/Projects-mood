@@ -106,6 +106,7 @@ function Profile() {
 
       <div className={styles.gender}>
         <span>Your Gender</span>
+        <div>
         <label>
           <input
             type="radio"
@@ -128,6 +129,7 @@ function Profile() {
           />
           Female
         </label>
+        </div>
       </div>
 
       <div className={styles.EmailAddress}>

@@ -1,60 +1,69 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css"; 
+import axios from 'axios';
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import libraryData from "../../libraryData.json";
-import library1 from "../../images/library 1.jpeg";
-import library2 from "../../images/library 2.jpeg";
-import library3 from "../../images/library 3.jpeg";
-import library4 from "../../images/library 4.jpeg";
-import library5 from "../../images/library 5.jpeg";
-import library6 from "../../images/library 6.jpeg";
-import library7 from "../../images/library 7.jpeg";
-import library8 from "../../images/library 8.jpeg";
-import library9 from "../../images/library 9.jpeg";
-import library10 from "../../images/library 10.jpeg";
-import library11 from "../../images/library 11.jpeg";
-import library12 from "../../images/library 12.jpeg";
-import library13 from "../../images/library 13.jpeg";
-import library14 from "../../images/library 14.jpeg";
-import library15 from "../../images/library 15.jpeg";
-import library16 from "../../images/library 16.jpeg";
-
-const imageMap = {
-  library1,
-  library2,
-  library3,
-  library4,
-  library5,
-  library6,
-  library7,
-  library8,
-  library9,
-  library10,
-  library11,
-  library12,
-  library13,
-  library14,
-  library15,
-  library16,
-};
 
 const LibraryCard = lazy(() => import('./LibraryCard'));
 
 const SuggestedLibraries = () => {
+  const [libraries, setLibraries] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchLibraries = async () => {
+    try {
+      const storedLocation = localStorage.getItem('userLocation');
+      let apiURL = 'http://localhost:8000/librarydetails';
+
+      if (storedLocation) {
+        let { city } = JSON.parse(storedLocation);
+
+        if (city) {
+          // Clean city name to remove pincode or extra parts
+          city = city.split("-")[0].trim();  // This will give us only the city name, e.g., 'Sultanpur'
+          console.log("Fetching libraries for city:", city);
+
+          apiURL = `http://localhost:8000/librarydetails?city=${encodeURIComponent(city)}`;
+        }
+      }
+
+      const response = await axios.get(apiURL);
+      console.log("Suggested Libraries API response:", response);
+
+      if (Array.isArray(response.data)) {
+        const formattedLibraries = response.data.map(lib => ({
+          title: lib.library_name,
+          location: lib.city || 'Unknown Location',
+          latitude: lib.latitude,
+          longitude: lib.longitude,
+        }));
+
+        setLibraries(formattedLibraries);
+      } else {
+        console.error('Expected an array of libraries, but got:', response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching libraries:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchLibraries();
+  }, []);
+
   const settings = {
-    infinite: true,
-    speed: 5000,
-    slidesToShow: 5,
-    slidesToScroll: 4,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2500,
     responsive: [
-      { breakpoint: 1280, settings: { slidesToShow: 4 } },
-      { breakpoint: 1024, settings: { slidesToShow: 3 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } },
-      { breakpoint: 480, settings: { slidesToShow: 1 } },
-    ],
+      { breakpoint: 1024, settings: { slidesToShow: 2 } },
+      { breakpoint: 640, settings: { slidesToShow: 1 } }
+    ]
   };
 
   return (
@@ -62,19 +71,24 @@ const SuggestedLibraries = () => {
       <h2 className="text-3xl ml-10 font-bold my-6">Suggested For You</h2>
       <div className="w-[95%] mx-auto">
         <Suspense fallback={<div>Loading...</div>}>
-          <Slider {...settings}>
-            {libraryData.slice(0, 12).map((lib, idx) => (
-              <div key={idx} className="px-2">
-                <LibraryCard
-                  title={lib.title}
-                  location={lib.location}
-                  rating={lib.rating}
-                  reviews={lib.reviews}
-                  image={imageMap[lib.image]}
-                />
-              </div>
-            ))}
-          </Slider>
+          {loading ? (
+            <div className="text-center py-6">Loading libraries...</div>
+          ) : libraries.length > 0 ? (
+            <Slider {...settings}>
+              {libraries.map((lib, idx) => (
+                <div key={idx} className="px-2">
+                 <LibraryCard
+  title={lib.title}
+  location={lib.location}
+  libLat={lib.latitude}
+  libLng={lib.longitude}
+/>
+                </div>
+              ))}
+            </Slider>
+          ) : (
+            <div className="text-center py-6">No libraries available</div>
+          )}
         </Suspense>
       </div>
     </>

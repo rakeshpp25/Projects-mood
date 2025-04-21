@@ -18,13 +18,7 @@ const userSignupSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  gender: {
-    type: String,
-  },
-  altMobileNumber: {
-    type: String,
-    required: true, // Changed 'require' to 'required'
-  },
+  
   role: {
     type: String,
     enum: ["user", "business"],

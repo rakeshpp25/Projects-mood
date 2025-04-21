@@ -9,6 +9,9 @@ import {
   PhotoIcon,
   ReviewsIcon,
   Addresslocation,
+  FeesIcon,
+  StatusIcon,
+  DocumentIcon,
 } from "../Svgs";
 import Profile from "../Business_Dashboard/Profile";
 import Overview from "../Business_Dashboard/Overview";
@@ -18,7 +21,10 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "../Reuse/Navbar";
 import axios from "axios";
 import Address from "./Address";
-import Documents from "../../componentss/documents/Documents";
+import FeeDetails from "./../Business_Dashboard/FeeDetails";
+import Documents from "../../componentss/Business_Dashboard/Documents";
+import PhotoUploads from "./PhotoUploads";
+import Status from "./Status";
 
 function DashboardOptions() {
   const { view } = useParams();
@@ -45,9 +51,23 @@ function DashboardOptions() {
     },
     {
       id: uuidv4(),
+      buttonIcon: <FeesIcon/>,
+      buttonName: "FEES",
+      component: <FeeDetails/>,
+    },
+    {
+      id: uuidv4(),
+      buttonIcon: <DocumentIcon/>,
+      buttonName: "Documents",
+      component: <Documents/>,
+    },
+    {
+      id: uuidv4(),
       buttonIcon: <PhotoIcon />,
       buttonName: "PHOTOS",
+      component: <PhotoUploads/>,
     },
+    
     {
       id: uuidv4(),
       buttonIcon: <ReviewsIcon />,
@@ -55,10 +75,11 @@ function DashboardOptions() {
     },
     {
       id: uuidv4(),
-      buttonIcon: <ReviewsIcon />,
-      buttonName: "Documents",
-      component:<Documents/>
+      buttonIcon: <StatusIcon/>,
+      buttonName: "STATUS",
+      component: <Status/>,
     },
+   
   ]);
 
   const [activeComponent, setActiveComponent] = useState(
@@ -112,16 +133,18 @@ function DashboardOptions() {
           {/* dashboard options starts from here */}
           <div className={styles.dashboardOptions}>
             <div className={styles.innerDashboardDiv}>
-              {DashBoardOptions.map((item) => (
-                <button
-                  key={item.id}
-                  className={`${styles.profile} ${styles.btns}`}
-                  onClick={() => setActiveComponent(item.id)}
-                >
-                  {item.buttonIcon}
-                  <span>{item.buttonName}</span>
-                </button>
-              ))}
+            {DashBoardOptions.map((item) => (
+  <button
+    key={item.id}
+    className={`${styles.profile} ${styles.btns} ${
+      item.id === activeComponent ? styles.activeBtn : ""
+    }`}
+    onClick={() => setActiveComponent(item.id)}
+  >
+    {item.buttonIcon}
+    <span>{item.buttonName}</span>
+  </button>
+))}
             </div>
           </div>
         </div>

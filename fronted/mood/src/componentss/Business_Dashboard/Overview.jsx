@@ -4,8 +4,7 @@ import Time from "./Time";
 import styles from "../../css/Business_Dashboard_Css/overview.module.css";
 import EditButton from "../Reuse/EditButton";
 import SaveButton from "../Reuse/SaveButton";
-import { FaCheck, FaTimes } from "react-icons/fa";
-import { FaWifi } from "react-icons/fa";
+import { FaCheck, FaTimes, FaWifi, FaFan, FaTint } from "react-icons/fa";
 
 function Overview() {
   const [days, setDays] = useState([
@@ -21,19 +20,17 @@ function Overview() {
   const [isEditing, setIsEditing] = useState(false);
   const [userData, setUserData] = useState({
     Library_name: "",
-    time: "", // Time will be handled in the 'days' state
+    time: "",
     special_features: "",
     about_library: "",
   });
 
   const [originalUserData, setOriginalUserData] = useState({});
   const [originalDays, setOriginalDays] = useState([]);
-
   const [predefinedAmenities] = useState(["WiFi", "AC", "Power Backup"]);
   const [dynamicAmenities, setDynamicAmenities] = useState([]);
   const [specialFeatures, setSpecialFeatures] = useState([]);
 
-  // Fetch overview data from backend
   useEffect(() => {
     const fetchOverview = async () => {
       try {
@@ -47,19 +44,20 @@ function Overview() {
         } = res.data;
 
         setUserData({ Library_name, time, special_features, about_library });
-        setOriginalUserData({
-          Library_name,
-          time,
-          special_features,
-          about_library,
-        }); // Save the original data
-        setDays(time); // Set the time (days) state from fetched data
-        setOriginalDays(time); // Save the original time data
+        setOriginalUserData({ Library_name, time, special_features, about_library });
+        setDays(time);
+        setOriginalDays(time);
 
-        const dynamic = amenities.filter(
-          (a) => !predefinedAmenities.includes(a)
-        );
+        const dynamic = amenities.filter((a) => !predefinedAmenities.includes(a));
         setDynamicAmenities(dynamic);
+
+        if (Array.isArray(special_features)) {
+          setSpecialFeatures(special_features);
+        } else if (typeof special_features === "string") {
+          setSpecialFeatures(special_features.split(",").map((f) => f.trim()));
+        } else {
+          setSpecialFeatures([]);
+        }
       } catch (err) {
         console.error("Error fetching overview:", err);
       }
@@ -70,7 +68,6 @@ function Overview() {
 
   const handleEditToggle = () => {
     if (isEditing) {
-      // Reset the state to original data when exiting the edit mode
       setUserData(originalUserData);
       setDays(originalDays);
     }
@@ -79,18 +76,17 @@ function Overview() {
 
   const handleSave = async (e) => {
     e.preventDefault();
-
     const payload = {
       ...userData,
       amenities: [...predefinedAmenities, ...dynamicAmenities],
-      time: days, // Pass the days (time) data here
+      time: days,
+      special_features: specialFeatures,
     };
 
     try {
       const res = await axios.put("http://localhost:8000/overview", payload);
       console.log("✅ Overview saved:", res.data);
       setIsEditing(false);
-      // Optionally reset the original data after saving
       setOriginalUserData(userData);
       setOriginalDays(days);
     } catch (err) {
@@ -113,17 +109,17 @@ function Overview() {
   };
 
   const handleAddAmenity = () => {
-    setDynamicAmenities((prev) => [...prev, ""]);
+    if (isEditing) setDynamicAmenities((prev) => [...prev, ""]);
   };
 
   const handleRemoveAmenity = (index) => {
-    setDynamicAmenities((prev) => prev.filter((_, i) => i !== index));
+    if (isEditing) {
+      setDynamicAmenities((prev) => prev.filter((_, i) => i !== index));
+    }
   };
 
   const handleAddSpecialFeature = () => {
-    if (isEditing) {
-      setSpecialFeatures((prev) => [...prev, ""]);
-    }
+    if (isEditing) setSpecialFeatures((prev) => [...prev, ""]);
   };
 
   const handleSpecialFeatureChange = (index, value) => {
@@ -133,9 +129,11 @@ function Overview() {
   };
 
   const handleRemoveSpecialFeature = (index) => {
-    const updated = [...specialFeatures];
-    updated.splice(index, 1);
-    setSpecialFeatures(updated);
+    if (isEditing) {
+      const updated = [...specialFeatures];
+      updated.splice(index, 1);
+      setSpecialFeatures(updated);
+    }
   };
 
   return (
@@ -157,20 +155,18 @@ function Overview() {
         />
       </div>
 
-      {/* Time Section - passed to Time component */}
       <Time days={days} setDays={setDays} isEditing={isEditing} />
 
       <div className={styles.Amenities}>
         <span>Amenities</span>
 
-        {/* Predefined Amenities */}
         {predefinedAmenities.map((amenity, index) => (
           <div key={`pre-${index}`} className={styles.AmenityItemWrapper}>
             <div className={styles.InputWithIcons}>
-              {/* Create a div that looks like an input */}
               <div className={styles.InputDivWrapper}>
-                {/* Show the WiFi icon only if the amenity is WiFi */}
-                {amenity === "WiFi" && <FaWifi className={styles.WifiIcon} />}
+                {amenity === "WiFi" && <FaCheck className={styles.WifiIcon} />}
+                {amenity === "AC" && <FaCheck className={styles.WifiIcon} />}
+                {amenity === "Power Backup" && <FaCheck className={styles.WifiIcon} />}
                 <input
                   className={styles.AmenitiesInputBox}
                   type="text"
@@ -182,23 +178,14 @@ function Overview() {
           </div>
         ))}
 
-        {/* Dynamic Amenities */}
         {dynamicAmenities.map((amenity, index) => (
           <div key={`dyn-${index}`} className={styles.DynamicAmenityWrapper}>
             <div className={styles.InputWithIcons}>
-              {/* Styled div that looks like an input */}
               <div className={styles.InputDivWrapper}>
                 <FaCheck className={styles.CheckIcon} />
-                {amenity.toLowerCase() === "wifi" && (
-                  <FaWifi className={styles.AmenitiesIcon} />
-                )}
-                {amenity.toLowerCase() === "ac" && (
-                  <FaFan className={styles.AmenitiesIcon} />
-                )}
-                {amenity.toLowerCase() === "water" && (
-                  <FaTint className={styles.AmenitiesIcon} />
-                )}
-
+                {amenity.toLowerCase() === "wifi" && <FaWifi className={styles.AmenitiesIcon} />}
+                {amenity.toLowerCase() === "ac" && <FaFan className={styles.AmenitiesIcon} />}
+                {amenity.toLowerCase() === "water" && <FaTint className={styles.AmenitiesIcon} />}
                 <input
                   className={styles.AmenitiesInputBox}
                   type="text"
@@ -208,22 +195,17 @@ function Overview() {
                 />
               </div>
               <FaTimes
-                className={`${styles.RemoveIcon} ${
-                  !isEditing ? styles.disabledIcon : ""
-                }`}
-                onClick={() => isEditing && handleRemoveAmenity(index)}
+                className={`${styles.RemoveIcon} ${!isEditing ? styles.disabledIcon : ""}`}
+                onClick={() => handleRemoveAmenity(index)}
               />
             </div>
           </div>
         ))}
 
-        {/* "Add More" Button */}
         <button
           type="button"
-          onClick={isEditing ? handleAddAmenity : null} // Only add more if editing is enabled
-          className={`${styles.AddMoreButton} ${
-            !isEditing ? styles.disabledButton : ""
-          }`}
+          onClick={handleAddAmenity}
+          className={`${styles.AddMoreButton} ${!isEditing ? styles.disabledButton : ""}`}
         >
           Add More
         </button>
@@ -238,14 +220,12 @@ function Overview() {
               className={styles.DynamicAmenitiesInputBox}
               type="text"
               value={feature}
-              onChange={(e) =>
-                handleSpecialFeatureChange(index, e.target.value)
-              }
+              onChange={(e) => handleSpecialFeatureChange(index, e.target.value)}
               disabled={!isEditing}
             />
             <span
               className={styles.RemoveIcon}
-              onClick={() => isEditing && handleRemoveSpecialFeature(index)}
+              onClick={() => handleRemoveSpecialFeature(index)}
             >
               ✖
             </span>
@@ -255,9 +235,7 @@ function Overview() {
         <button
           type="button"
           onClick={handleAddSpecialFeature}
-          className={`${styles.AddMoreButton} ${
-            !isEditing ? styles.disabledButton : ""
-          }`}
+          className={`${styles.AddMoreButton} ${!isEditing ? styles.disabledButton : ""}`}
         >
           Add More
         </button>

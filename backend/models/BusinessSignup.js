@@ -47,6 +47,15 @@ const BusinessSignupSchema = new mongoose.Schema({
     default: Date.now,
     required: true,
   },
+  status: {
+    type: String,
+    enum: ['pending', 'approved', 'rejected'],
+    default: 'pending'
+  },
+  libraryLiveStatus: {
+    type: Boolean,
+    default: false, // Default to false, assuming the library is not live initially
+  }
 }, { timestamps: true });
 
 // Create a TTL index on the 'createdAt' field for unverified businesses

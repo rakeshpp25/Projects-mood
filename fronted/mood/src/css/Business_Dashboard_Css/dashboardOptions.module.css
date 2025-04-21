@@ -1,6 +1,18 @@
+.activeBtn {
+  background-color: #C5B5FF; /* blue or your theme color */
+  color: white;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+
 .WholeComponent{
-      display : flex;
-      
+    display: flex;
+padding: 0px 4%;
+align-items: flex-start;
+gap: 60px;
+align-self: stretch;
+margin : 80px 0;
 }
 
 .allOptions 
@@ -11,7 +23,6 @@ align-items: flex-start;
 gap: 30px;
 align-self: stretch;
 width : 300px;
-margin : 50px
 }
 
 .profilePicNname{

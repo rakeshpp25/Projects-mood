@@ -1,113 +1,338 @@
 .navbar {
-      background-color: #6439ff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      align-self: stretch;
-      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-      padding: 0 4%;
-      height: 50px;
-    }
-    .middleNav{
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 100px;
-      color: #FFF;
-font-size: 20px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-    }
-
-
-    .logoInside {
-      width: 72px;
-      height: 16px;
-    }
-    
-    .login {
-      display: flex;
-      justify-items: center;
-      align-items: center;
-      border: solid;
-      font-size: 20px;
-      color: #fabc3f;
-      padding: 4px 8px;
-      border-radius: 3px;
-      background-color: transparent;
-      font-weight :500;
-      font-style: normal;
-      line-height: normal;
-    }
-
-    .logoDiv img{
-      height: 25px;
-      width : 110px;
-    }
-
-    .Accountbtn{
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      
-    }
-
-    .AccountTitle{
-      color: #FFF;
-font-size: 20px;
-font-style: normal;
-font-weight:500;
-line-height: normal;
-    }
-
-    .downArrow {
-      stroke-width: 1.5px;
-stroke: #FFF;
-    }
-
-.AccountbtnNdropdown{
-  display :flex;
-  flex-direction : column;
+  background-color: rgba(100, 57, 255); /* 80% opacity for #6439ff */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  padding: 0 4%;
+  height: 55px;
+}
+.middleNav {
+  display: flex;
   justify-content: center;
-align-items: center;
-position : relative;
+  align-items: center;
+  gap: 100px;
+  color: #FFF;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.middleNav button {
+  background: none;
+  border: none;
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative; /* To position the line */
 }
 
 
-    .dropdown{
-      display: flex;
-width: 190px;
-padding: 10px 0px;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 20px;
-background : #6439ff;
-color : white;
-position : absolute;
-top : 100%;
-left : 0;
-z-index : 2;
-    }
 
-    .MyProfilebtn , .logoutbtn{
-      display: flex;
-padding: 0px 10px;
-align-items: center;
-gap: 10px;
-align-self: stretch;
-    }
+.middleNav button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px; /* Thickness of the line */
+  background-color: #ffffff; /* Line color */
+  transition: width 0.3s ease; /* Smooth transition */
+}
 
+.middleNav button:hover::after {
+  width: 100%; /* Line expands to full width of the button */
+}
 
-    .MyProfilebtn span , .logoutbtn span {
+.logoDiv img{
+  height: 25px;
+  width : 110px;
+}
+
+.logoInside {
+  width: 72px;
+  height: 16px;
+  transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+}
+
+.logoInside:hover {
+  transform: scale(1.05); /* Scales the image by 5% */
+}
     
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-   
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #fabc3f; /* Border color matching the text color */
+  font-size: 20px;
+  color: #fabc3f;
+  padding: 8px 16px; /* Increased padding for a better look */
+  border-radius: 30px; /* More rounded corners for a modern look */
+  background-color: transparent;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: all 0.3s ease; /* Smooth transition for hover and active states */
+}
+
+.login:hover {
+  background-color: #fabc3f; /* Background color on hover */
+  color: #fff; /* Change text color to white when hovered */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.login:active {
+  background-color: #e89c30; /* Darker background on click */
+  transform: scale(1); /* Reset scale on active */
+}
 
     
+.Accountbtn {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Increased gap for better spacing */
+  padding: 8px 16px; /* Added padding for better button appearance */
+  border-radius: 30px; /* Rounded corners for a softer look */
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition on hover */
+}
+
+.Accountbtn:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Light background effect on hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.AccountTitle {
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+  transition: color 0.3s ease; /* Smooth text color transition */
+}
+
+.downArrow {
+  stroke-width: 1.5px;
+  stroke: #FFF;
+  transition: transform 0.3s ease; /* Smooth arrow transition */
+}
+
+.AccountbtnNdropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.dropdown {
+  display: flex;
+  width: 190px;
+  padding: 10px 0px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #6439ff;
+  color: white;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 2;
+  border-radius: 8px; /* Rounded corners for a softer look */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s 0.3s; /* Smooth dropdown transition */
+}
+
+.Accountbtn:hover + .dropdown,
+.dropdown:hover {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0s 0s; /* Make the dropdown visible when hovering */
+}
+
+.MyProfilebtn,
+.logoutbtn {
+  display: flex;
+  padding: 10px 15px;
+  align-items: center;
+  gap: 15px;
+  align-self: stretch;
+  font-size: 18px;
+  font-weight: 400;
+  border: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease; /* Smooth transition */
+}
+
+.MyProfilebtn:hover,
+.logoutbtn:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Background color change on hover */
+   /* Slightly enlarge the button on hover */
+}
+
+.MyProfilebtn span,
+.logoutbtn span {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+
+
+@media only screen and (max-width: 480px) {
+  /* Navbar Styling */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6439FF;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    
+  }
+
+ 
+    .logoDiv img{
+      height: 20px;
+      width : 75px;
+    }
+  
+
+  .middleNav {
+    display: flex;
+    gap: 20px;
+  }
+
+  .login {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .AccountbtnNdropdown {
+    position: relative;
+  }
+
+  .Accountbtn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  /* Dropdown Styling */
+  .dropdown {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+  }
+
+  /* Hamburger Menu Styling */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #ffffff;
+  }
+
+  /* Hide elements on mobile */
+  .middleNav,
+  .login,
+  .AccountbtnNdropdown {
+    display: none;
+  }
+
+  /* Show hamburger icon */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Keyframe animation for sidebar slide-in */
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
+
+  /* Sidebar when visible on mobile */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    max-width: 320px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.15);
+    padding: 2rem 1.5rem;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: slideIn 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+  }
+
+  /* Close button inside sidebar */
+  .closeIcon {
+    align-self: flex-end;
+    font-size: 1.7rem;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  /* Button Styling inside sidebar */
+  .sidebar button {
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .sidebar button:hover {
+    color: #007bff;
+  }
+
+  
+  
+ 
+}

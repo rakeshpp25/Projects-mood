@@ -8,7 +8,7 @@ router.get("/",  async (req, res) => {
       try {
         const userId = req.userpayload.id;
     
-        const overview = await OverviewModel.findOne({ userId });
+        const overview = await OverviewModel.findOne({ businessId: userId });
     
         if (!overview) {
           return res.status(404).json({ message: "Overview not found" });
@@ -28,7 +28,7 @@ router.put('/', async (req, res) => {
         
         
         const existingOverview = await OverviewModel.findOne({ userId });
-    
+    console.log("hello")
         if (existingOverview) {
           // Update existing overview
           existingOverview.Library_name = Library_name;

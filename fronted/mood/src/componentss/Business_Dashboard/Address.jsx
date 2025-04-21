@@ -30,7 +30,7 @@ function Address() {
             withCredentials: true,
           });
     
-          console.log("Fetched address from backend:", res.data); // 👈 Add this log
+          console.log("Fetched address from backend:", res.data);
     
           if (res.data && Object.keys(res.data).length > 0) {
             setUserData((prev) => ({
@@ -195,6 +195,36 @@ function Address() {
         <EditButton isEditing={isEditing} onClick={handleEditToggle} />
       </div>
 
+      <div className={styles.AltmobileNumber}>
+        <span>Location</span>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <input
+            className={styles.InputBox}
+            type="text"
+            name="location"
+            value={userData.location}
+            onChange={handleChange}
+            disabled={!isEditing}
+          />
+          {isEditing && (
+            <button
+              type="button"
+              style={{
+                padding: "8px 12px",
+                background: "#007BFF",
+                color: "white",
+                border: "none",
+                borderRadius: "6px",
+                cursor: "pointer",
+              }}
+              onClick={getLocation}
+            >
+              Fetch
+            </button>
+          )}
+        </div>
+      </div>
+
       <div className={styles.Name}>
         <span>Building Name</span>
         <input
@@ -267,35 +297,7 @@ function Address() {
         />
       </div>
 
-      <div className={styles.AltmobileNumber}>
-        <span>Location</span>
-        <div style={{ display: "flex", gap: "10px" }}>
-          <input
-            className={styles.InputBox}
-            type="text"
-            name="location"
-            value={userData.location}
-            onChange={handleChange}
-            disabled={!isEditing}
-          />
-          {isEditing && (
-            <button
-              type="button"
-              style={{
-                padding: "8px 12px",
-                background: "#007BFF",
-                color: "white",
-                border: "none",
-                borderRadius: "6px",
-                cursor: "pointer",
-              }}
-              onClick={getLocation}
-            >
-              Fetch
-            </button>
-          )}
-        </div>
-      </div>
+      
 
       {isEditing && <SaveButton />}
     </form>

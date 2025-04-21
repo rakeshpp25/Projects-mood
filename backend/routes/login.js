@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     }
     
     if (!existsUser) {
-      return res.status(400).send("USER NOT FOUND, PLEASE REGISTER");
+      return res.status(404).json({ message: "User not found. Please register." });
     }
 
     // Generate a random 6-digit OTP
@@ -49,7 +49,6 @@ router.post("/", async (req, res) => {
       role: role,
     });
   } catch (error) {
-    console.error("Error during login OTP process:", error);
     res.status(500).send("An error occurred during login.");
   }
 });

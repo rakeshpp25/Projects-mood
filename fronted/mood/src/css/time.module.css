@@ -1,6 +1,6 @@
 .ParticularDay{
-      border : 2px solid red;
-      margin :5px;
+      border : 1px solid #B2B2B2;
+      margin :5px 0;
 }
 
 .InputBoxDiv {
@@ -11,10 +11,13 @@
     }
     
     .InputBox {
-      width: 100%;
-      padding: 10px 35px 10px 10px; /* leave space for icon on right */
-      outline: none;
-      font-size: 16px;
+height: 50px;
+min-width: 400px;
+max-width: 600px;
+padding: 6px 20px;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
     }
     
     .arrowIcon {
@@ -24,4 +27,6 @@
       transform: translateY(-50%);
       pointer-events: none; /* prevent icon from blocking input clicks */
     }
+
+
     
