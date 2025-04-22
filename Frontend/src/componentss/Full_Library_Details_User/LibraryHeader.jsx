@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import styles from "../../css/Full_Library_Details_css/LibraryDescription.module.css";
-import { DotIcon, LocationIcon, StarIcon } from "../Svgs";
+import styles from "../../css/Full_Library_Details_css/libraryDescription.module.css";
+import { DotIcon, StarIcon } from "../Svgs";
 import { MdOutlineLocationOn } from "react-icons/md";
 
 
