@@ -30,7 +30,7 @@ app.use(cookieParser());
 const PORT = process.env.PORT || 5000;
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://projects-mood-frontend.onrender.com",
     credentials: true,
   })
 );
@@ -60,9 +60,13 @@ app.use("/statusUpdate",verifytoken, BusinessUpdate);
 app.use("/updateLibraryStatus",verifytoken, updateLibraryStatus);
 app.use("/librarydetails", LibraryDetails);
 
+
 app.use('/pdfs', express.static(path.join(__dirname, 'pdfs')));
 
+app.get('/' , (req,res) =>{
+  res.send("backend is live ")
+})
 
 app.listen(PORT, () => {
-  console.log("server started");
+  console.log(`server started on ${PORT}`);
 });
