@@ -1,0 +1,208 @@
+.InputDivWrapper {
+      display: flex; /* Flexbox for aligning icon and input */
+      align-items: center; /* Vertically center the items */
+      position: relative; /* For absolute positioning of the icon */
+      border: 1px solid #ccc; /* Border to make it look like an input box */
+      border-radius: 4px; /* Rounded corners */
+      padding-left: 10px; /* Space from the left edge */
+ /* Height of the box */
+      width: 100%; /* Make the div take up the full width */
+    }
+    
+    .WifiIcon {
+      font-size: 18px; /* Icon size */
+      color: #555; /* Icon color */
+      margin-right: 8px; /* Space between icon and input field */
+    }
+    
+  
+    
+    .AmenitiesInputBox:focus {
+      outline: none; /* Remove focus outline */
+    }
+    
+    .InputWithIcons {
+      position: relative; /* Necessary for the icon positioning */
+    }
+    
+
+.FullOverviewSection{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 30px;
+flex: 1 0 0;
+}
+
+.titleNedit{
+      display: flex;
+min-width: 400px;
+max-width: 600px;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
+}
+
+.titleNedit span {
+      color: #000;
+font-size: 24px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.BusinessName{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 15px;
+align-self: stretch;
+}
+
+.BusinessName span {
+      color: #000;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.BusinessName input{
+  display: flex;
+height: 50px;
+min-width: 400px;
+max-width: 600px;
+padding: 0px 10px;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
+border : 1px solid #B2B2B2;
+gap :20px;
+}
+
+.Amenities{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 15px;
+align-self: stretch;
+}
+
+.AmenitiesInputBox , .DynamicAmenitiesInputBox{
+      display: flex;
+height: 50px;
+min-width: 400px;
+max-width: 600px;
+padding: 0px 10px;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
+} 
+
+.AmenityItemWrapper {
+      margin-bottom: 10px;
+    }
+    
+    .InputWithIcons {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    
+ 
+    .AmenityActions {
+      position: absolute;
+      right: 10px;
+      display: flex;
+      gap: 10px;
+    }
+    
+    .CheckIcon,
+    .CrossIcon {
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    .CheckIcon:hover,
+    .CrossIcon:hover {
+      transform: scale(1.1);
+    }
+    
+    .disabledIcon {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    
+    .DynamicAmenityWrapper {
+      margin-bottom: 10px;
+    }
+    
+    .InputWithRemoveIcon {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    
+  
+    .RemoveIcon {
+      position: absolute;
+      right: 10px;
+      font-size: 16px;
+      color: #ff4d4f;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    .RemoveIcon:hover {
+      transform: scale(1.1);
+    }
+    
+    .disabledIcon {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    
+    .SpecialFeatures{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 15px;
+align-self: stretch;
+    }
+
+.AboutLibrary{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+      align-self: stretch;
+      
+    }
+   
+.AboutLibraryInputBox{
+     
+min-width: 400px;
+max-width: 600px;
+flex: 1 0 0;
+border : 1px solid #B2B2B2;
+width: 100%;
+min-height: 120px;
+/* height:200px; */
+resize: vertical; /* allows resizing vertically */
+ background-color: #f9f9f9;
+ padding : 0 10px;
+    }
+
+    .AddMoreButton{
+      color: #6439FF;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+    }
+
+
+    

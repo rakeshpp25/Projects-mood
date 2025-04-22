@@ -1,0 +1,71 @@
+.FullProfileSection{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 30px;
+flex: 1 0 0;
+align-self: stretch;
+}
+
+.titleNedit{
+      display: flex;
+min-width: 400px;
+max-width: 600px;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
+}
+
+.titleNedit span {
+      color: #000;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+}
+
+.Name ,.EmailAddress , .AadharNumber , .mobileNumber ,.AltmobileNumber{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+align-self: stretch;
+}
+
+.Name span , .EmailAddress span , .AadharNumber span ,.mobileNumber span , .AltmobileNumber span {
+      color: #000;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.InputBox{
+      display: flex;
+height: 50px;
+min-width: 400px;
+max-width: 600px;
+padding: 0px 10px;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
+border : 1px solid #B2B2B2;
+}
+
+.gender{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+align-self: stretch;
+
+}
+
+.gender span {
+      color: #000;
+
+font-size: 20px;
+font-style: normal;
+font-weight:500;
+line-height: normal;
+}

@@ -1,0 +1,26 @@
+.wholeImages{
+      display: inline-flex;
+align-items: center;
+gap: 5px;
+      
+}
+.wholeImages img{
+      height: 500px;
+      width: 650px;
+    
+}
+
+.carousel{
+      display: flex;
+height: 48px;
+justify-content: space-between;
+align-items: center;
+flex-shrink: 0;
+}
+
+/* button{
+      width: 48px;
+height: 48px;
+flex-shrink: 0;
+}
+ */

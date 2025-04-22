@@ -1,0 +1,171 @@
+
+.FullTimeOuterDiv{
+      display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 30px;
+align-self: stretch;
+}
+
+.titleNedit{
+      display: flex;
+align-items: center;
+gap: 100px;
+align-self: stretch;
+}
+
+.titleName{
+      display: flex;
+justify-content: center;
+align-items: center;
+color: #000;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.edit{
+      display: flex;
+justify-content: center;
+align-items: center;
+color: #6439FF;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.businessInput{
+      display: flex;
+align-items: flex-start;
+gap: 20px;
+align-self: stretch;
+}
+
+.InputDivNSave{
+      display: flex;
+align-items: flex-start;
+gap: 20px;
+align-self: stretch;
+}
+
+.inputDiv{
+      display: flex;
+      height: 50px;
+      min-width: 400px;
+      max-width: 600px;
+      padding: 0px 20px;
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+      border : 1px solid #B2B2B2;
+}
+
+.InputBoxDiv{
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 1 0 0;
+}
+
+.InputBox{
+      flex: 1 0 0;
+      background :none;
+      outline : none;
+}
+
+.save{
+      display: flex;
+width: 120px;
+height: 50px;
+justify-content: center;
+align-items: center;
+border-radius : 2px;
+background :#6439FF;
+color: #fff;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+
+.FullChooseDayNTime{
+      display: flex;
+width: 600px;
+padding: 20px;
+flex-direction: column;
+align-items: center;
+gap: 40px;
+border : 1px solid #B2B2B2;
+}
+
+
+.OuterTimeDiv{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 20px;
+align-self: stretch;
+}
+
+.dayName{
+      align-self: stretch;
+      color: #000;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.ChooseTime{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 20px;
+align-self: stretch;
+}
+
+.OpenNClose{
+      display: flex;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
+}
+
+.open{
+      display: flex;
+justify-content: center;
+align-items: center;
+gap: 12px;
+}
+
+.close{
+      display: flex;
+justify-content: center;
+align-items: center;
+gap: 12px;
+}
+
+.TimeFromToDiv{
+      display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 20px;
+align-self: stretch;
+}
+
+.Hours{
+      display: flex;
+justify-content: center;
+align-items: center;
+gap: 12px;
+}
+
+.TimeNTo{
+      display: flex;
+align-items: center;
+gap: 20px;
+}

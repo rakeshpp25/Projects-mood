@@ -24,7 +24,7 @@ import {StatusUpdate} from './routes/approve.js'
 import { BusinessUpdate } from "./routes/statusUpdate.js";
 import { updateLibraryStatus } from "./routes/updateLibraryStatus.js";
 import { LibraryDetails } from "./routes/LibraryDetails.js";
-
+import { connectDB } from "./DB/dbConnect.js";
 dotenv.config();
 
 const app = express();
@@ -37,8 +37,7 @@ app.use(
   })
 );
 app.use(express.json());
-const mongoURL = process.env.MONGODB_URL;
-mongoose.connect(mongoURL);
+connectDB();
 
 const __filename = fileURLToPath(import.meta.url);  // Get the current file path
 const __dirname = path.dirname(__filename);          // Get the directory name of the current file
@@ -64,11 +63,6 @@ app.use("/updateLibraryStatus",verifytoken, updateLibraryStatus);
 app.use("/librarydetails", LibraryDetails);
 app.use('/pdfs', express.static(path.join(__dirname, 'pdfs')));
 
-// app.use('/product',verifytoken, product)
-// app.use('/account/profile', verifytoken ,profile )
-// app.use('/loginEmailVerify',verifyEmailLogin)
-// app.use('/uploadImages',verifytoken ,ImageUploads)
-// app.use('/location' ,UserLocation )
 
 app.listen(PORT, () => {
   console.log("server started");

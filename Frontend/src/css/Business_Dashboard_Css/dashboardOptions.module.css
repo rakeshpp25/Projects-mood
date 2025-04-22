@@ -1,0 +1,109 @@
+.activeBtn {
+  background-color: #C5B5FF; /* blue or your theme color */
+  color: white;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+
+.WholeComponent{
+    display: flex;
+padding: 0px 4%;
+align-items: flex-start;
+gap: 60px;
+align-self: stretch;
+margin : 80px 0;
+}
+
+.allOptions 
+{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 30px;
+align-self: stretch;
+width : 300px;
+}
+
+.profilePicNname{
+      display: flex;
+padding: 15px;
+align-items: center;
+gap: 20px;
+align-self: stretch;
+border : 1px solid #E8E8E8 
+}
+
+.profilePic {
+width: 60px;
+height: 60px;
+}
+
+.UserName{ 
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 6px;
+flex: 1 0 0;
+color: #000;
+font-style: normal;
+line-height: normal;
+}
+
+.hello{
+align-self: stretch;
+font-size: 16px;
+font-weight: 400;
+
+}
+
+.name{
+      align-self: stretch;
+font-size:20px;
+font-weight: 500;
+}
+
+.dashboardOptions{
+      display: flex;
+      padding: 15px 0px;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+      border : 1px solid #E8E8E8
+}
+
+.innerDashboardDiv{
+      display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 30px;
+flex: 1 0 0;
+align-self: stretch;
+}
+
+
+.btns{
+      display: flex;
+height: 70px;
+padding-left: 15px;
+align-items: center;
+gap: 20px;
+align-self: stretch;
+}
+
+/* button:hover{
+background  :#f5f5f5;
+} */
+
+.btns span {
+flex: 1 0 0;
+color: #4D4D4D;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+display: flex;
+align-items: center;
+}

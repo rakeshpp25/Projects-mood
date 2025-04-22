@@ -1,0 +1,140 @@
+/* Default styles for larger screens */
+.herobarOuterDiv {
+  background: linear-gradient(180deg, #6439FF 0%, #B19CFF 75%, rgba(100, 57, 255, 0.50) 100%);
+  height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.herobarInsideDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  color: white;
+  width: 100%;
+  max-width: 700px;
+}
+
+.HerobarTitleNdescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+}
+
+.title {
+  align-items: center;
+  align-self: stretch;
+  color: #FFF;
+  font-size: 36px;
+  font-weight: 600;
+  
+}
+
+.title span {
+  color: #FABC3F;
+  
+}
+
+.description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  width: 100%;
+  padding: 0 25px;
+}
+
+.searchBar, .search {
+  display: flex;
+  /* height: 60px; */
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 50px;
+  background: #FFF;
+}
+
+.search {
+  width: 100%;
+  padding: 15px;
+}
+
+.searchBar input {
+  flex: 1 0 0;
+  color: #000000;
+  font-size: 18px;
+  font-weight: 400;
+  outline: none;
+  height: 100%;
+}
+
+.nearme {
+  background-color: rgba(100, 57, 255);
+  height: 100%;
+  width: 100px;
+  border-radius: 0 50px 50px 0px;
+  color: white;
+  font-size: 14px;
+}
+
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 480px) {
+  .herobarOuterDiv {
+    height: auto; /* Allow it to adjust based on content */
+    padding: 50px 0; /* Add some padding for smaller screens */
+  }
+
+  .herobarInsideDiv {
+    gap: 15px;
+    max-width: 100%;
+    padding: 0 8%; /* Add padding for mobile view */
+  }
+
+  .title {
+    font-size: 1.375rem;
+    text-align: center;  /* Center text horizontally */
+    color: #FFF;
+    font-weight: 600;
+    display: block; /* Ensure it's a block element to allow wrapping */
+    width: 100%; /* Make sure the container takes the full width */
+  }
+  
+  .title span{
+    padding: 0 0.5rem;
+  }
+
+  .description {
+    font-size: 1rem; /* Reduce description font size */
+    padding: 0 15px; /* Adjust padding */
+  }
+
+  .searchBar, .search {
+    height: 40px; /* Adjust the height for mobile */
+  /* Add padding to give some space */
+  }
+
+  .searchBar input {
+    font-size: 0.75rem; /* Reduce font size for smaller screens */
+    height: 40px;
+   
+  }
+
+  .nearme {
+    width: auto; /* Reduce the size of the "near me" button */
+    font-size: 0.75rem;
+ 
+  }
+  .searchIcon :first-child{
+    width : 25px
+  }
+}

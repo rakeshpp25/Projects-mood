@@ -1,0 +1,179 @@
+[
+      {
+        "title": "Knowledge Zone Library",
+        "location": "Shivaji Nagar, Kamta Chinhat, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.5,
+        "reviews": 25,
+        "image": "library1"
+      },
+      {
+        "title": "Study Hub Library",
+        "location": "Mahanagar, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.7,
+        "reviews": 30,
+        "image": "library2"
+      },
+      {
+        "title": "Mind Space Library",
+        "location": "Indira Nagar, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.6,
+        "reviews": 22,
+        "image": "library3"
+      },
+      {
+        "title": "Quiet Corner Library",
+        "location": "Gomti Nagar, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.8,
+        "reviews": 40,
+        "image": "library4"
+      },
+      {
+        "title": "Scholars' Paradise",
+        "location": "Hazratganj, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.3,
+        "reviews": 15,
+        "image": "library5"
+      },
+      {
+        "title": "Focus Point Library",
+        "location": "Aliganj, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.2,
+        "reviews": 18,
+        "image": "library6"
+      },
+      {
+        "title": "Reading Nook Library",
+        "location": "Vikramshila, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.4,
+        "reviews": 27,
+        "image": "library7"
+      },
+      {
+        "title": "Book Haven Library",
+        "location": "Krishna Nagar, Sultanpur",
+        "city": "Sultanpur",
+        "rating": 4.9,
+        "reviews": 50,
+        "image": "library8"
+      },
+      {
+        "title": "The Study Den",
+        "location": "Baba Bhudev Nagar, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.6,
+        "reviews": 33,
+        "image": "library9"
+      },
+      {
+        "title": "Academic Oasis Library",
+        "location": "Sadar Bazar, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.7,
+        "reviews": 35,
+        "image": "library10"
+      },
+      {
+        "title": "Learn & Grow Library",
+        "location": "Telibagh, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.8,
+        "reviews": 42,
+        "image": "library11"
+      },
+      {
+        "title": "The Book Vault",
+        "location": "Jankipuram, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.5,
+        "reviews": 28,
+        "image": "library12"
+      },
+      {
+        "title": "The Study Spot",
+        "location": "Nawabganj, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.3,
+        "reviews": 19,
+        "image": "library13"
+      },
+      {
+        "title": "Eureka Learning Library",
+        "location": "Kaiserbagh, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.6,
+        "reviews": 31,
+        "image": "library14"
+      },
+      {
+        "title": "Insight Study Library",
+        "location": "Ashiyana, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.7,
+        "reviews": 26,
+        "image": "library15"
+      },
+      {
+        "title": "The Reading Room",
+        "location": "Rahat Colony, Lucknow",
+        "city": "Lucknow",
+        "rating": 4.4,
+        "reviews": 24,
+        "image": "library16"
+      },
+      {
+        "title": "Classic Library",
+        "location": "Kachahri, Sultanpur",
+        "city": "Sultanpur",
+        "rating": 4.3,
+        "reviews": 19,
+        "image": "library11"
+      },
+      {
+        "title": "Knowledge Arena",
+        "location": "Kanpur, Uttar Pradesh",
+        "city": "Kanpur",
+        "rating": 4.7,
+        "reviews": 33,
+        "image": "library9"
+      },
+      {
+        "title": "Future Scholars Library",
+        "location": "Lalganj, Sultanpur",
+        "city": "Sultanpur",
+        "rating": 4.6,
+        "reviews": 25,
+        "image": "library1"
+      },
+      {
+        "title": "Elite Study Hub",
+        "location": "Kanpur, Uttar Pradesh",
+        "city": "Kanpur",
+        "rating": 4.5,
+        "reviews": 28,
+        "image": "library1"
+      },
+      {
+        "title": "The Book House",
+        "location": "Shahganj, Sultanpur",
+        "city": "Sultanpur",
+        "rating": 4.8,
+        "reviews": 40,
+        "image": "library1"
+      },
+      {
+        "title": "Study Paradise",
+        "location": "Kanpur, Uttar Pradesh",
+        "city": "Kanpur",
+        "rating": 4.9,
+        "reviews": 50,
+        "image": "library2"
+      }
+    ]
+    
