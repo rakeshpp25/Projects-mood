@@ -12,7 +12,6 @@ import ProtectedRoute from "./componentss/ProtectedRoutes/ProtectedRoutes";
 import Time from "./componentss/Business_Dashboard/Time";
 import DesktopBigCard from "./componentss/User_View/DesktopBigCard";
 import FullLibraryDetails from "./screens/FullLibraryDetails";
-import NearMeCard from "./componentss/libraryDetail/NearMeCard";
 
 axios.defaults.withCredentials = true;
 

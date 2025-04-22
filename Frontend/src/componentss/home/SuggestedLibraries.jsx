@@ -1,10 +1,10 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
-import Slider from 'react-slick';
-import axios from 'axios';
+import React, { lazy, Suspense, useEffect, useState } from "react";
+import Slider from "react-slick";
+import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const LibraryCard = lazy(() => import('./LibraryCard'));
+const LibraryCard = lazy(() => import("./LibraryCard"));
 
 const SuggestedLibraries = () => {
   const [libraries, setLibraries] = useState([]);
@@ -12,18 +12,21 @@ const SuggestedLibraries = () => {
 
   const fetchLibraries = async () => {
     try {
-      const storedLocation = localStorage.getItem('userLocation');
-      let apiURL = 'http://localhost:8000/librarydetails';
+      const storedLocation = localStorage.getItem("userLocation");
+      let apiURL =
+        "https://projects-mood-backend-yugw.onrender.com/librarydetails";
 
       if (storedLocation) {
         let { city } = JSON.parse(storedLocation);
 
         if (city) {
           // Clean city name to remove pincode or extra parts
-          city = city.split("-")[0].trim();  // This will give us only the city name, e.g., 'Sultanpur'
+          city = city.split("-")[0].trim(); // This will give us only the city name, e.g., 'Sultanpur'
           console.log("Fetching libraries for city:", city);
 
-          apiURL = `http://localhost:8000/librarydetails?city=${encodeURIComponent(city)}`;
+          apiURL = `https://projects-mood-backend-yugw.onrender.com/librarydetails?city=${encodeURIComponent(
+            city
+          )}`;
         }
       }
 
@@ -31,16 +34,19 @@ const SuggestedLibraries = () => {
       console.log("Suggested Libraries API response:", response);
 
       if (Array.isArray(response.data)) {
-        const formattedLibraries = response.data.map(lib => ({
+        const formattedLibraries = response.data.map((lib) => ({
           title: lib.library_name,
-          location: lib.city || 'Unknown Location',
+          location: lib.city || "Unknown Location",
           latitude: lib.latitude,
           longitude: lib.longitude,
         }));
 
         setLibraries(formattedLibraries);
       } else {
-        console.error('Expected an array of libraries, but got:', response.data);
+        console.error(
+          "Expected an array of libraries, but got:",
+          response.data
+        );
       }
     } catch (error) {
       console.error("Error fetching libraries:", error);
@@ -62,8 +68,8 @@ const SuggestedLibraries = () => {
     autoplaySpeed: 2500,
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 640, settings: { slidesToShow: 1 } }
-    ]
+      { breakpoint: 640, settings: { slidesToShow: 1 } },
+    ],
   };
 
   return (
@@ -77,12 +83,12 @@ const SuggestedLibraries = () => {
             <Slider {...settings}>
               {libraries.map((lib, idx) => (
                 <div key={idx} className="px-2">
-                 <LibraryCard
-  title={lib.title}
-  location={lib.location}
-  libLat={lib.latitude}
-  libLng={lib.longitude}
-/>
+                  <LibraryCard
+                    title={lib.title}
+                    location={lib.location}
+                    libLat={lib.latitude}
+                    libLng={lib.longitude}
+                  />
                 </div>
               ))}
             </Slider>

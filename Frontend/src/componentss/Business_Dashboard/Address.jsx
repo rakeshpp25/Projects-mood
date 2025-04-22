@@ -26,10 +26,10 @@ function Address() {
   useEffect(() => {
       const fetchAddress = async () => {
         try {
-          const res = await axios.get("http://localhost:8000/address", {
+          const res = await axios.get("https://projects-mood-backend-yugw.onrender.com/address", {
             withCredentials: true,
           });
-    
+          
           console.log("Fetched address from backend:", res.data);
     
           if (res.data && Object.keys(res.data).length > 0) {
@@ -122,7 +122,7 @@ function Address() {
     try {
       console.log("Sending location to server:", { latitude, longitude });
 
-      const response = await axios.post("http://localhost:8000/location", {
+      const response = await axios.post("https://projects-mood-backend-yugw.onrender.com/loaction", {
         latitude,
         longitude,
       });
@@ -174,7 +174,7 @@ function Address() {
     e.preventDefault();
 
     try {
-      const res = await axios.put("http://localhost:8000/address", updatedFields, {
+      const res = await axios.put("https://projects-mood-backend-yugw.onrender.com/address", updatedFields, {
         withCredentials: true,
       });
 

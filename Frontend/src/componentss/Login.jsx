@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../css/userlogin.css";
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setRole } from "../Redux/roleslice";
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ function Login() {
   const handleEmail = (e) => {
     setInputEmail({
       ...inputEmail,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -24,7 +24,8 @@ function Login() {
     e.preventDefault();
     setIsSending(true); // start loading
 
-    axios.post("http://localhost:8000/login", inputEmail)
+    axios
+      .post("https://projects-mood-backend-yugw.onrender.com/login", inputEmail)
       .then((res) => {
         if (res.data) {
           const userRole = res.data.role;
@@ -33,18 +34,22 @@ function Login() {
             state: {
               email: inputEmail.useremail,
               role: userRole,
-              purpose: "login"
-            }
+              purpose: "login",
+            },
           });
         }
       })
       .catch((error) => {
         if (error.response) {
           // Server responded with a status other than 2xx
-          toast.error(error.response.data.message || "Login failed. Please try again.");
+          toast.error(
+            error.response.data.message || "Login failed. Please try again."
+          );
         } else if (error.request) {
           // Request made but no response received
-          toast.error("No response from server. Please check your internet connection.");
+          toast.error(
+            "No response from server. Please check your internet connection."
+          );
         } else {
           // Something else caused an error
           toast.error("An unexpected error occurred.");

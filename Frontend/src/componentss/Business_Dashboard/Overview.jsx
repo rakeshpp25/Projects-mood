@@ -34,7 +34,7 @@ function Overview() {
   useEffect(() => {
     const fetchOverview = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/overview");
+        const res = await axios.get("https://projects-mood-backend-yugw.onrender.com/overview");
         const {
           Library_name,
           time,
@@ -84,7 +84,7 @@ function Overview() {
     };
 
     try {
-      const res = await axios.put("http://localhost:8000/overview", payload);
+      const res = await axios.put("https://projects-mood-backend-yugw.onrender.com/overview", payload);
       console.log("✅ Overview saved:", res.data);
       setIsEditing(false);
       setOriginalUserData(userData);

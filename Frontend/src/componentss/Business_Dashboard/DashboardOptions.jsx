@@ -88,7 +88,7 @@ function DashboardOptions() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/Profile", {
+        const res = await axios.get("https://projects-mood-backend-yugw.onrender.com/Profile", {
           withCredentials: true, // Include cookies for authentication
         });
         setUserData(res.data); // Set the user data

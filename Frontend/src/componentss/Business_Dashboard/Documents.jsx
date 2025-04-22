@@ -40,7 +40,7 @@ const Documents = () => {
           formData.append("label", doc.label);
 
           const response = await axios.post(
-            "http://localhost:8000/documentUploads",
+            "https://projects-mood-backend-yugw.onrender.com/documentUploads",
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
@@ -66,7 +66,7 @@ const Documents = () => {
 
   const fetchUploadedDocuments = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/documentUploads", {
+      const response = await axios.get("https://projects-mood-backend-yugw.onrender.com/documentUploads", {
         withCredentials: true,
       });
 

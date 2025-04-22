@@ -10,7 +10,7 @@ const PhotoUploads = () => {
     const fetchSavedImages = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:8000/PhotoUploads", {
+        const response = await axios.get("https://projects-mood-backend-yugw.onrender.com/PhotoUploads", {
           withCredentials: true, // if you're using cookies with JWT
         });
         setSavedImages(response.data || []);
@@ -60,7 +60,7 @@ const PhotoUploads = () => {
     try {
       setLoading(true); // Set loading state to true while uploading
       const response = await axios.post(
-        "http://localhost:8000/PhotoUploads",
+        "https://projects-mood-backend-yugw.onrender.com/PhotoUploads",
         formData,
         {
           headers: {
@@ -72,7 +72,7 @@ const PhotoUploads = () => {
 
       if (response.status === 200) {
         alert("Images saved successfully!");
-        const updated = await axios.get("http://localhost:8000/PhotoUploads", {
+        const updated = await axios.get("https://projects-mood-backend-yugw.onrender.com/PhotoUploads", {
           withCredentials: true,
         });
         setSavedImages(updated.data || []);

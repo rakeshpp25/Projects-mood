@@ -22,9 +22,12 @@ function Navbar() {
     const fetchUserData = async () => {
       if (isAuthenticated) {
         try {
-          const res = await axios.get("http://localhost:8000/Profile", {
-            withCredentials: true,
-          });
+          const res = await axios.get(
+            "https://projects-mood-backend-yugw.onrender.com/Profile",
+            {
+              withCredentials: true,
+            }
+          );
           const fullName = res.data.name;
           const firstName = fullName.split(" ")[0];
           setFirstName(firstName);
@@ -43,7 +46,11 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:8000/logout", {}, { withCredentials: true });
+      await axios.post(
+        "https://projects-mood-backend-yugw.onrender.com/logout",
+        {},
+        { withCredentials: true }
+      );
       dispatch(logout());
       navigate("/");
     } catch (err) {
@@ -124,14 +131,23 @@ function Navbar() {
             className={styles.Accountbtn}
             onMouseEnter={() => setIsDropdownHover(true)}
           >
-            <span className={styles.accountIcon}><AccountIcon /></span>
-            <span className={styles.AccountTitle}>{firstName || "Account"}</span>
-            <span className={styles.downArrow}><DownArrow /></span>
+            <span className={styles.accountIcon}>
+              <AccountIcon />
+            </span>
+            <span className={styles.AccountTitle}>
+              {firstName || "Account"}
+            </span>
+            <span className={styles.downArrow}>
+              <DownArrow />
+            </span>
           </button>
 
           {isDropdownHover && (
             <div className={styles.dropdown}>
-              <button className={styles.MyProfilebtn} onClick={handleProfileClick}>
+              <button
+                className={styles.MyProfilebtn}
+                onClick={handleProfileClick}
+              >
                 <AccountIcon />
                 <span>My Profile</span>
               </button>
@@ -156,7 +172,10 @@ function Navbar() {
       {isSidebarOpen && (
         <div className={styles.sidebar} ref={sidebarRef}>
           {/* Cross Icon */}
-          <div className={styles.closeSidebar} onClick={() => setIsSidebarOpen(false)}>
+          <div
+            className={styles.closeSidebar}
+            onClick={() => setIsSidebarOpen(false)}
+          >
             &#10005; {/* Unicode for cross icon */}
           </div>
 

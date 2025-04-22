@@ -3,12 +3,11 @@ import styles from "../../css/Email_Verify_css/emailverify.module.css";
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setAuth } from "../../Redux/authenticatedSlice";
 
 function Emailverify() {
-
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -47,12 +46,15 @@ function Emailverify() {
     }
 
     try {
-      const res = await axios.post("http://localhost:8000/emailverify", {
-        verificationCode,
-        email,
-        role,
-        purpose,
-      });
+      const res = await axios.post(
+        "https://projects-mood-backend-yugw.onrender.com/emailverify",
+        {
+          verificationCode,
+          email,
+          role,
+          purpose,
+        }
+      );
       if (res.data && res.data.user) {
         dispatch(setAuth(res.data.user)); // set authenticated and store user
         toast.success("Successfully verified");
@@ -62,7 +64,9 @@ function Emailverify() {
       console.error("Verification error:", error);
       if (error.response) {
         // ✅ Fix: show actual message
-        toast.error(`Error: ${error.response?.data?.message || 'Verification failed.'}`);
+        toast.error(
+          `Error: ${error.response?.data?.message || "Verification failed."}`
+        );
       } else if (error.request) {
         toast.error("No server response. Check your internet connection.");
       } else {

@@ -133,7 +133,7 @@ function FeeDetails() {
 
     try {
       const payload = transformFeeDataForBackend(updatedFeeData);
-      const res = await axios.put("http://localhost:8000/feesdetails", payload);
+      const res = await axios.put("https://projects-mood-backend-yugw.onrender.com/feesdetails", payload);
       console.log("Saved to backend:", res.data);
       toast.success("Fee details saved successfully!");
     } catch (err) {

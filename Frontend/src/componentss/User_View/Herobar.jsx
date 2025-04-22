@@ -8,7 +8,7 @@ function Herobar() {
   const [location, setLocation] = useState({
     latitude: null,
     longitude: null,
-    error: null
+    error: null,
   });
 
   const navigate = useNavigate();
@@ -30,13 +30,17 @@ function Herobar() {
           const savedLocation = localStorage.getItem("userLocation");
           if (savedLocation) {
             const { latitude, longitude } = JSON.parse(savedLocation);
-            setLocation({ latitude, longitude, error: "Using last known location" });
+            setLocation({
+              latitude,
+              longitude,
+              error: "Using last known location",
+            });
             console.log("Using saved location:", latitude, longitude);
             fetchNearbyLibraries(latitude, longitude);
           } else {
             setLocation((prev) => ({
               ...prev,
-              error: getErrorMessage(error.code)
+              error: getErrorMessage(error.code),
             }));
           }
         }
@@ -44,17 +48,20 @@ function Herobar() {
     } else {
       setLocation((prev) => ({
         ...prev,
-        error: "Geolocation is not supported by your browser."
+        error: "Geolocation is not supported by your browser.",
       }));
     }
   };
 
   const fetchNearbyLibraries = async (latitude, longitude) => {
     try {
-      const response = await axios.post("http://localhost:8000/location", {
-        latitude,
-        longitude
-      });
+      const response = await axios.post(
+        "https://projects-mood-backend-yugw.onrender.com/location",
+        {
+          latitude,
+          longitude,
+        }
+      );
 
       const formattedAddress = response.data.formattedAddress;
       console.log("Formatted Address:", formattedAddress);
@@ -63,7 +70,10 @@ function Herobar() {
       console.log("Extracted City:", city);
 
       // Store lat, lon and city
-      localStorage.setItem("userLocation", JSON.stringify({ latitude, longitude, city }));
+      localStorage.setItem(
+        "userLocation",
+        JSON.stringify({ latitude, longitude, city })
+      );
 
       // Navigate to Nearme page
       navigate(`/Nearme?address=${encodeURIComponent(formattedAddress)}`);
@@ -102,22 +112,19 @@ function Herobar() {
             Set Your<span>MOOD</span>Set Your Success
           </div>
           <div className={styles.description}>
-            Find the best library that suits you and provides the best results that fit you
+            Find the best library that suits you and provides the best results
+            that fit you
           </div>
         </div>
 
         <form className={styles.searchBar} onSubmit={(e) => e.preventDefault()}>
-         <div className={styles.search}>
-         <input type="text" placeholder="Search by library, place" />
-          <button className={styles.searchIcon} type="submit">
-            <SearchIcon  />
-          </button>
-         </div>
-          <button 
-            type="button"
-            className= {styles.nearme}
-            onClick={getLocation}
-          >
+          <div className={styles.search}>
+            <input type="text" placeholder="Search by library, place" />
+            <button className={styles.searchIcon} type="submit">
+              <SearchIcon />
+            </button>
+          </div>
+          <button type="button" className={styles.nearme} onClick={getLocation}>
             Near me
           </button>
         </form>

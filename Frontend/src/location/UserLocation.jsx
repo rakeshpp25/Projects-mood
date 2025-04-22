@@ -16,7 +16,7 @@
 //             navigator.geolocation.getCurrentPosition(
 //                 (position) => {
 //                     const { latitude, longitude } = position.coords;
-                    
+
 //                     setLocation({ latitude, longitude, error: null });
 
 //                     // Save to local storage
@@ -29,7 +29,7 @@
 //                 },
 //                 (error) => {
 //                     console.warn("Geolocation error:", error);
-                    
+
 //                     const savedLocation = localStorage.getItem("userLocation");
 //                     if (savedLocation) {
 //                         const { latitude, longitude } = JSON.parse(savedLocation);
@@ -54,7 +54,7 @@
 
 //     const sendLocationToServer = async (latitude, longitude) => {
 //         try {
-//             const response = await axios.post("http://localhost:8000/location", { latitude, longitude });
+//             const response = await axios.post("https://projects-mood-backend-yugw.onrender.com/location", { latitude, longitude });
 
 //             const formattedAddress = response.data.formattedAddress;
 //             console.log("Formatted Address:", formattedAddress);

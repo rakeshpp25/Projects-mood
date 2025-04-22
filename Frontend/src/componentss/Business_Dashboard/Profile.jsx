@@ -15,7 +15,7 @@ function Profile() {
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/Profile", {
+        const res = await axios.get("https://projects-mood-backend-yugw.onrender.com/Profile", {
           withCredentials: true,
         });
         setUserData(res.data);
@@ -53,7 +53,7 @@ function Profile() {
     // Send only updated fields
     try {
       const res = await axios.put(
-        "http://localhost:8000/Profile",
+        "https://projects-mood-backend-yugw.onrender.com/Profile",
         updatedFields, // Send only updated data
         { withCredentials: true }
       );

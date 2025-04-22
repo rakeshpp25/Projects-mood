@@ -12,7 +12,9 @@ const UploadImages = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/uploadImages");
+      const response = await axios.get(
+        "https://projects-mood-backend-yugw.onrender.com/uploadImages"
+      );
       setUploadedImages(response.data);
     } catch (error) {
       console.error("Error fetching images:", error);
@@ -20,14 +22,13 @@ const UploadImages = () => {
   };
 
   const handleFileChange = (e) => {
-      const selectedImages = e.target.files;
+    const selectedImages = e.target.files;
     if (selectedImages.length + images.length > maxImages) {
       alert(`You can upload a maximum of ${maxImages} images.`);
     } else {
-      setImages([...images, ...selectedImages]);  // Add the selected images to the state
+      setImages([...images, ...selectedImages]); // Add the selected images to the state
     }
   };
-
 
   const handleUpload = async (e) => {
     e.preventDefault();
@@ -43,9 +44,13 @@ const UploadImages = () => {
     });
 
     try {
-      await axios.post("http://localhost:8000/uploadImages", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "https://projects-mood-backend-yugw.onrender.com/uploadImages",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       alert("Images uploaded successfully!");
       fetchImages(); // Refresh uploaded images

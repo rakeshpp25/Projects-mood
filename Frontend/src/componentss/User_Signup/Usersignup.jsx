@@ -42,32 +42,30 @@ function Usersignup() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/usersignup",
+        "https://projects-mood-backend-yugw.onrender.com/usersignup",
         {
           ...inputData,
-          role: "user", 
+          role: "user",
         }
       );
 
       // Success response
       toast.success("Otp has been send to: " + response.data.email);
       if (response.data) {
-        navigate("/emailverify", { state: { email: useremail, role: "user", purpose: "signup" } });
-
+        navigate("/emailverify", {
+          state: { email: useremail, role: "user", purpose: "signup" },
+        });
       }
-    }
-     catch (error) {
+    } catch (error) {
       // Handling errors if request fails
 
       if (error.response) {
         // Server responded with an error (e.g., 400 or 500 status code)
         toast.error("Error: " + error.response.data);
-      } 
-      else if (error.request) {
+      } else if (error.request) {
         // No response from server (e.g., network issues , can't connect to server)
         toast.error("No response from server.");
-      } 
-      else {
+      } else {
         // Some other error occurred (e.g., bad request or configuration issues)
         toast.error("Something went wrong: " + error.message);
       }
