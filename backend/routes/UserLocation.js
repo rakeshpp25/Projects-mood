@@ -1,12 +1,14 @@
 import express from "express";
 import axios from "axios";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const router = express.Router();
 
 router.post("/", async (req, res) => {
     const { latitude, longitude } = req.body;
 
-    const GEOAPIFY_API_KEY = "c5582cb75226417ba63a831f1379d58f"; // Replace with your Geoapify API Key
+    const GEOAPIFY_API_KEY = process.env.GEOAPIFY_API_KEY;// Replace with your Geoapify API Key
 
     if (!latitude || !longitude) {
         return res.status(400).json({ error: "Latitude and Longitude are required" });

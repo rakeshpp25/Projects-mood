@@ -49,7 +49,7 @@ if(Businessuser.verification_code == verificationCode){
       httpOnly: true,  // Ensures the cookie is not accessible via JavaScript
       secure: process.env.NODE_ENV === "production", // Set to true for HTTPS in production
       sameSite: "Strict", // Prevents cookie from being sent in cross-site requests
-      maxAge: 60 * 60 * 1000, // 1 hour expiry time
+    
     });
 
   res.json("User email verified successfully.");

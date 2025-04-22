@@ -1,6 +1,7 @@
 import express from 'express'
 import { transporter } from '../middleware/emailConfig.js'
-
+import dotenv from 'dotenv';
+dotenv.config();
 const router = express.Router()
 
 router.post('/', async (req, res) => {
@@ -9,7 +10,7 @@ router.post('/', async (req, res) => {
   try {
     await transporter.sendMail({
       from: `"${name}" <${email}>`, // appears from user
-      to: 'rakeshpl2530@gmail.com', // your Gmail
+      to: process.env.EMAIL_ADDRESS, // your Gmail
       subject: 'New Contact Message from MOOD',
       html: `
         <h3>New message from MOOD</h3>

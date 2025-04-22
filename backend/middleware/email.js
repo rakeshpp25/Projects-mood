@@ -1,18 +1,20 @@
 import { Verification_Email_Template } from "./emailtemplate.js";
 import { transporter } from "./emailConfig.js";
+import dotenv from 'dotenv';
+dotenv.config();
+export const sendVerificationCode = async (email, verification_code) => {
+  try {
+    const htmlContent = Verification_Email_Template.replace("{verificationCode}", verification_code);
+    const response = await transporter.sendMail({
+      from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_FROM_ADDRESS}>`, // ✅ now from env
+      to: email,
+      subject: "Verify your email",
+      text: "Verification code",
+      html: htmlContent,
+    });
 
-export const sendVerificationCode =async (email,verification_code) =>{
-      try {
-            const htmlContent = Verification_Email_Template.replace("{verificationCode}", verification_code);
-            const response = await transporter.sendMail({
-                  from: '"code by mood" <risermoon0@gmail.com>', // sender address
-                  to: email, // list of receivers
-                  subject: "verify your email", // Subject line
-                  text: "verification code", // plain text body
-                  html: htmlContent // html body
-                });
-                console.log("email send successfully",response)
-      } catch (error) {
-            console.log(error)
-      }
-}
+    console.log("Email sent successfully", response);
+  } catch (error) {
+    console.error("Failed to send email:", error);
+  }
+};

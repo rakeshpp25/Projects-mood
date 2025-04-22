@@ -6,6 +6,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { transporter } from '../middleware/emailConfig.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -41,7 +43,7 @@ router.get('/', async (req, res) => {
       const rejectLink = `${baseUrl}/status/reject/${userId}`;
 
       await transporter.sendMail({
-            from: '"MOOD App" <risermoon0@gmail.com>',
+        from: `"MOOD App" <${process.env.EMAIL_ADDRESS}>`,
             to: "milliodream584@gmail.com", // update to dynamic admin if needed
             subject: 'Library Approval Request - MOOD App',
             html: `

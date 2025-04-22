@@ -1,11 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import mongoose from "mongoose";
 import { usersignupRoutes } from "./routes/usersignpRoutes.js";
 import { verifyEmailroutes } from "./routes/VerifyEmailroutes.js";
 import { login } from "./routes/login.js";
-import { product } from "./routes/product.js";
 import { verifytoken } from "./middleware/auth.js";
 import cookieParser from "cookie-parser";
 import { profile } from "./routes/profile.js";
@@ -39,8 +37,8 @@ app.use(
 app.use(express.json());
 connectDB();
 
-const __filename = fileURLToPath(import.meta.url);  // Get the current file path
-const __dirname = path.dirname(__filename);          // Get the directory name of the current file
+const __filename = fileURLToPath(import.meta.url);  
+const __dirname = path.dirname(__filename);    
 
 app.use("/usersignup", usersignupRoutes);
 app.use("/businessSignup", usersignupRoutes);
@@ -61,6 +59,7 @@ app.use("/reject",Status);
 app.use("/statusUpdate",verifytoken, BusinessUpdate);
 app.use("/updateLibraryStatus",verifytoken, updateLibraryStatus);
 app.use("/librarydetails", LibraryDetails);
+
 app.use('/pdfs', express.static(path.join(__dirname, 'pdfs')));
 
 

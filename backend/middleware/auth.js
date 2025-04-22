@@ -1,12 +1,14 @@
 import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
 
+dotenv.config();
 const generatetoken = (userdata) => {
   const token = jwt.sign(
     {
       email: userdata.email,
       id: userdata.id,
     },
-    "helloji",
+    process.env.JWT_SECRET,
     
   );
 
@@ -24,7 +26,7 @@ const verifytoken = (req, res, next) => {
 
   try {
     //verify the token
-    const decodepayload = jwt.verify(token, "helloji");
+    const decodepayload = jwt.verify(token, process.env.JWT_SECRET);
     //userpayload act as a key which contain values of decodepayload
     req.userpayload = decodepayload;
     next();
