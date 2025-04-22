@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import usermodel from "../models/usersignup.js";
 import BusinessModel from "../models/BusinessSignup.js";
-import ProfileModel from '../models/profile.js' // Your Business Model
+
 
 router.get("/",  async (req, res) => {
       try {
