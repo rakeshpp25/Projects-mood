@@ -48,7 +48,7 @@ if(Businessuser.verification_code == verificationCode){
     res.cookie("token", token, {
       httpOnly: true,  // Ensures the cookie is not accessible via JavaScript
       secure: process.env.NODE_ENV === "production", // Set to true for HTTPS in production
-      sameSite: "Strict", // Prevents cookie from being sent in cross-site requests
+      sameSite: "None", // Prevents cookie from being sent in cross-site requests
     
     });
 
