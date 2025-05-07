@@ -38,13 +38,13 @@ function Overview() {
       try {
         // Fetch profile data
         const userRes = await axios.get(
-          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile"
+          "http://localhost:8000/dashboard/profile"
         );
         const { library_name } = userRes.data;
 
         // Fetch overview data
         const overviewRes = await axios.get(
-          "https://projects-mood-backend-yugw.onrender.com/dashboard/overview"
+          "http://localhost:8000/dashboard/overview"
         );
         const { time, special_features, about_library, amenities } =
           overviewRes.data || {};
@@ -102,14 +102,8 @@ function Overview() {
 
     try {
       await Promise.all([
-        axios.put(
-          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
-          userPayload
-        ),
-        axios.put(
-          "https://projects-mood-backend-yugw.onrender.com/dashboard/overview",
-          overviewPayload
-        ),
+        axios.put("http://localhost:8000/dashboard/profile", userPayload),
+        axios.put("http://localhost:8000/dashboard/overview", overviewPayload),
       ]);
 
       setIsEditing(false);

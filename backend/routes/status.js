@@ -168,7 +168,7 @@ router.get("/", async (req, res) => {
     doc.end();
 
     writeStream.on("finish", async () => {
-      const baseUrl = "https://projects-mood-backend-yugw.onrender.com";
+      const baseUrl = "http://localhost:8000";
       const approveLink = `${baseUrl}/approve/${userId}`;
       const rejectLink = `${baseUrl}/status/reject/${userId}`;
 

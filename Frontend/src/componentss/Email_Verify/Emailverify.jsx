@@ -48,15 +48,12 @@ function Emailverify() {
     }
 
     try {
-      const res = await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/auth/emailverify",
-        {
-          verificationCode,
-          email,
-          role,
-          purpose,
-        }
-      );
+      const res = await axios.post("http://localhost:8000/auth/emailverify", {
+        verificationCode,
+        email,
+        role,
+        purpose,
+      });
       if (res.data && res.data.user) {
         dispatch(setAuth(res.data.user)); // set authenticated and store user
         toast.success("Successfully verified");

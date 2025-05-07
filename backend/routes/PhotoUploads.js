@@ -4,7 +4,7 @@ import PhotoUpload from "../models/PhotoUploadsModel.js";
 
 const router = express.Router();
 
-router.post("/",  upload.array("images", 10), async (req, res) => {
+router.post("/", upload.array("images", 10), async (req, res) => {
   try {
     const userId = req.userpayload.id; // Assuming you have user payload from JWT
 
@@ -13,10 +13,7 @@ router.post("/",  upload.array("images", 10), async (req, res) => {
     }
 
     const photoData = req.files.map((file) => ({
-      url: `https://projects-mood-backend-yugw.onrender.com/${file.path.replace(
-        /\\/g,
-        "/"
-      )}`, // Full URL for the image
+      url: `http://localhost:8000/${file.path.replace(/\\/g, "/")}`, // Full URL for the image
       uploadedAt: new Date(),
     }));
 

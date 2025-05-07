@@ -12,9 +12,7 @@ const Status = ({ businessId }) => {
 
   const fetchStatus = async () => {
     try {
-      const response = await axios.get(
-        `https://projects-mood-backend-yugw.onrender.com/statusUpdate`
-      );
+      const response = await axios.get(`http://localhost:8000/statusUpdate`);
 
       if (response.data && response.data.status) {
         setDocumentStatus(response.data.status);
@@ -36,7 +34,7 @@ const Status = ({ businessId }) => {
 
     try {
       const response = await axios.get(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/status"
+        "http://localhost:8000/dashboard/status"
       );
 
       if (response.data) {
@@ -57,7 +55,7 @@ const Status = ({ businessId }) => {
       // Send PUT request to update the status in the database
       try {
         const response = await axios.put(
-          `https://projects-mood-backend-yugw.onrender.com/dashboard/updateLibraryStatus`,
+          `http://localhost:8000/dashboard/updateLibraryStatus`,
           {
             libraryLiveStatus: !isActive,
           }

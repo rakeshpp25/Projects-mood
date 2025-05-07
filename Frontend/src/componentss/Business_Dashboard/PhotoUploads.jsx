@@ -19,7 +19,7 @@ function PhotoUploads() {
     setLoading(true);
     try {
       const res = await axios.get(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/imageuploads",
+        "http://localhost:8000/dashboard/imageuploads",
         {
           withCredentials: true,
         }
@@ -90,13 +90,10 @@ function PhotoUploads() {
 
     setLoading(true);
     try {
-      await axios.delete(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/imageuploads",
-        {
-          data: { public_id: imageToDelete }, // Use the publicId directly
-          withCredentials: true,
-        }
-      );
+      await axios.delete("http://localhost:8000/dashboard/imageuploads", {
+        data: { public_id: imageToDelete }, // Use the publicId directly
+        withCredentials: true,
+      });
       setShowModal(false);
       await fetchImages(); // Re-fetch images to stay in sync
     } catch (err) {
@@ -128,7 +125,7 @@ function PhotoUploads() {
 
     try {
       await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/imageuploads",
+        "http://localhost:8000/dashboard/imageuploads",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

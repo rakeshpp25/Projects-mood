@@ -22,7 +22,7 @@ const FullLibraryDetails = () => {
       try {
         // Fetch overview data
         // const overviewRes = await axios.get(
-        //   `https://projects-mood-backend-yugw.onrender.com/dashboard/overview/${id}`
+        //   `http://localhost:8000/dashboard/overview/${id}`
         // );
         // if (overviewRes.data) {
         //   setOverview(overviewRes.data);
@@ -31,7 +31,7 @@ const FullLibraryDetails = () => {
 
         // Fetch profile data
         // const profileRes = await axios.get(
-        //   `https://projects-mood-backend-yugw.onrender.com/dashboard/profile/${id}`
+        //   `http://localhost:8000/dashboard/profile/${id}`
         // );
         // if (profileRes.data) {
         //   const { library_name, city, mobile_no } = profileRes.data;
@@ -41,7 +41,7 @@ const FullLibraryDetails = () => {
 
         // Fetch address data
         // const addressRes = await axios.get(
-        //   `https://projects-mood-backend-yugw.onrender.com/dashboard/address/${id}`
+        //   `http://localhost:8000/dashboard/address/${id}`
         // );
         // if (addressRes.data) {
         //   const { building_name, area_name, landmark, pin_code } =
@@ -52,7 +52,7 @@ const FullLibraryDetails = () => {
 
         // Fetch images
         const imageRes = await axios.get(
-          `https://projects-mood-backend-yugw.onrender.com/dashboard/imageuploads/${id}`
+          `http://localhost:8000/dashboard/imageuploads/${id}`
         );
         if (imageRes.data) {
           setImages(imageRes.data);

@@ -15,7 +15,6 @@ function Home() {
 <Navbar/>
 <Herobar/>
 </div>
-<TrendingLibraries/>
 <SuggestedLibraries/>
 <GetIntouch/>
 <Footer/>

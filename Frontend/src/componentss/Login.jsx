@@ -27,10 +27,7 @@ function Login() {
     setIsSending(true); // start loading
 
     axios
-      .post(
-        "https://projects-mood-backend-yugw.onrender.com/auth/login",
-        inputEmail
-      )
+      .post("http://localhost:8000/auth/login", inputEmail)
       .then((res) => {
         if (res.data) {
           const userRole = res.data.role;

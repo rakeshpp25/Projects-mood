@@ -23,7 +23,7 @@ function Navbar() {
       if (isAuthenticated) {
         try {
           const res = await axios.get(
-            "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
+            "http://localhost:8000/dashboard/profile",
             {
               withCredentials: true,
             }
@@ -48,7 +48,7 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/auth/logout",
+        "http://localhost:8000/auth/logout",
         {},
         { withCredentials: true }
       );
@@ -61,7 +61,7 @@ function Navbar() {
 
   const handleProfileClick = () => {
     if (user?.role === "business") {
-      navigate(`/dashboard`); // <-- fixed
+      navigate(`/dashboard`);
     } else {
       navigate("/");
     }
@@ -104,7 +104,9 @@ function Navbar() {
         </Link>
       </div>
 
+      {/* 👇 Explore Button Added Here */}
       <div className={styles.middleNav}>
+        <button onClick={() => navigate("/explore")}>Explore</button>
         <button onClick={scrollToContact}>Contact</button>
         <button onClick={scrollToAbout}>About</button>
       </div>
@@ -152,14 +154,12 @@ function Navbar() {
         </div>
       )}
 
-      {/* Hamburger for mobile */}
       <div className={styles.hamburger} onClick={() => setIsSidebarOpen(true)}>
         <div className={styles.bar}></div>
         <div className={styles.bar}></div>
         <div className={styles.bar}></div>
       </div>
 
-      {/* Sidebar Menu */}
       {isSidebarOpen && (
         <div className={styles.sidebar} ref={sidebarRef}>
           <div
@@ -169,6 +169,7 @@ function Navbar() {
             &#10005;
           </div>
 
+          <button onClick={() => navigate("/explore")}>Explore</button>
           <button onClick={scrollToContact}>Contact</button>
           <button onClick={scrollToAbout}>About</button>
           {!isAuthenticated && (

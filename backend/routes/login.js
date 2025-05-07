@@ -58,7 +58,7 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  res.redirect("https://projects-mood-frontend.onrender.com/");
+  res.redirect("http://localhost:5173/");
 });
 
 export const login = router;

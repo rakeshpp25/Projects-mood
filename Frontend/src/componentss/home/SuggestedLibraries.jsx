@@ -1,5 +1,4 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
-import Slider from "react-slick";
 import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -13,8 +12,7 @@ const SuggestedLibraries = () => {
   const fetchLibraries = async () => {
     try {
       const storedLocation = localStorage.getItem("userLocation");
-      let apiURL =
-        "https://projects-mood-backend-yugw.onrender.com/librarydetails";
+      let apiURL = "http://localhost:8000/librarydetails";
 
       if (storedLocation) {
         let { city } = JSON.parse(storedLocation);
@@ -24,7 +22,7 @@ const SuggestedLibraries = () => {
           city = city.split("-")[0].trim(); // This will give us only the city name, e.g., 'Sultanpur'
           console.log("Fetching libraries for city:", city);
 
-          apiURL = `https://projects-mood-backend-yugw.onrender.com/librarydetails?city=${encodeURIComponent(
+          apiURL = `http://localhost:8000/librarydetails?city=${encodeURIComponent(
             city
           )}`;
         }
@@ -61,19 +59,6 @@ const SuggestedLibraries = () => {
     fetchLibraries();
   }, []);
 
-  const settings = {
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 640, settings: { slidesToShow: 1 } },
-    ],
-  };
-
   return (
     <>
       <h2 className="text-3xl ml-10 font-bold my-6">Suggested For You</h2>
@@ -82,9 +67,12 @@ const SuggestedLibraries = () => {
           {loading ? (
             <div className="text-center py-6">Loading libraries...</div>
           ) : libraries.length > 0 ? (
-            <Slider {...settings}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {libraries.map((lib, idx) => (
-                <div key={idx} className="px-2">
+                <div
+                  key={idx}
+                  className="flex justify-center items-center px-2 py-4"
+                >
                   <LibraryCard
                     id={lib.id}
                     title={lib.title}
@@ -95,7 +83,7 @@ const SuggestedLibraries = () => {
                   />
                 </div>
               ))}
-            </Slider>
+            </div>
           ) : (
             <div className="text-center py-6">No libraries available</div>
           )}
