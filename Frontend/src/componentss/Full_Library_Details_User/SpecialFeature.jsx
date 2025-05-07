@@ -1,33 +1,21 @@
-import React from 'react'
+import React from 'react';
 import { LuCircleCheckBig } from "react-icons/lu";
 
-const SpecialFeature = () => {
+const SpecialFeature = ({ overview }) => {
+  console.log(overview)
   return (
-    <>
-    <h1 className="text-4xl font-bold">Special Feature</h1>
-    <div className='flex flex-col text-xl gap-5'>
-    <div className='flex gap-5 items-center'>
-        <LuCircleCheckBig/>
-        <p>Wheelchail Accessibility</p>
+    <div className='flex flex-col gap-5'>
+      <h1 className="text-[26px] font-bold">Special Feature</h1>
+      <div className="flex flex-col text-[18px] gap-4">
+        {overview?.special_features?.map((item, index) => (
+          <div key={index} className="flex items-center gap-4">
+            <LuCircleCheckBig className="text-[20px]" />
+            <p className='text-[#303030] text-[18px]'>{item}</p>
+          </div>
+        ))}
+      </div>
     </div>
-    <div className='flex gap-5 items-center'>
-        <LuCircleCheckBig/>
-        <p>Hot and cold Water</p>
-    </div>
-    <div className='flex gap-5 items-center'>
-        <LuCircleCheckBig/>
-        <p>Comics and Magzines</p>
-    </div>
-    <div className='flex gap-5 items-center'>
-        <LuCircleCheckBig/>
-        <p>Smart Table Lamp</p>
-    </div>
+  );
+};
 
-    </div>
-    
-   
-    </>
-  )
-}
-
-export default SpecialFeature
+export default SpecialFeature;

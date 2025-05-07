@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../css/Business_Dashboard_Css/dashboardOptions.module.css";
-// import profile from "../images/profile.png";
 import Footer from "../Reuse/Footer";
 import {
   OverviewIcon,
@@ -15,9 +14,8 @@ import {
 } from "../Svgs";
 import Profile from "./Profile";
 import Overview from "./Overview";
-// import Amenities from "./Amenities";
 import { v4 as uuidv4 } from "uuid";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../Reuse/Navbar";
 import axios from "axios";
 import Address from "./Address";
@@ -27,80 +25,97 @@ import PhotoUploads from "./PhotoUploads";
 import Status from "./Status";
 
 function DashboardOptions() {
-  const { view } = useParams();
-  const [userData, setUserData] = useState(null); // State to hold user data
-  const [loading, setLoading] = useState(true); // State to track loading
+  const { view } = useParams(); // Get URL param
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const [DashBoardOptions, setDashBoardOptions] = useState([
     {
       id: uuidv4(),
+      path: "profile",
       buttonIcon: <ProfileIcon />,
       buttonName: "PROFILE",
       component: <Profile />,
     },
     {
       id: uuidv4(),
+      path: "overview",
       buttonIcon: <OverviewIcon />,
       buttonName: "OVERVIEW",
       component: <Overview />,
     },
     {
       id: uuidv4(),
+      path: "address",
       buttonIcon: <Addresslocation />,
       buttonName: "ADDRESS",
       component: <Address />,
     },
     {
       id: uuidv4(),
+      path: "fees",
       buttonIcon: <FeesIcon />,
       buttonName: "FEES",
       component: <FeeDetails />,
     },
     {
       id: uuidv4(),
+      path: "documents",
       buttonIcon: <DocumentIcon />,
       buttonName: "Documents",
       component: <Documents />,
     },
     {
       id: uuidv4(),
+      path: "photos",
       buttonIcon: <PhotoIcon />,
       buttonName: "PHOTOS",
       component: <PhotoUploads />,
     },
-
     {
       id: uuidv4(),
+      path: "reviews",
       buttonIcon: <ReviewsIcon />,
       buttonName: "REVIEWS",
+      component: null, // Add a component if needed
     },
     {
       id: uuidv4(),
+      path: "status",
       buttonIcon: <StatusIcon />,
       buttonName: "STATUS",
       component: <Status />,
     },
   ]);
 
-  const [activeComponent, setActiveComponent] = useState(
-    DashBoardOptions[0].id
-  ); // State to track the active component
+  const [activeComponent, setActiveComponent] = useState(DashBoardOptions[0].id);
 
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const res = await axios.get("http://localhost:8000/Profile", {
+  //         withCredentials: true,
+  //       });
+  //       setUserData(res.data);
+  //       setLoading(false);
+  //     } catch (err) {
+  //       console.error("Error fetching user data:", err);
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, []);
+
+  // Sync component with URL param
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const res = await axios.get("https://projects-mood-backend-yugw.onrender.com/Profile", {
-          withCredentials: true, // Include cookies for authentication
-        });
-        setUserData(res.data); // Set the user data
-        setLoading(false); // Set loading to false
-      } catch (err) {
-        console.error("Error fetching user data:", err);
-        setLoading(false); // Set loading to false if there's an error
-      }
-    };
-
-    fetchUserData();
-  }, []);
+    const found = DashBoardOptions.find(
+      (opt) => opt.path.toLowerCase() === view?.toLowerCase()
+    );
+    if (found) setActiveComponent(found.id);
+    else setActiveComponent(DashBoardOptions[0].id);
+  }, [view, DashBoardOptions]);
 
   const renderComponent = () => {
     const activeOption = DashBoardOptions.find(
@@ -109,26 +124,26 @@ function DashboardOptions() {
     return activeOption ? activeOption.component : null;
   };
 
+  const handleOptionClick = (item) => {
+    navigate(`/dashboard/${item.path}`); // Update URL
+    setActiveComponent(item.id); // Optional since useEffect also updates this
+  };
+
   return (
     <>
       <Navbar />
       <div className={styles.WholeComponent}>
         <div className={styles.allOptions}>
-          {/* profile pic and name starts here  */}
           <div className={styles.profilePicNname}>
-            {/* profilepic section starts */}
             <div className={styles.profilePic}>
               <ProfilePic />
             </div>
-            {/* profile i.e user name starts */}
             <div className={styles.UserName}>
               <p className={styles.hello}>Hello</p>
               <p className={styles.name}>{userData?.name}</p>
             </div>
           </div>
-          {/* profile pic and name ends here  */}
 
-          {/* dashboard options starts from here */}
           <div className={styles.dashboardOptions}>
             <div className={styles.innerDashboardDiv}>
               {DashBoardOptions.map((item) => (
@@ -137,7 +152,7 @@ function DashboardOptions() {
                   className={`${styles.profile} ${styles.btns} ${
                     item.id === activeComponent ? styles.activeBtn : ""
                   }`}
-                  onClick={() => setActiveComponent(item.id)}
+                  onClick={() => handleOptionClick(item)}
                 >
                   {item.buttonIcon}
                   <span>{item.buttonName}</span>
@@ -147,7 +162,6 @@ function DashboardOptions() {
           </div>
         </div>
 
-        {/* Render Active Component */}
         <div className={styles.activeComponent}>{renderComponent()}</div>
       </div>
       <Footer />

@@ -13,8 +13,7 @@ const SuggestedLibraries = () => {
   const fetchLibraries = async () => {
     try {
       const storedLocation = localStorage.getItem("userLocation");
-      let apiURL =
-        "https://projects-mood-backend-yugw.onrender.com/librarydetails";
+      let apiURL = "http://localhost:8000/librarydetails";
 
       if (storedLocation) {
         let { city } = JSON.parse(storedLocation);
@@ -24,7 +23,7 @@ const SuggestedLibraries = () => {
           city = city.split("-")[0].trim(); // This will give us only the city name, e.g., 'Sultanpur'
           console.log("Fetching libraries for city:", city);
 
-          apiURL = `https://projects-mood-backend-yugw.onrender.com/librarydetails?city=${encodeURIComponent(
+          apiURL = `http://localhost:8000/librarydetails?city=${encodeURIComponent(
             city
           )}`;
         }
@@ -35,10 +34,12 @@ const SuggestedLibraries = () => {
 
       if (Array.isArray(response.data)) {
         const formattedLibraries = response.data.map((lib) => ({
+          id: lib._id,
           title: lib.library_name,
           location: lib.city || "Unknown Location",
           latitude: lib.latitude,
           longitude: lib.longitude,
+          images: lib.images || [],
         }));
 
         setLibraries(formattedLibraries);
@@ -83,12 +84,14 @@ const SuggestedLibraries = () => {
             <Slider {...settings}>
               {libraries.map((lib, idx) => (
                 <div key={idx} className="px-2">
-                  <LibraryCard
-                    title={lib.title}
-                    location={lib.location}
-                    libLat={lib.latitude}
-                    libLng={lib.longitude}
-                  />
+                <LibraryCard
+                id={lib.id}  
+  title={lib.title}
+  location={lib.location}
+  liblat={lib.latitude}  
+  liblang={lib.longitude} 
+  images={lib.images}
+/>
                 </div>
               ))}
             </Slider>

@@ -1,3 +1,5 @@
+// this will create user and send data to /auth/usersignup
+
 import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -41,18 +43,15 @@ function Usersignup() {
     }
 
     try {
-      const response = await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/usersignup",
-        {
-          ...inputData,
-          role: "user",
-        }
-      );
+      const response = await axios.post("http://localhost:8000/auth/userSignup", {
+        ...inputData,
+        role: "user",
+      });
 
       // Success response
       toast.success("Otp has been send to: " + response.data.email);
       if (response.data) {
-        navigate("/emailverify", {
+        navigate("/auth/emailverify", {
           state: { email: useremail, role: "user", purpose: "signup" },
         });
       }

@@ -1,3 +1,5 @@
+// this is used to create data of business user and send data to /auth/businessSignup
+
 import { faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -42,7 +44,7 @@ function BusinessSignup() {
 
     try {
       const response = await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/businessSignup",
+        "http://localhost:8000/auth/businessSignup",
         {
           ...inputData,
           role: "business",
@@ -52,7 +54,7 @@ function BusinessSignup() {
       // Success response
       toast.success("Otp has been send to: " + response.data.email);
       if (response.data) {
-        navigate("/emailverify", {
+        navigate("/auth/emailverify", {
           state: { email: useremail, role: "business", purpose: "signup" },
         });
       }

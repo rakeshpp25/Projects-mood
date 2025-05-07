@@ -23,33 +23,58 @@ function Address() {
   const [locationInfo, setLocationInfo] = useState({});
   const navigate = useNavigate();
 
+  // Fetch user data (address and city) on component mount
   useEffect(() => {
-      const fetchAddress = async () => {
+    const fetchAddressAndCity = async () => {
+      try {
+        let addressData = {};
+        
+        // Fetch address data
         try {
-          const res = await axios.get("https://projects-mood-backend-yugw.onrender.com/address", {
+          const addressRes = await axios.get("http://localhost:8000/dashboard/address", {
             withCredentials: true,
           });
-          
-          console.log("Fetched address from backend:", res.data);
-    
-          if (res.data && Object.keys(res.data).length > 0) {
-            setUserData((prev) => ({
-              ...prev,
-              ...res.data,
-            }));
-            setOriginalData(res.data);
-          }
-        } catch (error) {
-          console.error("Error fetching address:", error);
-          if (error.response?.status !== 404) {
-            toast.error("Something went wrong while fetching address");
+          console.log("Fetched address from backend:", addressRes.data);
+          addressData = addressRes.data || {};
+        } catch (addressError) {
+          if (addressError.response?.status === 404) {
+            console.warn("No address found, skipping...");
+          } else {
+            throw addressError;
           }
         }
-      };
-    
-      fetchAddress();
-    }, []);
 
+        // Fetch profile data (city)
+        const profileRes = await axios.get("http://localhost:8000/dashboard/profile", {
+          withCredentials: true,
+        });
+        console.log("Fetched city from profile:", profileRes.data);
+
+        const profileData = profileRes.data || {};
+
+        // Combine address and city data
+        const combinedData = {
+          ...addressData,
+          city: profileData.city || "",
+        };
+
+        // Set userData and originalData states
+        setUserData((prev) => ({
+          ...prev,
+          ...combinedData,
+        }));
+
+        setOriginalData(combinedData);
+      } catch (error) {
+        console.error("Error fetching address or city:", error);
+        toast.error("Something went wrong while fetching address or city");
+      }
+    };
+
+    fetchAddressAndCity();
+  }, []);
+
+  // Toggle edit mode
   const handleEditToggle = () => {
     if (isEditing) {
       setUserData(originalData);
@@ -58,6 +83,7 @@ function Address() {
     setIsEditing((prev) => !prev);
   };
 
+  // Handle input field change
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -66,28 +92,23 @@ function Address() {
       [name]: value,
     }));
 
-    // If city, state, or pin_code is manually edited, don't overwrite them with fetched data
-    if (name === "pin_code" || name === "city" || name === "state") {
-      setUpdatedFields((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    } else {
-      setUpdatedFields((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+    setUpdatedFields((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
+  // Fetch and set geolocation
   const getLocation = () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-
           setLocationInfo({ latitude, longitude, error: null });
-          localStorage.setItem("userLocation", JSON.stringify({ latitude, longitude }));
+          localStorage.setItem(
+            "userLocation",
+            JSON.stringify({ latitude, longitude })
+          );
 
           console.log("New location fetched:", latitude, longitude);
 
@@ -99,7 +120,11 @@ function Address() {
 
           if (savedLocation) {
             const { latitude, longitude } = JSON.parse(savedLocation);
-            setLocationInfo({ latitude, longitude, error: "Using last known location" });
+            setLocationInfo({
+              latitude,
+              longitude,
+              error: "Using last known location",
+            });
             console.log("Using saved location:", latitude, longitude);
             sendLocationToServer(latitude, longitude);
           } else {
@@ -118,11 +143,12 @@ function Address() {
     }
   };
 
+  // Send location info to the backend
   const sendLocationToServer = async (latitude, longitude) => {
     try {
       console.log("Sending location to server:", { latitude, longitude });
 
-      const response = await axios.post("https://projects-mood-backend-yugw.onrender.com/loaction", {
+      const response = await axios.post("http://localhost:8000/dashboard/location", {
         latitude,
         longitude,
       });
@@ -133,9 +159,9 @@ function Address() {
       setUserData((prev) => ({
         ...prev,
         location: formattedAddress,
-        city: city || prev.city, // Don't overwrite if manually entered
-        state: state || prev.state, // Don't overwrite if manually entered
-        pin_code: postalCode || prev.pin_code, // Don't overwrite if manually entered
+        city: city || prev.city,
+        state: state || prev.state,
+        pin_code: postalCode || prev.pin_code,
       }));
 
       setUpdatedFields((prev) => ({
@@ -145,8 +171,8 @@ function Address() {
         state: state || prev.state,
         pin_code: postalCode || prev.pin_code,
         coordinates: {
-          type: "Point", // This is required
-          coordinates: [longitude, latitude], // Array [longitude, latitude]
+          type: "Point",
+          coordinates: [longitude, latitude],
         },
       }));
 
@@ -157,6 +183,7 @@ function Address() {
     }
   };
 
+  // Get error message for geolocation error codes
   const getErrorMessage = (errorCode) => {
     switch (errorCode) {
       case 1:
@@ -170,23 +197,50 @@ function Address() {
     }
   };
 
+  // Handle save button click
   const handleSave = async (e) => {
     e.preventDefault();
-
+  
+    // Validate required fields
+    if (!updatedFields.pin_code || !updatedFields.area_name || !updatedFields.location) {
+      toast.error("Pin Code, Area Name, and Location are required.");
+      return;
+    }
+  
     try {
-      const res = await axios.put("https://projects-mood-backend-yugw.onrender.com/address", updatedFields, {
-        withCredentials: true,
-      });
-
-      toast.success("Address updated successfully");
-      setOriginalData(res.data); // Update original data with response from server
+      await Promise.all([
+        axios.put(
+          "http://localhost:8000/dashboard/profile",
+          { city: updatedFields.city },
+          { withCredentials: true }
+        ),
+        axios.put(
+          "http://localhost:8000/dashboard/address",
+          {
+            building_name: updatedFields.building_name,
+            landmark: updatedFields.landmark,
+            pin_code: updatedFields.pin_code,
+            state: updatedFields.state,
+            location: updatedFields.location,
+            area_name: updatedFields.area_name,
+            coordinates: updatedFields.coordinates,
+          },
+          { withCredentials: true }
+        ),
+      ]);
+  
+      toast.success("Profile and address updated successfully");
+  
+      // ✅ After successful save, exit edit mode
       setIsEditing(false);
-      setUpdatedFields({}); // Clear updated fields
+      setUpdatedFields({});
+      setOriginalData(userData); // optional but good: reset originalData
     } catch (error) {
-      console.error("Error updating address:", error);
-      toast.error("Failed to update address");
+      console.error("Error updating profile/address:", error);
+      toast.error("Failed to update profile or address");
     }
   };
+  
 
   return (
     <form className={styles.FullProfileSection} onSubmit={handleSave}>
@@ -204,7 +258,7 @@ function Address() {
             name="location"
             value={userData.location}
             onChange={handleChange}
-            disabled={!isEditing}
+            disabled
           />
           {isEditing && (
             <button
@@ -296,8 +350,6 @@ function Address() {
           disabled={!isEditing}
         />
       </div>
-
-      
 
       {isEditing && <SaveButton />}
     </form>

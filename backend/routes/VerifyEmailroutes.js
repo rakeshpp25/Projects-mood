@@ -8,7 +8,7 @@ import { generatetoken } from "../middleware/auth.js";
 router.post("/", async (req, res) => {
   try {
     const { verificationCode, email: useremail, role, purpose } = req.body;
-    console.log("role is", role, "purpose is", purpose ,useremail);
+
 
     const Model = role === "business" ? BusinessModel : usermodel;
 
@@ -64,7 +64,7 @@ router.post("/", async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
+      sameSite: "Lax",
 
     });
 

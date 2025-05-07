@@ -21,7 +21,7 @@ const verifytoken = (req, res, next) => {
   //extract the jwt token from server
   const token = req.cookies.token;
   if (!token) {
-    return res.status(400).redirect("/login");
+    return res.status(400).redirect("/auth/login");
   }
 
   try {

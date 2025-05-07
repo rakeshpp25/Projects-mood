@@ -20,13 +20,17 @@ router.post("/", async (req, res) => {
       existsUser = await businessmodel.findOne({ email: useremail });
       role = "business";
     }
-    
+
     if (!existsUser) {
-      return res.status(404).json({ message: "User not found. Please register." });
+      return res
+        .status(404)
+        .json({ message: "User not found. Please register." });
     }
 
     // Generate a random 6-digit OTP
-    const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+    const verificationCode = Math.floor(
+      100000 + Math.random() * 900000
+    ).toString();
 
     // Create an OTP entry in OtpModel with purpose "login"
     const otpEntry = new OtpModel({
@@ -54,7 +58,7 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  res.redirect("https://projects-mood-frontend.onrender.com/");
+  res.redirect("http://localhost:5173/");
 });
 
 export const login = router;

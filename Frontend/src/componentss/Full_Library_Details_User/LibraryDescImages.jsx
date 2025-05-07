@@ -1,13 +1,9 @@
-import React, { useState } from "react";
-import image1 from "../../images/firstImage1.jpg";
-import image2 from "../../images/firstImage2.jpg";
-import image3 from "../../images/firstImage3.jpg";
-import image4 from "../../images/firstImage4.webp";
-import image5 from "../../images/firstImage5.webp";
+import React, { useEffect, useState } from "react";
 import { FcPrevious, FcNext } from "react-icons/fc";
 
-function LibraryDescImages() {
-  const images = [image1, image2, image3, image4, image5];
+function LibraryDescImages({ images }) {
+  
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goLeft = () => {
@@ -15,7 +11,7 @@ function LibraryDescImages() {
   };
 
   const goRight = () => {
-    if (currentIndex < images.length - 2.5) setCurrentIndex(currentIndex + 1);
+    if (currentIndex < images.length - 1) setCurrentIndex(currentIndex + 1);
   };
 
   return (
@@ -27,18 +23,19 @@ function LibraryDescImages() {
             transform: `translateX(-${currentIndex * (100 / 2.5)}%)`,
           }}
         >
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className="min-w-[40%] max-w-[40%] mx-1 rounded-xl overflow-hidden shadow-lg"
-            >
-              <img
-                src={image}
-                alt={`Slide ${index}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
+         {images.map((image, index) => (
+  <div
+    key={index}
+    className="min-w-[40%] max-w-[40%] mx-1 rounded-xl overflow-hidden shadow-lg h-[400px]"
+  >
+    <img
+      src={image.url}
+      alt={`Slide ${index}`}
+      className="w-full h-full object-cover"
+    />
+  </div>
+))}
+
         </div>
       </div>
 

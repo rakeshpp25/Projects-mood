@@ -5,66 +5,72 @@ import styles from "../../css/Business_Dashboard_Css/overview.module.css";
 import EditButton from "../Reuse/EditButton";
 import SaveButton from "../Reuse/SaveButton";
 import { FaCheck, FaTimes, FaWifi, FaFan, FaTint } from "react-icons/fa";
+import { toast } from "react-toastify";
+
+const defaultDays = [
+  { day: "Monday", status: "", customTime: "", showOptions: false },
+  { day: "Tuesday", status: "", customTime: "", showOptions: false },
+  { day: "Wednesday", status: "", customTime: "", showOptions: false },
+  { day: "Thursday", status: "", customTime: "", showOptions: false },
+  { day: "Friday", status: "", customTime: "", showOptions: false },
+  { day: "Saturday", status: "", customTime: "", showOptions: false },
+  { day: "Sunday", status: "", customTime: "", showOptions: false },
+];
 
 function Overview() {
-  const [days, setDays] = useState([
-    { day: "Monday", status: "", customTime: "", showOptions: false },
-    { day: "Tuesday", status: "", customTime: "", showOptions: false },
-    { day: "Wednesday", status: "", customTime: "", showOptions: false },
-    { day: "Thursday", status: "", customTime: "", showOptions: false },
-    { day: "Friday", status: "", customTime: "", showOptions: false },
-    { day: "Saturday", status: "", customTime: "", showOptions: false },
-    { day: "Sunday", status: "", customTime: "", showOptions: false },
-  ]);
+  const [days, setDays] = useState(defaultDays);
+  const [originalDays, setOriginalDays] = useState(defaultDays);
 
   const [isEditing, setIsEditing] = useState(false);
   const [userData, setUserData] = useState({
-    Library_name: "",
-    time: "",
-    special_features: "",
+    library_name: "",
     about_library: "",
   });
-
   const [originalUserData, setOriginalUserData] = useState({});
-  const [originalDays, setOriginalDays] = useState([]);
   const [predefinedAmenities] = useState(["WiFi", "AC", "Power Backup"]);
   const [dynamicAmenities, setDynamicAmenities] = useState([]);
   const [specialFeatures, setSpecialFeatures] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchOverview = async () => {
+    const fetchData = async () => {
+      setLoading(true);
       try {
-        const res = await axios.get("https://projects-mood-backend-yugw.onrender.com/overview");
-        const {
-          Library_name,
-          time,
-          special_features,
-          about_library,
-          amenities = [],
-        } = res.data;
+        // Fetch profile data
+        const userRes = await axios.get("http://localhost:8000/dashboard/profile");
+        const { library_name } = userRes.data;
 
-        setUserData({ Library_name, time, special_features, about_library });
-        setOriginalUserData({ Library_name, time, special_features, about_library });
-        setDays(time);
-        setOriginalDays(time);
+        // Fetch overview data
+        const overviewRes = await axios.get("http://localhost:8000/dashboard/overview");
+        const { time, special_features, about_library, amenities } = overviewRes.data || {};
 
-        const dynamic = amenities.filter((a) => !predefinedAmenities.includes(a));
+        const dynamic = (amenities || []).filter((item) => !predefinedAmenities.includes(item));
+
+        // Set state
+        setUserData({
+          library_name,
+          about_library: about_library || "",
+        });
+
+        setSpecialFeatures(special_features || []);
+        setDays(time || defaultDays);
         setDynamicAmenities(dynamic);
 
-        if (Array.isArray(special_features)) {
-          setSpecialFeatures(special_features);
-        } else if (typeof special_features === "string") {
-          setSpecialFeatures(special_features.split(",").map((f) => f.trim()));
-        } else {
-          setSpecialFeatures([]);
-        }
+        // Backup original state
+        setOriginalUserData({
+          library_name,
+          about_library: about_library || "",
+        });
+        setOriginalDays(time || defaultDays);
       } catch (err) {
-        console.error("Error fetching overview:", err);
+        console.error("Error fetching data:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchOverview();
-  }, [predefinedAmenities]);
+    fetchData();
+  }, []);
 
   const handleEditToggle = () => {
     if (isEditing) {
@@ -76,30 +82,35 @@ function Overview() {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    const payload = {
-      ...userData,
-      amenities: [...predefinedAmenities, ...dynamicAmenities],
+    const overviewPayload = {
       time: days,
       special_features: specialFeatures,
+      about_library: userData.about_library,
+      amenities: [...predefinedAmenities, ...dynamicAmenities],
+    };
+
+    const userPayload = {
+      library_name: userData.library_name,
     };
 
     try {
-      const res = await axios.put("https://projects-mood-backend-yugw.onrender.com/overview", payload);
-      console.log("✅ Overview saved:", res.data);
+      await Promise.all([
+        axios.put("http://localhost:8000/dashboard/profile", userPayload),
+        axios.put("http://localhost:8000/dashboard/overview", overviewPayload),
+      ]);
+
       setIsEditing(false);
       setOriginalUserData(userData);
       setOriginalDays(days);
+      toast.success("Data saved successfully");
     } catch (err) {
-      console.error("Error saving overview:", err);
+      toast.error("Error saving data");
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleAmenityChange = (index, value) => {
@@ -148,8 +159,8 @@ function Overview() {
         <input
           className={styles.InputBox}
           type="text"
-          name="Library_name"
-          value={userData.Library_name}
+          name="library_name"
+          value={userData.library_name}
           onChange={handleChange}
           disabled={!isEditing}
         />
@@ -164,15 +175,8 @@ function Overview() {
           <div key={`pre-${index}`} className={styles.AmenityItemWrapper}>
             <div className={styles.InputWithIcons}>
               <div className={styles.InputDivWrapper}>
-                {amenity === "WiFi" && <FaCheck className={styles.WifiIcon} />}
-                {amenity === "AC" && <FaCheck className={styles.WifiIcon} />}
-                {amenity === "Power Backup" && <FaCheck className={styles.WifiIcon} />}
-                <input
-                  className={styles.AmenitiesInputBox}
-                  type="text"
-                  value={amenity}
-                  disabled
-                />
+                <FaCheck className={styles.WifiIcon} />
+                <input className={styles.AmenitiesInputBox} type="text" value={amenity} disabled />
               </div>
             </div>
           </div>

@@ -1,3 +1,5 @@
+// This is login Page 
+
 import { Link, useNavigate } from "react-router-dom";
 import "../css/userlogin.css";
 import React, { useState } from "react";
@@ -25,12 +27,12 @@ function Login() {
     setIsSending(true); // start loading
 
     axios
-      .post("https://projects-mood-backend-yugw.onrender.com/login", inputEmail)
+      .post("http://localhost:8000/auth/login", inputEmail)
       .then((res) => {
         if (res.data) {
           const userRole = res.data.role;
           dispatch(setRole(userRole));
-          navigate("/emailverify", {
+          navigate("/auth/emailverify", {
             state: {
               email: inputEmail.useremail,
               role: userRole,
@@ -96,7 +98,7 @@ function Login() {
               <Link to="/userSignup" className="tosigninpage w-1/2">
                 <button className="w-full">User</button>
               </Link>
-              <Link to="/businessSignup" className="tosigninpage w-1/2">
+              <Link to="/auth/businessSignup" className="tosigninpage w-1/2">
                 <button className="w-full">Corporate</button>
               </Link>
             </div>

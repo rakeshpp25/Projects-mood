@@ -19,15 +19,15 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/userSignup" element={<Usersignup />} />
-        <Route path="/emailverify" element={<Emailverify />} />
-        <Route path="/businessSignup" element={<BusinessSignup />} />
-        <Route path="/Profile" element={<Profile />} />
+        <Route path="/" element={<Home/>} />
+        <Route path="auth/login" element={<Login />} />
+        <Route path="auth/userSignup" element={<Usersignup />} />
+        <Route path="auth/emailVerify" element={<Emailverify />} />
+        <Route path="auth/businessSignup" element={<BusinessSignup />} />
+        <Route path="dashboard/:view" element={<DashboardOptions/>} />
         <Route path="/time" element={<Time />} />
         <Route path="/nearme" element={<DesktopBigCard />} />
-        <Route path="/libraryDetails" element={<FullLibraryDetails />} />
+        <Route path="/libraryDetails/:id" element={<FullLibraryDetails />} />
         <Route
           path="/dashboard"
           element={

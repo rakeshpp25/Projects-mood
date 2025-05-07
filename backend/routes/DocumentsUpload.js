@@ -8,14 +8,14 @@ router.post("/", upload.single("image"), async (req, res) => {
   try {
     const { label } = req.body;
     const userId = req.userpayload.id;
-
+   
     if (!req.file || !label) {
       return res.status(400).json({ message: "Missing image or label" });
     }
 
     const imageUrl = `${req.file.path.replace(/\\/g, "/")}`; // Normalize path for all OS
 
-    let existingDoc = await DocumentUpload.findOne({ userId });
+    let existingDoc = await DocumentUpload.findOne({user : userId });
 
     if (existingDoc) {
       const index = existingDoc.documents.findIndex(doc => doc.label === label);
@@ -25,11 +25,11 @@ router.post("/", upload.single("image"), async (req, res) => {
       } else {
         existingDoc.documents.push({ label, url: imageUrl });
       }
-
+console.log("Existing Doc:", existingDoc);
       await existingDoc.save();
     } else {
       await DocumentUpload.create({
-        userId,
+        user: userId,
         documents: [{ label, url: imageUrl }],
       });
     }
@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
   try {
     const userId = req.userpayload.id;
 
-    const userDocs = await DocumentUpload.findOne({ userId });
+    const userDocs = await DocumentUpload.findOne({user : userId });
 
     if (!userDocs || userDocs.documents.length === 0) {
       return res.status(200).json([]);

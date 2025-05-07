@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
   try {
     const userId = req.userpayload.id; // Access user ID from JWT payload
 
-    const feesDetails = await FeesDetails.findOne({ businessId: userId }); // Find fee details by userId
+    const feesDetails = await FeesDetails.findOne({user : userId }); // Find fee details by userId
 
     if (!feesDetails) {
       return res.status(404).json({ message: "Fees details not found" });
@@ -29,7 +29,7 @@ router.put('/', async (req, res) => {
     const { Hourly, Weekly, Monthly } = req.body; // The fee details sent in the request
 
     // Try to find an existing fee details document for the business user
-    let existingFeesDetails = await FeesDetails.findOne({ businessId: userId });
+    let existingFeesDetails = await FeesDetails.findOne({user : userId });
 
     if (existingFeesDetails) {
       // If the fees details exist, update them with the new data

@@ -12,9 +12,7 @@ const UploadImages = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get(
-        "https://projects-mood-backend-yugw.onrender.com/uploadImages"
-      );
+      const response = await axios.get("http://localhost:8000/dashboard/uploadImages");
       setUploadedImages(response.data);
     } catch (error) {
       console.error("Error fetching images:", error);
@@ -44,13 +42,9 @@ const UploadImages = () => {
     });
 
     try {
-      await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/uploadImages",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      await axios.post("http://localhost:8000/dashboard/uploadImages", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       alert("Images uploaded successfully!");
       fetchImages(); // Refresh uploaded images

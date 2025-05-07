@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SaveButton from "../Reuse/SaveButton";
 import EditButton from "../Reuse/EditButton";
+import Loader from "../Reuse/Loader";
 
 const Documents = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -11,6 +12,7 @@ const Documents = () => {
     { label: "Library Certificate", file: null, preview: "" },
   ]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); // Add loading state
 
   const handleEditToggle = () => setIsEditing((prev) => !prev);
 
@@ -27,6 +29,7 @@ const Documents = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     setError(null);
+    setLoading(true); // Set loading to true when starting the upload process
 
     try {
       const updated = [...documents];
@@ -40,7 +43,7 @@ const Documents = () => {
           formData.append("label", doc.label);
 
           const response = await axios.post(
-            "https://projects-mood-backend-yugw.onrender.com/documentUploads",
+            "http://localhost:8000/dashboard/documentUploads",
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
@@ -61,14 +64,20 @@ const Documents = () => {
     } catch (err) {
       console.error("Upload Error:", err);
       setError("Failed to upload one or more documents. Please try again.");
+    } finally {
+      setLoading(false); // Set loading to false once the upload process is finished
     }
   };
 
   const fetchUploadedDocuments = async () => {
+    setLoading(true); // Set loading to true when fetching documents
     try {
-      const response = await axios.get("https://projects-mood-backend-yugw.onrender.com/documentUploads", {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        "http://localhost:8000/dashboard/documentUploads",
+        {
+          withCredentials: true,
+        }
+      );
 
       if (response.status === 200 && Array.isArray(response.data)) {
         const uploadedDocs = response.data;
@@ -80,6 +89,8 @@ const Documents = () => {
       }
     } catch (err) {
       console.error("Error fetching documents:", err);
+    } finally {
+      setLoading(false); // Set loading to false once the fetching process is done
     }
   };
 
@@ -103,6 +114,9 @@ const Documents = () => {
 
       {error && <div className="text-red-600 mb-4">{error}</div>}
 
+      {/* Full-page loader */}
+      {loading && <Loader/>}
+
       <div className="flex flex-col gap-6">
         {documents.map((item, index) => (
           <div
@@ -121,7 +135,7 @@ const Documents = () => {
               <input
                 type="file"
                 accept="image/*"
-                disabled={!isEditing}
+                disabled={!isEditing || loading} // Disable input if loading
                 onChange={(e) => handleFileChange(e, index)}
                 className={`text-sm file:mr-4 file:py-1 file:px-3 file:rounded-md file:border-0 ${
                   isEditing
@@ -134,9 +148,10 @@ const Documents = () => {
         ))}
       </div>
 
+      {/* Disable Save button when loading */}
       {isEditing && (
         <div className="mt-8">
-          <SaveButton />
+          <SaveButton disabled={loading} /> {/* Disable button when loading */}
         </div>
       )}
     </form>

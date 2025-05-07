@@ -2,15 +2,10 @@ import mongoose from "mongoose";
 
 const OverviewSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Business",
       required: true,
-    },
-    Library_name: {
-      type: String,
-      required: true,
-      trim: true,
     },
     time: [
       {

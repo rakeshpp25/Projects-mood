@@ -8,7 +8,7 @@ const feeItemSchema = new mongoose.Schema({
 
 // Schema for fee details (Hourly, Weekly, Monthly)
 const feeDetailsSchema = new mongoose.Schema({
-  businessId: { type: mongoose.Schema.Types.ObjectId, ref: 'Business', required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'Business', required: true },
   Hourly: [feeItemSchema],
   Weekly: [feeItemSchema],
   Monthly: [feeItemSchema]

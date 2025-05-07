@@ -37,10 +37,7 @@ function GetIntouch() {
     setLoading(true); // Set loading to true when submitting the form
 
     try {
-      await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/getintouch",
-        formData
-      );
+      await axios.post("http://localhost:8000/getintouch", formData);
       setStatus("Message sent successfully");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {

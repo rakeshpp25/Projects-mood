@@ -1,3 +1,5 @@
+// this will  used to take otp for both user and business_user and send that otp to auth/emailverify
+
 import { Link } from "react-router-dom";
 import styles from "../../css/Email_Verify_css/emailverify.module.css";
 import React, { useState, useRef } from "react";
@@ -46,15 +48,12 @@ function Emailverify() {
     }
 
     try {
-      const res = await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/emailverify",
-        {
-          verificationCode,
-          email,
-          role,
-          purpose,
-        }
-      );
+      const res = await axios.post("http://localhost:8000/auth/emailverify", {
+        verificationCode,
+        email,
+        role,
+        purpose,
+      });
       if (res.data && res.data.user) {
         dispatch(setAuth(res.data.user)); // set authenticated and store user
         toast.success("Successfully verified");

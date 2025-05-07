@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const addressSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // or "Business"
+    ref: "Business", // or "Business"
     required: true,
     unique: true
   },
@@ -16,10 +16,6 @@ const addressSchema = new mongoose.Schema({
     required: true
   },
   pin_code: {
-    type: String,
-    required: true
-  },
-  city: {
     type: String,
     required: true
   },

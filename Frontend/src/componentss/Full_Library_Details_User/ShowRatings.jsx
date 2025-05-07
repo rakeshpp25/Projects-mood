@@ -40,7 +40,7 @@ function ShowRatings() {
             <IoMdStar />
             <IoMdStar />
             <IoMdStar />
-            < IoMdStarHalf />
+            <IoMdStarHalf />
           </div>
         </div>
         <div className={styles.OuterRatingsDiv}>

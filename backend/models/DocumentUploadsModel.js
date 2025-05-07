@@ -3,7 +3,7 @@
 import mongoose from "mongoose";
 
 const documentSchema = new mongoose.Schema({
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Business", // or "User" based on your auth logic
     required: true,

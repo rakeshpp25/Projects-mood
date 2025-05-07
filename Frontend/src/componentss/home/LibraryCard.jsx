@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../../css/User_view_css/desktopcard.module.css";
 import { VscLocation } from "react-icons/vsc";
-import { FaMapMarkedAlt } from "react-icons/fa"; // map icon
 
-const LibraryCard = ({ title, location, liblat, liblang, rating, reviews, image }) => {
+
+const LibraryCard = ({ id, title, location, liblat, liblang, rating, reviews, images }) => {
   const handleMapClick = () => {
     console.log(liblat)
     const mapUrl = `https://www.google.com/maps/dir/?api=1&destination=${liblat},${liblang}`;
@@ -14,10 +14,11 @@ const LibraryCard = ({ title, location, liblat, liblang, rating, reviews, image 
   return (
     <div className={styles.OuterCard}>
       <div className={styles.LibraryImage}>
-        <img src={image} alt={title} />
-        <div className={styles.mapIconWrapper} onClick={handleMapClick} title="Open in Google Maps">
-          <FaMapMarkedAlt className={styles.mapIcon} />
-        </div>
+      <img
+  src={images && images.length > 0 ? images[0].url : "/default-image.jpg"}
+  alt={title}
+  className="w-full h-48 object-cover rounded-lg"
+/>
       </div>
 
       <div className={styles.libraryDeatils}>
@@ -66,9 +67,9 @@ const LibraryCard = ({ title, location, liblat, liblang, rating, reviews, image 
         </div>
 
         {/* View Details Button */}
-        <Link to="/libraryDetails" className={styles.btn}>
-          View Details
-        </Link>
+       <button className={styles.btn} >
+       <Link to={`/libraryDetails/${id}`}>View Details</Link>
+       </button>
       </div>
     </div>
   );

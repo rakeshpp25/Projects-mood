@@ -22,15 +22,13 @@ function Navbar() {
     const fetchUserData = async () => {
       if (isAuthenticated) {
         try {
-          const res = await axios.get(
-            "https://projects-mood-backend-yugw.onrender.com/Profile",
-            {
-              withCredentials: true,
-            }
-          );
-          const fullName = res.data.name;
-          const firstName = fullName.split(" ")[0];
-          setFirstName(firstName);
+          const res = await axios.get("http://localhost:8000/dashboard/profile", {
+            withCredentials: true,
+          });
+          const id = res.data.id;
+          const fullName = res.data.name ?? "";
+          const first = fullName.split(" ")[0];
+          setFirstName(first);
         } catch (err) {
           console.error("Failed to fetch user data", err);
         }
@@ -41,13 +39,13 @@ function Navbar() {
   }, [isAuthenticated]);
 
   const handleLogin = () => {
-    navigate("/login");
+    navigate("/auth/login");
   };
 
   const handleLogout = async () => {
     try {
       await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/logout",
+        "http://localhost:8000/auth/logout",
         {},
         { withCredentials: true }
       );
@@ -60,7 +58,7 @@ function Navbar() {
 
   const handleProfileClick = () => {
     if (user?.role === "business") {
-      navigate("/dashboard");
+      navigate(`/dashboard`); // <-- fixed
     } else {
       navigate("/");
     }
@@ -77,14 +75,13 @@ function Navbar() {
   };
 
   const scrollToAbout = () => {
-    const contactSection = document.getElementById("footer");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
+    const aboutSection = document.getElementById("footer");
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: "smooth" });
     }
     setIsSidebarOpen(false);
   };
 
-  // Close sidebar on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -92,15 +89,8 @@ function Navbar() {
       }
     };
 
-    if (isSidebarOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isSidebarOpen]);
 
   return (
@@ -135,10 +125,10 @@ function Navbar() {
               <AccountIcon />
             </span>
             <span className={styles.AccountTitle}>
-              {firstName || "Account"}
+              {firstName }
             </span>
             <span className={styles.downArrow}>
-              <DownArrow />
+              <DownArrow/>
             </span>
           </button>
 
@@ -171,12 +161,11 @@ function Navbar() {
       {/* Sidebar Menu */}
       {isSidebarOpen && (
         <div className={styles.sidebar} ref={sidebarRef}>
-          {/* Cross Icon */}
           <div
             className={styles.closeSidebar}
             onClick={() => setIsSidebarOpen(false)}
           >
-            &#10005; {/* Unicode for cross icon */}
+            &#10005;
           </div>
 
           <button onClick={scrollToContact}>Contact</button>

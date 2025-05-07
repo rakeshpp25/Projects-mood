@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, act } from "react";
 import axios from "axios";
+import Loader from "../Reuse/Loader";
 
 const Status = ({ businessId }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -7,19 +8,16 @@ const Status = ({ businessId }) => {
   const [documentStatus, setDocumentStatus] = useState(null);
   const [isActive, setIsActive] = useState(false);
 
-  // 👇 Fetch the current document status when component mounts
-  useEffect(() => {
-    fetchStatus();
-  }, []);
+  // Fetch the current document status when component mounts
+ 
 
   const fetchStatus = async () => {
     try {
-      const response = await axios.get(
-        `https://projects-mood-backend-yugw.onrender.com/statusUpdate`
-      );
-      console.log(response);
+      const response = await axios.get(`http://localhost:8000/statusUpdate`);
+      
       if (response.data && response.data.status) {
         setDocumentStatus(response.data.status);
+        setIsActive(response.data.libraryLiveStatus); // ✅ update from backend
       }
     } catch (err) {
       console.error("Error fetching status:", err.message);
@@ -27,14 +25,16 @@ const Status = ({ businessId }) => {
     }
   };
 
+  useEffect(() => {
+    fetchStatus();
+  }, []);
+
   const handleSubmit = async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await axios.get(
-        "https://projects-mood-backend-yugw.onrender.com/status"
-      );
+      const response = await axios.get("http://localhost:8000/dashboard/status");
 
       if (response.data) {
         alert("PDF sent successfully to your email!");
@@ -43,7 +43,7 @@ const Status = ({ businessId }) => {
         throw new Error("PDF generation failed.");
       }
     } catch (err) {
-      console.error("Error generating PDF:", err.message);
+      
       setError("There was an error generating the PDF. Please try again.");
     } finally {
       setIsLoading(false);
@@ -52,18 +52,17 @@ const Status = ({ businessId }) => {
 
   const handleToggleStatus = async () => {
     if (documentStatus === "approved") {
-      setIsActive(!isActive);
-
+     
       // Send PUT request to update the status in the database
       try {
         const response = await axios.put(
-          `https://projects-mood-backend-yugw.onrender.com/updateLibraryStatus`,
+          `http://localhost:8000/dashboard/updateLibraryStatus`,
           {
             libraryLiveStatus: !isActive,
           }
         );
-        if (response.data) {
-          console.log("Library live status updated:", response.data);
+        if (response.data && typeof response.data.libraryLiveStatus === 'boolean') {
+          setIsActive(response.data.libraryLiveStatus); // ✅ update from backend
         }
       } catch (err) {
         console.error("Error updating library live status:", err.message);
@@ -73,15 +72,17 @@ const Status = ({ businessId }) => {
   };
 
   return (
+   <>
+   {isLoading && <Loader/>}
     <div className="p-6 max-w-md mx-auto border rounded shadow">
       <h2 className="text-xl font-semibold mb-4">Library Status</h2>
-
+      
       <button
         onClick={handleSubmit}
         className="bg-blue-600 text-white px-4 py-2 rounded mb-4"
         disabled={isLoading}
       >
-        {isLoading ? "Generating PDF..." : "Submit Details for Verification"}
+       Click for submit 
       </button>
 
       {error && <p className="text-red-500">{error}</p>}
@@ -110,6 +111,7 @@ const Status = ({ businessId }) => {
         <p className="mt-4 text-yellow-600">Document is under review...</p>
       )}
     </div>
+   </>
   );
 };
 

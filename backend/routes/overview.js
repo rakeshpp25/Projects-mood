@@ -4,34 +4,42 @@ import OverviewModel from "../models/OverviewModel.js";
 
 const router = express.Router();
 
-router.get("/",  async (req, res) => {
+router.get("/:id?",  async (req, res) => {
       try {
-        const userId = req.userpayload.id;
-    
-        const overview = await OverviewModel.findOne({ businessId: userId });
-    
-        if (!overview) {
-          return res.status(404).json({ message: "Overview not found" });
-        }
+      let userId;
+
+    // If route param `id` is present, use it (e.g., from /dashboard/imageuploads/:id for public)
+    // Otherwise, fall back to authenticated user's ID for dashboard use
+    if (req.params.id) {
+      userId = req.params.id;
+    } else {
+      userId = req.userpayload.id;
+    }
+   
+        const overview = await OverviewModel.findOne({user :userId });
+      
+       
+    if (!overview) {
+      return res.status(200).json([]);
+    }
     
         res.status(200).json(overview);
       } catch (error) {
-        console.error("Error fetching overview:", error);
-        res.status(500).json({ message: "Error fetching overview" });
+        
+        res.status(500).json({ message: "Error fetching overview"});
       }
     });
 // Protected route
 router.put('/', async (req, res) => {
       try {
         const userId = req.userpayload.id; // from decoded JWT
-        const { Library_name, time, special_features, about_library, amenities } = req.body;
+        const {  time, special_features, about_library, amenities } = req.body;
         
         
-        const existingOverview = await OverviewModel.findOne({ userId });
-    console.log("hello")
+        const existingOverview = await OverviewModel.findOne({user : userId });
+    
         if (existingOverview) {
           // Update existing overview
-          existingOverview.Library_name = Library_name;
           existingOverview.special_features = special_features;
           existingOverview.about_library = about_library;
           existingOverview.amenities = amenities;
@@ -44,8 +52,7 @@ router.put('/', async (req, res) => {
         } else {
           // Create new overview
           const newOverview = new OverviewModel({
-            userId,
-            Library_name,
+            user: userId,
             time, // Save the entire time object (array of day objects)
             special_features,
             about_library,

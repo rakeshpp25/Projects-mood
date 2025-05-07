@@ -26,7 +26,10 @@ router.put('/', async (req, res) => {
       return res.status(404).json({ message: 'Business not found' });
     }
 
-    res.status(200).json(updatedBusiness);
+     res.status(200).json({
+      status: updatedBusiness.status, // approved / pending / rejected
+      libraryLiveStatus: updatedBusiness.libraryLiveStatus, // true / false
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Failed to update library status' });
