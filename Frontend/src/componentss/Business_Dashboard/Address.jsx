@@ -32,7 +32,7 @@ function Address() {
         // Fetch address data
         try {
           const addressRes = await axios.get(
-            "http://localhost:8000/dashboard/address",
+            "https://projects-mood-backend-yugw.onrender.com/dashboard/address",
             {
               withCredentials: true,
             }
@@ -49,7 +49,7 @@ function Address() {
 
         // Fetch profile data (city)
         const profileRes = await axios.get(
-          "http://localhost:8000/dashboard/profile",
+          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
           {
             withCredentials: true,
           }
@@ -155,7 +155,7 @@ function Address() {
       console.log("Sending location to server:", { latitude, longitude });
 
       const response = await axios.post(
-        "http://localhost:8000/dashboard/location",
+        "https://projects-mood-backend-yugw.onrender.com/dashboard/location",
         {
           latitude,
           longitude,
@@ -223,12 +223,12 @@ function Address() {
     try {
       await Promise.all([
         axios.put(
-          "http://localhost:8000/dashboard/profile",
+          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
           { city: updatedFields.city },
           { withCredentials: true }
         ),
         axios.put(
-          "http://localhost:8000/dashboard/address",
+          "https://projects-mood-backend-yugw.onrender.com/dashboard/address",
           {
             building_name: updatedFields.building_name,
             landmark: updatedFields.landmark,

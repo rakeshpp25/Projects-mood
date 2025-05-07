@@ -23,7 +23,7 @@ function Navbar() {
       if (isAuthenticated) {
         try {
           const res = await axios.get(
-            "http://localhost:8000/dashboard/profile",
+            "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
             {
               withCredentials: true,
             }
@@ -48,7 +48,7 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:8000/auth/logout",
+        "https://projects-mood-backend-yugw.onrender.com/auth/logout",
         {},
         { withCredentials: true }
       );

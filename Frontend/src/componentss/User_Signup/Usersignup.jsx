@@ -44,7 +44,7 @@ function Usersignup() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/auth/userSignup",
+        "https://projects-mood-backend-yugw.onrender.com/auth/userSignup",
         {
           ...inputData,
           role: "user",

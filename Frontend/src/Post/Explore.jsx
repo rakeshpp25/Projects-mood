@@ -1,31 +1,35 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import React from 'react'
+import { useEffect, useState } from "react";
+import axios from "axios";
+import React from "react";
 
 const Explore = () => {
   const [posts, setPosts] = useState([]);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
 
-//   const fetchPosts = async () => {
-//     const res = await axios.get('http://localhost:8000/posts');
-//     setPosts(res.data);
-//   };
+  //   const fetchPosts = async () => {
+  //     const res = await axios.get('https://projects-mood-backend-yugw.onrender.com/posts');
+  //     setPosts(res.data);
+  //   };
 
   const handlePost = async () => {
     if (!text.trim()) return;
-    await axios.post('http://localhost:8000/posts', { text }, {  withCredentials: true, });
-    setText('');
-//     fetchPosts();
+    await axios.post(
+      "https://projects-mood-backend-yugw.onrender.com/posts",
+      { text },
+      { withCredentials: true }
+    );
+    setText("");
+    //     fetchPosts();
   };
 
   useEffect(() => {
-//     fetchPosts();
+    //     fetchPosts();
   }, []);
 
   return (
     <div className="p-4 max-w-xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">Explore</h2>
-      
+
       <div className="mb-4">
         <textarea
           className="w-full p-2 border rounded"

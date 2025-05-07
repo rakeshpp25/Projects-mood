@@ -12,7 +12,8 @@ const SuggestedLibraries = () => {
   const fetchLibraries = async () => {
     try {
       const storedLocation = localStorage.getItem("userLocation");
-      let apiURL = "http://localhost:8000/librarydetails";
+      let apiURL =
+        "https://projects-mood-backend-yugw.onrender.com/librarydetails";
 
       if (storedLocation) {
         let { city } = JSON.parse(storedLocation);
@@ -22,7 +23,7 @@ const SuggestedLibraries = () => {
           city = city.split("-")[0].trim(); // This will give us only the city name, e.g., 'Sultanpur'
           console.log("Fetching libraries for city:", city);
 
-          apiURL = `http://localhost:8000/librarydetails?city=${encodeURIComponent(
+          apiURL = `https://projects-mood-backend-yugw.onrender.com/librarydetails?city=${encodeURIComponent(
             city
           )}`;
         }

@@ -44,7 +44,7 @@ function BusinessSignup() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/auth/businessSignup",
+        "https://projects-mood-backend-yugw.onrender.com/auth/businessSignup",
         {
           ...inputData,
           role: "business",

@@ -13,7 +13,10 @@ router.post("/", upload.array("images", 10), async (req, res) => {
     }
 
     const photoData = req.files.map((file) => ({
-      url: `http://localhost:8000/${file.path.replace(/\\/g, "/")}`, // Full URL for the image
+      url: `https://projects-mood-backend-yugw.onrender.com/${file.path.replace(
+        /\\/g,
+        "/"
+      )}`, // Full URL for the image
       uploadedAt: new Date(),
     }));
 

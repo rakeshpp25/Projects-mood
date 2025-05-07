@@ -32,7 +32,7 @@ app.use(cookieParser());
 const PORT = process.env.PORT || 5000;
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://projects-mood-frontend.onrender.com",
     credentials: true,
   })
 );
@@ -57,7 +57,6 @@ app.use("/dashboard/feesdetails", verifytoken, feesDetails);
 app.use("/dashboard/documentUploads", verifytoken, DocumentUploads);
 app.use("/dashboard/imageuploads", ImageUploads);
 app.use("/dashboard/status", verifytoken, Status);
-
 
 app.use("/posts", post);
 
