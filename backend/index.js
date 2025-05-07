@@ -24,6 +24,7 @@ import { updateLibraryStatus } from "./routes/updateLibraryStatus.js";
 import { LibraryDetails } from "./routes/LibraryDetails.js";
 import { connectDB } from "./DB/dbConnect.js";
 import { ImageUploads } from "./routes/imageUpload.js";
+import { post } from "./routes/post.js";
 dotenv.config();
 
 const app = express();
@@ -31,7 +32,7 @@ app.use(cookieParser());
 const PORT = process.env.PORT || 5000;
 app.use(
   cors({
-    origin: "https://projects-mood-frontend.onrender.com",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
@@ -56,6 +57,9 @@ app.use("/dashboard/feesdetails", verifytoken, feesDetails);
 app.use("/dashboard/documentUploads", verifytoken, DocumentUploads);
 app.use("/dashboard/imageuploads", ImageUploads);
 app.use("/dashboard/status", verifytoken, Status);
+
+
+app.use("/posts", post);
 
 app.use("/approve", StatusUpdate);
 app.use("/reject", Status);

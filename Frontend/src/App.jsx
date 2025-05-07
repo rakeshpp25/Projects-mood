@@ -12,8 +12,9 @@ import ProtectedRoute from "./componentss/ProtectedRoutes/ProtectedRoutes";
 import Time from "./componentss/Business_Dashboard/Time";
 import DesktopBigCard from "./componentss/User_View/DesktopBigCard";
 import FullLibraryDetails from "./screens/FullLibraryDetails";
-import PostForm from "./css/Post/PostForm";
-import PostList from "./css/Post/PostList";
+import PostForm from "./Post/PostForm";
+import PostList from "./Post/PostList";
+import Explore from "./Post/Explore";
 
 axios.defaults.withCredentials = true;
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/nearme" element={<DesktopBigCard />} />
         <Route path="/post" element={<PostForm/>} />
         <Route path="/postlist" element={<PostList/>} />
+        <Route path="/explore" element={<Explore/>} />
         <Route path="/libraryDetails/:id" element={<FullLibraryDetails />} />
         <Route
           path="/dashboard"
