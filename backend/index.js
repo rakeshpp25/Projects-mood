@@ -31,7 +31,7 @@ app.use(cookieParser());
 const PORT = process.env.PORT || 5000;
 app.use(
   cors({
-    origin: "http://localhost:https://projects-mood-frontend.onrender.com",
+    origin: "https://projects-mood-frontend.onrender.com",
     credentials: true,
   })
 );
