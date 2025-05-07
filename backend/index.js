@@ -49,7 +49,7 @@ app.use("/auth/logout", logoutRoute);
 
 // access for private
 app.use("/dashboard/profile", profile);
-app.use("/dashboard/overview", verifytoken, overview);
+app.use("/dashboard/overview", overview);
 app.use("/dashboard/location", UserLocation);
 app.use("/dashboard/address", verifytoken, address);
 app.use("/dashboard/feesdetails", verifytoken, feesDetails);

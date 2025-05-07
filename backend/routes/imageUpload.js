@@ -7,7 +7,7 @@ const router = express.Router();
 import jwt from "jsonwebtoken";
 
 // Upload multiple images to Cloudinary and save URLs in MongoDB
-router.post("/", upload.array("images"), async (req, res) => {
+router.post("/", verifytoken, upload.array("images"), async (req, res) => {
   try {
     const userId = req.userpayload.id;
 
@@ -77,7 +77,7 @@ router.get("/:id?", async (req, res) => {
 
 // DELETE /imageuploads
 // DELETE /imageuploads
-router.delete("/", async (req, res) => {
+router.delete("/", verifytoken, async (req, res) => {
   const { public_id } = req.body;
   const userId = req.userpayload.id;
 

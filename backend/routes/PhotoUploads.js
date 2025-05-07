@@ -4,7 +4,7 @@ import PhotoUpload from "../models/PhotoUploadsModel.js";
 
 const router = express.Router();
 
-router.post("/", upload.array("images", 10), async (req, res) => {
+router.post("/",  upload.array("images", 10), async (req, res) => {
   try {
     const userId = req.userpayload.id; // Assuming you have user payload from JWT
 

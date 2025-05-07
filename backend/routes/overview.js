@@ -8,8 +8,7 @@ router.get("/:id?",  async (req, res) => {
       try {
       let userId;
 
-    // If route param `id` is present, use it (e.g., from /dashboard/imageuploads/:id for public)
-    // Otherwise, fall back to authenticated user's ID for dashboard use
+    
     if (req.params.id) {
       userId = req.params.id;
     } else {
@@ -30,7 +29,7 @@ router.get("/:id?",  async (req, res) => {
       }
     });
 // Protected route
-router.put('/', async (req, res) => {
+router.put('/', verifytoken, async (req, res) => {
       try {
         const userId = req.userpayload.id; // from decoded JWT
         const {  time, special_features, about_library, amenities } = req.body;
