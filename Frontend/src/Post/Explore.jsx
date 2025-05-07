@@ -6,10 +6,12 @@ const Explore = () => {
   const [posts, setPosts] = useState([]);
   const [text, setText] = useState("");
 
-  //   const fetchPosts = async () => {
-  //     const res = await axios.get('https://projects-mood-backend-yugw.onrender.com/posts');
-  //     setPosts(res.data);
-  //   };
+  const fetchPosts = async () => {
+    const res = await axios.get(
+      "https://projects-mood-backend-yugw.onrender.com/posts"
+    );
+    setPosts(res.data);
+  };
 
   const handlePost = async () => {
     if (!text.trim()) return;
@@ -19,11 +21,11 @@ const Explore = () => {
       { withCredentials: true }
     );
     setText("");
-    //     fetchPosts();
+    fetchPosts();
   };
 
   useEffect(() => {
-    //     fetchPosts();
+    fetchPosts();
   }, []);
 
   return (
