@@ -49,7 +49,7 @@ function Emailverify() {
 
     try {
       const res = await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/auth/emailverify",
+        "https://backend-wpv4.onrender.com/auth/emailverify",
         {
           verificationCode,
           email,

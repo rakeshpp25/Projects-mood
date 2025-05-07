@@ -19,7 +19,7 @@ function PhotoUploads() {
     setLoading(true);
     try {
       const res = await axios.get(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/imageuploads",
+        "https://backend-wpv4.onrender.com/dashboard/imageuploads",
         {
           withCredentials: true,
         }
@@ -91,7 +91,7 @@ function PhotoUploads() {
     setLoading(true);
     try {
       await axios.delete(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/imageuploads",
+        "https://backend-wpv4.onrender.com/dashboard/imageuploads",
         {
           data: { public_id: imageToDelete }, // Use the publicId directly
           withCredentials: true,
@@ -128,7 +128,7 @@ function PhotoUploads() {
 
     try {
       await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/imageuploads",
+        "https://backend-wpv4.onrender.com/dashboard/imageuploads",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

@@ -54,7 +54,7 @@
 
 //     const sendLocationToServer = async (latitude, longitude) => {
 //         try {
-//             const response = await axios.post("https://projects-mood-backend-yugw.onrender.com/location", { latitude, longitude });
+//             const response = await axios.post("https://backend-wpv4.onrender.com/location", { latitude, longitude });
 
 //             const formattedAddress = response.data.formattedAddress;
 //             console.log("Formatted Address:", formattedAddress);

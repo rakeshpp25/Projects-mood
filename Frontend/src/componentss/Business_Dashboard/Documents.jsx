@@ -43,7 +43,7 @@ const Documents = () => {
           formData.append("label", doc.label);
 
           const response = await axios.post(
-            "https://projects-mood-backend-yugw.onrender.com/dashboard/documentUploads",
+            "https://backend-wpv4.onrender.com/dashboard/documentUploads",
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
@@ -73,7 +73,7 @@ const Documents = () => {
     setLoading(true); // Set loading to true when fetching documents
     try {
       const response = await axios.get(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/documentUploads",
+        "https://backend-wpv4.onrender.com/dashboard/documentUploads",
         {
           withCredentials: true,
         }

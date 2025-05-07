@@ -134,7 +134,7 @@ function FeeDetails() {
     try {
       const payload = transformFeeDataForBackend(updatedFeeData);
       const res = await axios.put(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/feesdetails",
+        "https://backend-wpv4.onrender.com/dashboard/feesdetails",
         payload
       );
       console.log("Saved to backend:", res.data);

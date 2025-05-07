@@ -13,7 +13,7 @@ const UploadImages = () => {
   const fetchImages = async () => {
     try {
       const response = await axios.get(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/uploadImages"
+        "https://backend-wpv4.onrender.com/dashboard/uploadImages"
       );
       setUploadedImages(response.data);
     } catch (error) {
@@ -45,7 +45,7 @@ const UploadImages = () => {
 
     try {
       await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/uploadImages",
+        "https://backend-wpv4.onrender.com/dashboard/uploadImages",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

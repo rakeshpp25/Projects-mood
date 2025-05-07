@@ -38,13 +38,13 @@ function Overview() {
       try {
         // Fetch profile data
         const userRes = await axios.get(
-          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile"
+          "https://backend-wpv4.onrender.com/dashboard/profile"
         );
         const { library_name } = userRes.data;
 
         // Fetch overview data
         const overviewRes = await axios.get(
-          "https://projects-mood-backend-yugw.onrender.com/dashboard/overview"
+          "https://backend-wpv4.onrender.com/dashboard/overview"
         );
         const { time, special_features, about_library, amenities } =
           overviewRes.data || {};
@@ -103,11 +103,11 @@ function Overview() {
     try {
       await Promise.all([
         axios.put(
-          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
+          "https://backend-wpv4.onrender.com/dashboard/profile",
           userPayload
         ),
         axios.put(
-          "https://projects-mood-backend-yugw.onrender.com/dashboard/overview",
+          "https://backend-wpv4.onrender.com/dashboard/overview",
           overviewPayload
         ),
       ]);

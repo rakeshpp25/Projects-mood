@@ -53,7 +53,7 @@ function Profile() {
     const getUserProfile = async () => {
       try {
         const res = await axios.get(
-          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
+          "https://backend-wpv4.onrender.com/dashboard/profile",
           {
             withCredentials: true,
           }
@@ -96,7 +96,7 @@ function Profile() {
 
     try {
       const res = await axios.put(
-        "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
+        "https://backend-wpv4.onrender.com/dashboard/profile",
         updatedFields,
         { withCredentials: true }
       );

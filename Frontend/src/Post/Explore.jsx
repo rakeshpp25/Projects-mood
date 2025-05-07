@@ -7,16 +7,14 @@ const Explore = () => {
   const [text, setText] = useState("");
 
   const fetchPosts = async () => {
-    const res = await axios.get(
-      "https://projects-mood-backend-yugw.onrender.com/posts"
-    );
+    const res = await axios.get("https://backend-wpv4.onrender.com/posts");
     setPosts(res.data);
   };
 
   const handlePost = async () => {
     if (!text.trim()) return;
     await axios.post(
-      "https://projects-mood-backend-yugw.onrender.com/posts",
+      "https://backend-wpv4.onrender.com/posts",
       { text },
       { withCredentials: true }
     );

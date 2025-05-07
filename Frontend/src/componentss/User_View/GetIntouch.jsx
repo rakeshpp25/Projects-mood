@@ -38,7 +38,7 @@ function GetIntouch() {
 
     try {
       await axios.post(
-        "https://projects-mood-backend-yugw.onrender.com/getintouch",
+        "https://backend-wpv4.onrender.com/getintouch",
         formData
       );
       setStatus("Message sent successfully");
