@@ -43,7 +43,7 @@ const Documents = () => {
           formData.append("label", doc.label);
 
           const response = await axios.post(
-            "http://localhost:8000/dashboard/documentUploads",
+            "https://projects-mood-backend-yugw.onrender.com/dashboard/documentUploads",
             formData,
             {
               headers: { "Content-Type": "multipart/form-data" },
@@ -73,7 +73,7 @@ const Documents = () => {
     setLoading(true); // Set loading to true when fetching documents
     try {
       const response = await axios.get(
-        "http://localhost:8000/dashboard/documentUploads",
+        "https://projects-mood-backend-yugw.onrender.com/dashboard/documentUploads",
         {
           withCredentials: true,
         }
@@ -115,7 +115,7 @@ const Documents = () => {
       {error && <div className="text-red-600 mb-4">{error}</div>}
 
       {/* Full-page loader */}
-      {loading && <Loader/>}
+      {loading && <Loader />}
 
       <div className="flex flex-col gap-6">
         {documents.map((item, index) => (

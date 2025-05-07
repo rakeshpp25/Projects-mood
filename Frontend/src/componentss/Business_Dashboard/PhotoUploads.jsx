@@ -18,10 +18,12 @@ function PhotoUploads() {
   const fetchImages = async () => {
     setLoading(true);
     try {
-      
-      const res = await axios.get("http://localhost:8000/dashboard/imageuploads", {
-        withCredentials: true,
-      });
+      const res = await axios.get(
+        "https://projects-mood-backend-yugw.onrender.com/dashboard/imageuploads",
+        {
+          withCredentials: true,
+        }
+      );
       setImages(res.data);
     } catch (err) {
       console.error("Failed to fetch images:", err);
@@ -76,24 +78,25 @@ function PhotoUploads() {
 
   // ✅ Handle delete image from saved images with modal confirmation
   const handleDeleteImage = (publicId) => {
-  // Confirm that the publicId is passed correctly
+    // Confirm that the publicId is passed correctly
     setImageToDelete(publicId); // Set the image to delete in the state
     setShowModal(true); // Show modal
   };
 
   const confirmDelete = async () => {
     if (!imageToDelete) {
-      
       return; // Prevent delete if no public_id is passed
     }
 
-
     setLoading(true);
     try {
-      await axios.delete('http://localhost:8000/dashboard/imageuploads', {
-        data: { public_id: imageToDelete }, // Use the publicId directly
-        withCredentials: true,
-      });
+      await axios.delete(
+        "https://projects-mood-backend-yugw.onrender.com/dashboard/imageuploads",
+        {
+          data: { public_id: imageToDelete }, // Use the publicId directly
+          withCredentials: true,
+        }
+      );
       setShowModal(false);
       await fetchImages(); // Re-fetch images to stay in sync
     } catch (err) {
@@ -110,7 +113,7 @@ function PhotoUploads() {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    
+
     setLoading(true);
 
     const files = previewImages.map((item) => item.file);
@@ -122,12 +125,16 @@ function PhotoUploads() {
 
     const formData = new FormData();
     files.forEach((file) => formData.append("images", file));
-        
+
     try {
-      await axios.post("http://localhost:8000/dashboard/imageuploads", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-        withCredentials: true,
-      });
+      await axios.post(
+        "https://projects-mood-backend-yugw.onrender.com/dashboard/imageuploads",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          withCredentials: true,
+        }
+      );
       await fetchImages();
       setPreviewImages([]);
       setIsEditing(false);
@@ -175,7 +182,11 @@ function PhotoUploads() {
                   <img
                     src={image.url}
                     alt={`Preview ${index}`}
-                    style={{ width: "200px", height: "200px", objectFit: "cover" }}
+                    style={{
+                      width: "200px",
+                      height: "200px",
+                      objectFit: "cover",
+                    }}
                     className="rounded shadow border-2 border-blue-400"
                   />
                   <button
@@ -201,7 +212,11 @@ function PhotoUploads() {
                   <img
                     src={image.url}
                     alt={`Uploaded ${index}`}
-                    style={{ width: "200px", height: "200px", objectFit: "cover" }}
+                    style={{
+                      width: "200px",
+                      height: "200px",
+                      objectFit: "cover",
+                    }}
                     className="rounded shadow"
                   />
                   <button
@@ -229,7 +244,9 @@ function PhotoUploads() {
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded shadow-md max-w-sm mx-auto">
-            <h3 className="text-lg font-semibold">Are you sure you want to delete this image?</h3>
+            <h3 className="text-lg font-semibold">
+              Are you sure you want to delete this image?
+            </h3>
             <div className="flex justify-between mt-4">
               <button
                 onClick={confirmDelete} // No need to pass anything, imageToDelete is used directly

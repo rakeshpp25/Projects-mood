@@ -9,12 +9,13 @@ const Status = ({ businessId }) => {
   const [isActive, setIsActive] = useState(false);
 
   // Fetch the current document status when component mounts
- 
 
   const fetchStatus = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/statusUpdate`);
-      
+      const response = await axios.get(
+        `https://projects-mood-backend-yugw.onrender.com/statusUpdate`
+      );
+
       if (response.data && response.data.status) {
         setDocumentStatus(response.data.status);
         setIsActive(response.data.libraryLiveStatus); // ✅ update from backend
@@ -34,7 +35,9 @@ const Status = ({ businessId }) => {
     setError(null);
 
     try {
-      const response = await axios.get("http://localhost:8000/dashboard/status");
+      const response = await axios.get(
+        "https://projects-mood-backend-yugw.onrender.com/dashboard/status"
+      );
 
       if (response.data) {
         alert("PDF sent successfully to your email!");
@@ -43,7 +46,6 @@ const Status = ({ businessId }) => {
         throw new Error("PDF generation failed.");
       }
     } catch (err) {
-      
       setError("There was an error generating the PDF. Please try again.");
     } finally {
       setIsLoading(false);
@@ -52,16 +54,18 @@ const Status = ({ businessId }) => {
 
   const handleToggleStatus = async () => {
     if (documentStatus === "approved") {
-     
       // Send PUT request to update the status in the database
       try {
         const response = await axios.put(
-          `http://localhost:8000/dashboard/updateLibraryStatus`,
+          `https://projects-mood-backend-yugw.onrender.com/dashboard/updateLibraryStatus`,
           {
             libraryLiveStatus: !isActive,
           }
         );
-        if (response.data && typeof response.data.libraryLiveStatus === 'boolean') {
+        if (
+          response.data &&
+          typeof response.data.libraryLiveStatus === "boolean"
+        ) {
           setIsActive(response.data.libraryLiveStatus); // ✅ update from backend
         }
       } catch (err) {
@@ -72,46 +76,46 @@ const Status = ({ businessId }) => {
   };
 
   return (
-   <>
-   {isLoading && <Loader/>}
-    <div className="p-6 max-w-md mx-auto border rounded shadow">
-      <h2 className="text-xl font-semibold mb-4">Library Status</h2>
-      
-      <button
-        onClick={handleSubmit}
-        className="bg-blue-600 text-white px-4 py-2 rounded mb-4"
-        disabled={isLoading}
-      >
-       Click for submit 
-      </button>
+    <>
+      {isLoading && <Loader />}
+      <div className="p-6 max-w-md mx-auto border rounded shadow">
+        <h2 className="text-xl font-semibold mb-4">Library Status</h2>
 
-      {error && <p className="text-red-500">{error}</p>}
+        <button
+          onClick={handleSubmit}
+          className="bg-blue-600 text-white px-4 py-2 rounded mb-4"
+          disabled={isLoading}
+        >
+          Click for submit
+        </button>
 
-      {documentStatus === "approved" && (
-        <div className="mt-4">
-          <label className="text-lg">Library Status: </label>
-          <button
-            onClick={handleToggleStatus}
-            className={`px-4 py-2 rounded ${
-              isActive ? "bg-green-600" : "bg-gray-400"
-            } text-white`}
-          >
-            {isActive ? "Active" : "Inactive"}
-          </button>
-        </div>
-      )}
+        {error && <p className="text-red-500">{error}</p>}
 
-      {documentStatus === "rejected" && (
-        <p className="mt-4 text-red-600">
-          Your document has been rejected. Please contact support.
-        </p>
-      )}
+        {documentStatus === "approved" && (
+          <div className="mt-4">
+            <label className="text-lg">Library Status: </label>
+            <button
+              onClick={handleToggleStatus}
+              className={`px-4 py-2 rounded ${
+                isActive ? "bg-green-600" : "bg-gray-400"
+              } text-white`}
+            >
+              {isActive ? "Active" : "Inactive"}
+            </button>
+          </div>
+        )}
 
-      {documentStatus === "pending" && (
-        <p className="mt-4 text-yellow-600">Document is under review...</p>
-      )}
-    </div>
-   </>
+        {documentStatus === "rejected" && (
+          <p className="mt-4 text-red-600">
+            Your document has been rejected. Please contact support.
+          </p>
+        )}
+
+        {documentStatus === "pending" && (
+          <p className="mt-4 text-yellow-600">Document is under review...</p>
+        )}
+      </div>
+    </>
   );
 };
 

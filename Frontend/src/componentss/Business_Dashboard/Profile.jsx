@@ -52,9 +52,12 @@ function Profile() {
     setLoading(true);
     const getUserProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/dashboard/profile", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
+          {
+            withCredentials: true,
+          }
+        );
         setUserData(res.data);
         setOriginalData(res.data);
         setLoading(false);
@@ -93,7 +96,7 @@ function Profile() {
 
     try {
       const res = await axios.put(
-        "http://localhost:8000/dashboard/profile",
+        "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
         updatedFields,
         { withCredentials: true }
       );
@@ -137,7 +140,7 @@ function Profile() {
     <>
       {/* Full-page loader */}
       {loading && <Loader />}
-      
+
       {/* Profile form */}
       {!loading && userData && (
         <form className={styles.FullProfileSection} onSubmit={handleSave}>

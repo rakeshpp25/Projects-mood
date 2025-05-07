@@ -43,10 +43,13 @@ function Usersignup() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/auth/userSignup", {
-        ...inputData,
-        role: "user",
-      });
+      const response = await axios.post(
+        "https://projects-mood-backend-yugw.onrender.com/auth/userSignup",
+        {
+          ...inputData,
+          role: "user",
+        }
+      );
 
       // Success response
       toast.success("Otp has been send to: " + response.data.email);

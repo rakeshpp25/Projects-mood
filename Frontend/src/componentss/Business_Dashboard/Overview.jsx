@@ -37,14 +37,21 @@ function Overview() {
       setLoading(true);
       try {
         // Fetch profile data
-        const userRes = await axios.get("http://localhost:8000/dashboard/profile");
+        const userRes = await axios.get(
+          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile"
+        );
         const { library_name } = userRes.data;
 
         // Fetch overview data
-        const overviewRes = await axios.get("http://localhost:8000/dashboard/overview");
-        const { time, special_features, about_library, amenities } = overviewRes.data || {};
+        const overviewRes = await axios.get(
+          "https://projects-mood-backend-yugw.onrender.com/dashboard/overview"
+        );
+        const { time, special_features, about_library, amenities } =
+          overviewRes.data || {};
 
-        const dynamic = (amenities || []).filter((item) => !predefinedAmenities.includes(item));
+        const dynamic = (amenities || []).filter(
+          (item) => !predefinedAmenities.includes(item)
+        );
 
         // Set state
         setUserData({
@@ -95,8 +102,14 @@ function Overview() {
 
     try {
       await Promise.all([
-        axios.put("http://localhost:8000/dashboard/profile", userPayload),
-        axios.put("http://localhost:8000/dashboard/overview", overviewPayload),
+        axios.put(
+          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
+          userPayload
+        ),
+        axios.put(
+          "https://projects-mood-backend-yugw.onrender.com/dashboard/overview",
+          overviewPayload
+        ),
       ]);
 
       setIsEditing(false);
@@ -176,7 +189,12 @@ function Overview() {
             <div className={styles.InputWithIcons}>
               <div className={styles.InputDivWrapper}>
                 <FaCheck className={styles.WifiIcon} />
-                <input className={styles.AmenitiesInputBox} type="text" value={amenity} disabled />
+                <input
+                  className={styles.AmenitiesInputBox}
+                  type="text"
+                  value={amenity}
+                  disabled
+                />
               </div>
             </div>
           </div>
@@ -187,9 +205,15 @@ function Overview() {
             <div className={styles.InputWithIcons}>
               <div className={styles.InputDivWrapper}>
                 <FaCheck className={styles.CheckIcon} />
-                {amenity.toLowerCase() === "wifi" && <FaWifi className={styles.AmenitiesIcon} />}
-                {amenity.toLowerCase() === "ac" && <FaFan className={styles.AmenitiesIcon} />}
-                {amenity.toLowerCase() === "water" && <FaTint className={styles.AmenitiesIcon} />}
+                {amenity.toLowerCase() === "wifi" && (
+                  <FaWifi className={styles.AmenitiesIcon} />
+                )}
+                {amenity.toLowerCase() === "ac" && (
+                  <FaFan className={styles.AmenitiesIcon} />
+                )}
+                {amenity.toLowerCase() === "water" && (
+                  <FaTint className={styles.AmenitiesIcon} />
+                )}
                 <input
                   className={styles.AmenitiesInputBox}
                   type="text"
@@ -199,7 +223,9 @@ function Overview() {
                 />
               </div>
               <FaTimes
-                className={`${styles.RemoveIcon} ${!isEditing ? styles.disabledIcon : ""}`}
+                className={`${styles.RemoveIcon} ${
+                  !isEditing ? styles.disabledIcon : ""
+                }`}
                 onClick={() => handleRemoveAmenity(index)}
               />
             </div>
@@ -209,7 +235,9 @@ function Overview() {
         <button
           type="button"
           onClick={handleAddAmenity}
-          className={`${styles.AddMoreButton} ${!isEditing ? styles.disabledButton : ""}`}
+          className={`${styles.AddMoreButton} ${
+            !isEditing ? styles.disabledButton : ""
+          }`}
         >
           Add More
         </button>
@@ -224,7 +252,9 @@ function Overview() {
               className={styles.DynamicAmenitiesInputBox}
               type="text"
               value={feature}
-              onChange={(e) => handleSpecialFeatureChange(index, e.target.value)}
+              onChange={(e) =>
+                handleSpecialFeatureChange(index, e.target.value)
+              }
               disabled={!isEditing}
             />
             <span
@@ -239,7 +269,9 @@ function Overview() {
         <button
           type="button"
           onClick={handleAddSpecialFeature}
-          className={`${styles.AddMoreButton} ${!isEditing ? styles.disabledButton : ""}`}
+          className={`${styles.AddMoreButton} ${
+            !isEditing ? styles.disabledButton : ""
+          }`}
         >
           Add More
         </button>

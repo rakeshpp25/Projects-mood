@@ -25,16 +25,23 @@ router.get("/", async (req, res) => {
     const user = await BusinessModel.findById(userId);
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    const libraryOverview = await OverviewModel.findOne({user : userId });
-    const libraryFees = await FeesDetails.findOne({user : userId });
-    const libraryAddress = await Address.findOne({user : userId });
-    const libraryDocumentUploads = await DocumentUploadsModel.findOne({user : userId });
-    const libraryPhotoUploads = await PhotoUploadsModel.findOne({user : userId });
+    const libraryOverview = await OverviewModel.findOne({ user: userId });
+    const libraryFees = await FeesDetails.findOne({ user: userId });
+    const libraryAddress = await Address.findOne({ user: userId });
+    const libraryDocumentUploads = await DocumentUploadsModel.findOne({
+      user: userId,
+    });
+    const libraryPhotoUploads = await PhotoUploadsModel.findOne({
+      user: userId,
+    });
 
     if (!libraryOverview)
       return res.status(404).json({ message: "Library details not found" });
 
-    const pdfPath = path.join(__dirname, `../pdfs/library-details-${userId}.pdf`);
+    const pdfPath = path.join(
+      __dirname,
+      `../pdfs/library-details-${userId}.pdf`
+    );
     const doc = new PDFDocument();
     const writeStream = fs.createWriteStream(pdfPath);
     doc.pipe(writeStream);
@@ -46,13 +53,19 @@ router.get("/", async (req, res) => {
     doc.fontSize(14).text(`Library Profile:\n${JSON.stringify(user, null, 2)}`);
     doc.moveDown();
 
-    doc.fontSize(14).text(`Library Overview:\n${JSON.stringify(libraryOverview, null, 2)}`);
+    doc
+      .fontSize(14)
+      .text(`Library Overview:\n${JSON.stringify(libraryOverview, null, 2)}`);
     doc.moveDown();
 
-    doc.fontSize(14).text(`Library Address:\n${JSON.stringify(libraryAddress, null, 2)}`);
+    doc
+      .fontSize(14)
+      .text(`Library Address:\n${JSON.stringify(libraryAddress, null, 2)}`);
     doc.moveDown();
 
-    doc.fontSize(14).text(`Library Fees:\n${JSON.stringify(libraryFees, null, 2)}`);
+    doc
+      .fontSize(14)
+      .text(`Library Fees:\n${JSON.stringify(libraryFees, null, 2)}`);
     doc.moveDown();
 
     // ✅ Document Uploads (on one page)
@@ -91,10 +104,12 @@ router.get("/", async (req, res) => {
             doc.addPage();
             yPosition = 100; // Reset Y position for the new page
           }
-
         } catch (err) {
           console.error(`Failed to load ${docItem.label}:`, err.message);
-          doc.addPage().fontSize(14).text(`⚠️ Could not load image for ${docItem.label}`);
+          doc
+            .addPage()
+            .fontSize(14)
+            .text(`⚠️ Could not load image for ${docItem.label}`);
         }
       }
     } else {
@@ -138,10 +153,12 @@ router.get("/", async (req, res) => {
             doc.addPage();
             yPosition = 100; // Reset Y position for the new page
           }
-
         } catch (err) {
           console.error(`Failed to load photo ${index + 1}:`, err.message);
-          doc.addPage().fontSize(14).text(`⚠️ Could not load photo ${index + 1}`);
+          doc
+            .addPage()
+            .fontSize(14)
+            .text(`⚠️ Could not load photo ${index + 1}`);
         }
       }
     } else {
@@ -151,7 +168,7 @@ router.get("/", async (req, res) => {
     doc.end();
 
     writeStream.on("finish", async () => {
-      const baseUrl = "http://localhost:8000";
+      const baseUrl = "https://projects-mood-backend-yugw.onrender.com";
       const approveLink = `${baseUrl}/approve/${userId}`;
       const rejectLink = `${baseUrl}/status/reject/${userId}`;
 

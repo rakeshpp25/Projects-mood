@@ -22,9 +22,12 @@ function Navbar() {
     const fetchUserData = async () => {
       if (isAuthenticated) {
         try {
-          const res = await axios.get("http://localhost:8000/dashboard/profile", {
-            withCredentials: true,
-          });
+          const res = await axios.get(
+            "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
+            {
+              withCredentials: true,
+            }
+          );
           const id = res.data.id;
           const fullName = res.data.name ?? "";
           const first = fullName.split(" ")[0];
@@ -45,7 +48,7 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:8000/auth/logout",
+        "https://projects-mood-backend-yugw.onrender.com/auth/logout",
         {},
         { withCredentials: true }
       );
@@ -124,11 +127,9 @@ function Navbar() {
             <span className={styles.accountIcon}>
               <AccountIcon />
             </span>
-            <span className={styles.AccountTitle}>
-              {firstName }
-            </span>
+            <span className={styles.AccountTitle}>{firstName}</span>
             <span className={styles.downArrow}>
-              <DownArrow/>
+              <DownArrow />
             </span>
           </button>
 

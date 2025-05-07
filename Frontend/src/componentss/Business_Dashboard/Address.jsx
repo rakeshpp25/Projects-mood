@@ -28,12 +28,15 @@ function Address() {
     const fetchAddressAndCity = async () => {
       try {
         let addressData = {};
-        
+
         // Fetch address data
         try {
-          const addressRes = await axios.get("http://localhost:8000/dashboard/address", {
-            withCredentials: true,
-          });
+          const addressRes = await axios.get(
+            "https://projects-mood-backend-yugw.onrender.com/dashboard/address",
+            {
+              withCredentials: true,
+            }
+          );
           console.log("Fetched address from backend:", addressRes.data);
           addressData = addressRes.data || {};
         } catch (addressError) {
@@ -45,9 +48,12 @@ function Address() {
         }
 
         // Fetch profile data (city)
-        const profileRes = await axios.get("http://localhost:8000/dashboard/profile", {
-          withCredentials: true,
-        });
+        const profileRes = await axios.get(
+          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
+          {
+            withCredentials: true,
+          }
+        );
         console.log("Fetched city from profile:", profileRes.data);
 
         const profileData = profileRes.data || {};
@@ -148,10 +154,13 @@ function Address() {
     try {
       console.log("Sending location to server:", { latitude, longitude });
 
-      const response = await axios.post("http://localhost:8000/dashboard/location", {
-        latitude,
-        longitude,
-      });
+      const response = await axios.post(
+        "https://projects-mood-backend-yugw.onrender.com/dashboard/location",
+        {
+          latitude,
+          longitude,
+        }
+      );
 
       const { formattedAddress, city, state, postalCode } = response.data;
       console.log("Location response data:", response.data);
@@ -200,22 +209,26 @@ function Address() {
   // Handle save button click
   const handleSave = async (e) => {
     e.preventDefault();
-  
+
     // Validate required fields
-    if (!updatedFields.pin_code || !updatedFields.area_name || !updatedFields.location) {
+    if (
+      !updatedFields.pin_code ||
+      !updatedFields.area_name ||
+      !updatedFields.location
+    ) {
       toast.error("Pin Code, Area Name, and Location are required.");
       return;
     }
-  
+
     try {
       await Promise.all([
         axios.put(
-          "http://localhost:8000/dashboard/profile",
+          "https://projects-mood-backend-yugw.onrender.com/dashboard/profile",
           { city: updatedFields.city },
           { withCredentials: true }
         ),
         axios.put(
-          "http://localhost:8000/dashboard/address",
+          "https://projects-mood-backend-yugw.onrender.com/dashboard/address",
           {
             building_name: updatedFields.building_name,
             landmark: updatedFields.landmark,
@@ -228,9 +241,9 @@ function Address() {
           { withCredentials: true }
         ),
       ]);
-  
+
       toast.success("Profile and address updated successfully");
-  
+
       // ✅ After successful save, exit edit mode
       setIsEditing(false);
       setUpdatedFields({});
@@ -240,7 +253,6 @@ function Address() {
       toast.error("Failed to update profile or address");
     }
   };
-  
 
   return (
     <form className={styles.FullProfileSection} onSubmit={handleSave}>
