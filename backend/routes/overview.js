@@ -12,7 +12,17 @@ router.get("/:id?",  async (req, res) => {
     if (req.params.id) {
       userId = req.params.id;
     } else {
-      userId = req.userpayload.id;
+     let token = req.cookies.token;
+     
+           if (!token) {
+             return res
+               .status(401)
+               .json({ message: "Unauthorized: No token provided" });
+           }
+     
+           // Decode token
+           const decoded = jwt.verify(token, process.env.JWT_SECRET);
+           userId = decoded.id;
     }
    
         const overview = await OverviewModel.findOne({user :userId });
